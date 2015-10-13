@@ -9,10 +9,10 @@ Gets all the SharePoint Files from a SharePoint Folder
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFile;
-use WeAreArchitect\SharePoint\SPFolder;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFile;
+use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -53,9 +53,9 @@ Gets a SharePoint File by it's relative URL
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFile;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFile;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -84,10 +84,10 @@ Gets a SharePoint File by it's name
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFile;
-use WeAreArchitect\SharePoint\SPFolder;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFile;
+use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -119,10 +119,10 @@ Create a SharePoint File
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFile;
-use WeAreArchitect\SharePoint\SPFolder;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFile;
+use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -172,10 +172,10 @@ Update a SharePoint File
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFile;
-use WeAreArchitect\SharePoint\SPFolder;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFile;
+use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -221,10 +221,10 @@ Move and/or rename a SharePoint File.
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFile;
-use WeAreArchitect\SharePoint\SPFolder;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFile;
+use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -271,10 +271,10 @@ Copy a SharePoint File
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFile;
-use WeAreArchitect\SharePoint\SPFolder;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFile;
+use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -324,10 +324,10 @@ Delete a SharePoint File
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFile;
-use WeAreArchitect\SharePoint\SPFolder;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFile;
+use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings

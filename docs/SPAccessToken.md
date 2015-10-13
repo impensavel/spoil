@@ -12,9 +12,9 @@ There are two ways to create a new **App-only Policy** `SPAccessToken` instance.
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPAccessToken;
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPAccessToken;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -39,9 +39,9 @@ try {
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPAccessToken;
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPAccessToken;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -51,7 +51,7 @@ try {
 
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    $token = SPAccessToken::createAOP($site);
+    $token = SPAccessToken::createAppOnlyPolicy($site);
 
     $site->setSPAccessToken($token);
 
@@ -69,9 +69,9 @@ Like with the **App-only Policy** `SPAccessToken`, there's also two ways to inst
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPAccessToken;
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPAccessToken;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -98,9 +98,9 @@ try {
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPAccessToken;
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPAccessToken;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -112,7 +112,7 @@ try {
 
     $context_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNTQyNGR...';
 
-    $token = SPAccessToken::createUOP($site, $context_token);
+    $token = SPAccessToken::createUserOnlyPolicy($site, $context_token);
 
     $site->setSPAccessToken($token);
 

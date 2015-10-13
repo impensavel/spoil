@@ -9,9 +9,9 @@ Gets a SharePoint Folder by it's GUID
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFolder;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -40,9 +40,9 @@ Gets a SharePoint Folder by it's relative URL
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFolder;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -71,9 +71,9 @@ Gets all the Folders within a SharePoint Folder
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFolder;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -107,10 +107,10 @@ Create a SharePoint Folder
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFolder;
-use WeAreArchitect\SharePoint\SPList;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPList;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -149,9 +149,9 @@ Update a SharePoint Folder
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFolder;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -187,9 +187,9 @@ Delete a SharePoint Folder
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFolder;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings

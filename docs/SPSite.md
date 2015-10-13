@@ -12,8 +12,8 @@ There are two ways to create an `SPSite` instance.
 require 'vendor/autoload.php';
 
 use GuzzleHttp\Client;
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPSite;
 
 try {
     $settings = [
@@ -41,8 +41,8 @@ try {
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPSite;
 
 try {
     $settings = [

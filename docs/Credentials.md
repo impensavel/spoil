@@ -36,7 +36,7 @@ It's value should be something similar to: `YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scr
 ## App-only Policy specifics
 The `resource`, `client_id` and `secret` must be part of the `SPSite` settings, when using the following methods:
 - `SPSite::createSPAccessToken()`
-- `SPAccessToken::createAOP()`
+- `SPAccessToken::createAppOnlyPolicy()`
 
 ```php
 $settings = [
@@ -51,7 +51,7 @@ $settings = [
 ## User-only Policy specifics
 Only the `secret` needs to be included in the `SPSite` settings, when using the following methods:
 - `SPSite::createSPAccessToken()`
-- `SPAccessToken::createUOP()`
+- `SPAccessToken::createUserOnlyPolicy()`
 
 ```php
 $settings = [

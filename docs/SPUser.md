@@ -9,9 +9,9 @@ Get a `SPUser` instance of the current logged user.
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPSite;
-use WeAreArchitect\SharePoint\SPUser;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPSite;
+use Impensavel\Spoil\SPUser;
 
 try {
     // instantiate a SPSite class
@@ -31,9 +31,9 @@ Get a `SPUser` instance from a specific user account.
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPSite;
-use WeAreArchitect\SharePoint\SPUser;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPSite;
+use Impensavel\Spoil\SPUser;
 
 try {
     // instantiate a SPSite class

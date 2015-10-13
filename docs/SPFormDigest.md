@@ -10,9 +10,9 @@ There are two ways to instantiate a `SPFormDigest` object.
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFormDigest;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFormDigest;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
@@ -37,9 +37,9 @@ try {
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPFormDigest;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPFormDigest;
+use Impensavel\Spoil\SPSite;
 
 try {
     // SharePoint Site settings
