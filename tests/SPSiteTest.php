@@ -1,29 +1,30 @@
 <?php
 /**
- * This file is part of the SharePoint OAuth App Client library.
+ * This file is part of the SPOIL library.
  *
- * @author     Quetzy Garcia <qgarcia@wearearchitect.com>
- * @copyright  2014-2015 Architect 365
- * @link       http://architect365.co.uk
+ * @author     Quetzy Garcia <quetzyg@impensavel.com>
+ * @copyright  2014-2015
  *
  * For the full copyright and license information,
  * please view the LICENSE.md file that was distributed
  * with this source code.
  */
 
-namespace WeAreArchitect\SharePoint;
+namespace Impensavel\Spoil\Tests;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
 use JWT;
 use PHPUnit_Framework_TestCase;
 
+use Impensavel\Spoil\SPSite;
+
 class SPSiteTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Test SPSite constructor to FAIL (invalid URL)
      *
-     * @expectedException         \WeAreArchitect\SharePoint\SPException
+     * @expectedException         \Impensavel\Spoil\SPException
      * @expectedExceptionMessage  The SharePoint Site URL is invalid
      *
      * @access  public
@@ -65,7 +66,7 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
             'secret'    => 'YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scrum5mXVgE=',
         ]);
 
-        $this->assertInstanceOf('\WeAreArchitect\SharePoint\SPSite', $site);
+        $this->assertInstanceOf('\Impensavel\Spoil\SPSite', $site);
 
         return $site;
     }
@@ -74,7 +75,7 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      * Test SPSite getSPAccessToken() method to FAIL (invalid token)
      *
      * @depends                   testSPSiteConstructorPass
-     * @expectedException         \WeAreArchitect\SharePoint\SPException
+     * @expectedException         \Impensavel\Spoil\SPException
      * @expectedExceptionMessage  Invalid SharePoint Access Token
      *
      * @access  public
@@ -90,7 +91,7 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      * Test SPSite getSPAccessToken() method to FAIL (expired token)
      *
      * @depends                   testSPSiteConstructorPass
-     * @expectedException         \WeAreArchitect\SharePoint\SPException
+     * @expectedException         \Impensavel\Spoil\SPException
      * @expectedExceptionMessage  Expired SharePoint Access Token
      *
      * @access  public
@@ -99,11 +100,11 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      */
     public function testSPSiteGetSPAccessTokenFailExpiredToken(SPSite $site)
     {
-        $serialized = sprintf('C:39:"WeAreArchitect\SharePoint\SPAccessToken":59:{a:3:{i:0;s:0:"";i:1;i:%d;i:2;s:13:"Europe/London";}}', time());
+        $serialized = sprintf('C:30:"Impensavel\Spoil\SPAccessToken":59:{a:3:{i:0;s:0:"";i:1;i:%d;i:2;s:13:"Europe/London";}}', time());
 
         $token = unserialize($serialized);
 
-        $this->assertInstanceOf('\WeAreArchitect\SharePoint\SPAccessToken', $token);
+        $this->assertInstanceOf('\Impensavel\Spoil\SPAccessToken', $token);
         $this->assertFalse($token->hasExpired());
 
         $site->setSPAccessToken($token);
@@ -129,7 +130,7 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
 
         $token = $site->getSPAccessToken();
 
-        $this->assertInstanceOf('\WeAreArchitect\SharePoint\SPAccessToken', $token);
+        $this->assertInstanceOf('\Impensavel\Spoil\SPAccessToken', $token);
     }
 
     /**
@@ -163,14 +164,14 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
 
         $site->createSPAccessToken($access_token);
 
-        $this->assertInstanceOf('\WeAreArchitect\SharePoint\SPAccessToken', $site->getSPAccessToken());
+        $this->assertInstanceOf('\Impensavel\Spoil\SPAccessToken', $site->getSPAccessToken());
     }
 
     /**
      * Test SPSite setSPAccessToken() method to FAIL (invalid token)
      *
      * @depends                   testSPSiteConstructorPass
-     * @expectedException         \WeAreArchitect\SharePoint\SPException
+     * @expectedException         \Impensavel\Spoil\SPException
      * @expectedExceptionMessage  Expired SharePoint Access Token
      *
      * @access  public
@@ -179,9 +180,9 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      */
     public function testSPSiteSetSPAccessTokenFailInvalidToken(SPSite $site)
     {
-        $token = unserialize('C:39:"WeAreArchitect\SharePoint\SPAccessToken":50:{a:3:{i:0;s:0:"";i:1;i:0;i:2;s:13:"Europe/London";}}');
+        $token = unserialize('C:30:"Impensavel\Spoil\SPAccessToken":50:{a:3:{i:0;s:0:"";i:1;i:0;i:2;s:13:"Europe/London";}}');
 
-        $this->assertInstanceOf('\WeAreArchitect\SharePoint\SPAccessToken', $token);
+        $this->assertInstanceOf('\Impensavel\Spoil\SPAccessToken', $token);
         $this->assertTrue($token->hasExpired());
 
         $site->setSPAccessToken($token);
@@ -198,9 +199,9 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      */
     public function testSPSiteSetSPAccessTokenPass(SPSite $site)
     {
-        $token = unserialize('C:39:"WeAreArchitect\SharePoint\SPAccessToken":59:{a:3:{i:0;s:0:"";i:1;i:2147483647;i:2;s:13:"Europe/London";}}');
+        $token = unserialize('C:30:"Impensavel\Spoil\SPAccessToken":59:{a:3:{i:0;s:0:"";i:1;i:2147483647;i:2;s:13:"Europe/London";}}');
 
-        $this->assertInstanceOf('\WeAreArchitect\SharePoint\SPAccessToken', $token);
+        $this->assertInstanceOf('\Impensavel\Spoil\SPAccessToken', $token);
         $this->assertFalse($token->hasExpired());
 
         $site->setSPAccessToken($token);
@@ -210,7 +211,7 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      * Test SPSite getSPFormDigest() method to FAIL (invalid digest)
      *
      * @depends                   testSPSiteConstructorPass
-     * @expectedException         \WeAreArchitect\SharePoint\SPException
+     * @expectedException         \Impensavel\Spoil\SPException
      * @expectedExceptionMessage  Invalid SharePoint Form Digest
      *
      * @access  public
@@ -226,7 +227,7 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      * Test SPSite getSPFormDigest() method to FAIL (expired digest)
      *
      * @depends                   testSPSiteConstructorPass
-     * @expectedException         \WeAreArchitect\SharePoint\SPException
+     * @expectedException         \Impensavel\Spoil\SPException
      * @expectedExceptionMessage  Expired SharePoint Form Digest
      *
      * @access  public
@@ -235,10 +236,10 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      */
     public function testSPSiteGetSPFormDigestFailExpiredDigest(SPSite $site)
     {
-        $serialized = sprintf('C:38:"WeAreArchitect\SharePoint\SPFormDigest":59:{a:3:{i:0;s:0:"";i:1;i:%d;i:2;s:13:"Europe/London";}}', time());
+        $serialized = sprintf('C:29:"Impensavel\Spoil\SPFormDigest":59:{a:3:{i:0;s:0:"";i:1;i:%d;i:2;s:13:"Europe/London";}}', time());
         $digest = unserialize($serialized);
 
-        $this->assertInstanceOf('\WeAreArchitect\SharePoint\SPFormDigest', $digest);
+        $this->assertInstanceOf('\Impensavel\Spoil\SPFormDigest', $digest);
         $this->assertFalse($digest->hasExpired());
 
         $site->setSPFormDigest($digest);
@@ -263,14 +264,14 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
 
         $digest = $site->getSPFormDigest();
 
-        $this->assertInstanceOf('\WeAreArchitect\SharePoint\SPFormDigest', $digest);
+        $this->assertInstanceOf('\Impensavel\Spoil\SPFormDigest', $digest);
     }
 
     /**
      * Test SPSite setSPFormDigest() method to FAIL (invalid digest)
      *
      * @depends                   testSPSiteConstructorPass
-     * @expectedException         \WeAreArchitect\SharePoint\SPException
+     * @expectedException         \Impensavel\Spoil\SPException
      * @expectedExceptionMessage  Expired SharePoint Form Digest
      *
      * @access  public
@@ -279,9 +280,9 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      */
     public function testSPSiteSetSPFormDigestInvalidDigest(SPSite $site)
     {
-        $digest = unserialize('C:38:"WeAreArchitect\SharePoint\SPFormDigest":50:{a:3:{i:0;s:0:"";i:1;i:0;i:2;s:13:"Europe/London";}}');
+        $digest = unserialize('C:29:"Impensavel\Spoil\SPFormDigest":50:{a:3:{i:0;s:0:"";i:1;i:0;i:2;s:13:"Europe/London";}}');
 
-        $this->assertInstanceOf('\WeAreArchitect\SharePoint\SPFormDigest', $digest);
+        $this->assertInstanceOf('\Impensavel\Spoil\SPFormDigest', $digest);
         $this->assertTrue($digest->hasExpired());
 
         $site->setSPFormDigest($digest);
@@ -298,8 +299,8 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      */
     public function testSPSiteSetSPFormDigestPass(SPSite $site)
     {
-        $digest = unserialize('C:38:"WeAreArchitect\SharePoint\SPFormDigest":59:{a:3:{i:0;s:0:"";i:1;i:2147483647;i:2;s:13:"Europe/London";}}');
-        $this->assertInstanceOf('\WeAreArchitect\SharePoint\SPFormDigest', $digest);
+        $digest = unserialize('C:29:"Impensavel\Spoil\SPFormDigest":59:{a:3:{i:0;s:0:"";i:1;i:2147483647;i:2;s:13:"Europe/London";}}');
+        $this->assertInstanceOf('\Impensavel\Spoil\SPFormDigest', $digest);
         $this->assertFalse($digest->hasExpired());
 
         $site->setSPFormDigest($digest);
