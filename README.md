@@ -1,9 +1,10 @@
-# SharePoint OAuth App Client
-The **SharePoint OAuth App Client** is a [PHP](http://www.php.net) library that makes it easy to authenticate via [OAuth2](http://oauth.net/2/) with the SharePoint Online (2013) REST API and work with **Lists**, **Folders**, **Items**, **Files** and **Users**.
+# SPOIL
+SPOIL (**S**hare**P**oint **O**nline **I**nquiry **L**ibrary) is a client library for [PHP](http://www.php.net) to easily use the SharePoint Online (2013) REST API.
 
-This library aims for [PSR-1][], [PSR-2][] and [PSR-4][] standards compliance.
+Currently supported are SharePoint **Lists**, **Folders**, **Items**, **Files** and **Users**.
 
-[PSR-1]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
+The library aims to comply with the [PSR-2][] and [PSR-4][] standards.
+
 [PSR-2]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
 [PSR-4]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
 
@@ -15,7 +16,7 @@ This library aims for [PSR-1][], [PSR-2][] and [PSR-4][] standards compliance.
 
 ## Installation
 ``` bash
-composer require "wearearchitect/sharepoint-oauth-app-client:0.9.*"
+composer require "impensavel/spoil"
 ```
 
 ## Basic usage example
@@ -24,9 +25,9 @@ composer require "wearearchitect/sharepoint-oauth-app-client:0.9.*"
 
 require 'vendor/autoload.php';
 
-use WeAreArchitect\SharePoint\SPException;
-use WeAreArchitect\SharePoint\SPList;
-use WeAreArchitect\SharePoint\SPSite;
+use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPList;
+use Impensavel\Spoil\SPSite;
 
 try {
     $settings = [
@@ -74,10 +75,10 @@ try {
 - [SPUser](docs/SPUser.md)
 
 ## SharePoint credentials
-See how to generate the SharePoint credentials [here](docs/Credentials.md). 
+[Instructions](docs/Credentials.md) on how to generate SharePoint credentials. 
 
 ## Troubleshooting
-Check for common library issues and how to [solve them](docs/Troubleshooting.md)
+Common issues and how to [solve them](docs/Troubleshooting.md).
 
 ## SharePoint Documentation
 - [Working with lists and list items with REST](https://msdn.microsoft.com/en-us/library/office/dn292552%28v=office.15%29.aspx)

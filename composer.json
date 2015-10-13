@@ -1,29 +1,39 @@
 {
-	"name": "wearearchitect/sharepoint-oauth-app-client",
-	"type": "library",
-	"description": "SharePoint OAuth App Client",
-	"keywords": ["sharepoint", "online", "2013", "oauth", "rest", "api", "client"],
-	"homepage": "https://github.com/wearearchitect/sharepoint-oauth-app-client",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Quetzy Garcia",
-			"email": "qgarcia@wearearchitect.com",
-			"role": "Developer"
-		}
-	],
-	"require": {
-		"php": ">=5.4.0",
-		"guzzlehttp/guzzle": "~5.0",
-		"firebase/php-jwt": "1.*",
-		"nesbot/carbon": "~1.0"
-	},
-	"require-dev": {
-		"phpunit/phpunit": "~4.0"
-	},
-	"autoload": {
-		"psr-4": {
-			"WeAreArchitect\\SharePoint\\": "src/"
-		}
-	}
+    "name": "impensavel/spoil",
+    "type": "library",
+    "description": " SPOIL is a client library for PHP to easily use the SharePoint Online (2013) REST API",
+    "keywords": ["sharepoint", "online", "2013", "oauth", "rest", "api", "client"],
+    "homepage": "https://github.com/impensavel/spoil",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Quetzy Garcia",
+            "email": "quetzyg@impensavel.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "guzzlehttp/guzzle": "~5.0",
+        "firebase/php-jwt": "1.*",
+        "nesbot/carbon": "~1.0"
+    },
+    "require-dev": {
+      "phpunit/phpunit": "~4.0",
+      "fabpot/php-cs-fixer": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Impensavel\\Spoil\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Impensavel\\Spoil\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "cs": "php-cs-fixer fix src --level=psr2 --verbose",
+        "test": "phpunit --verbose"
+    }
 }
