@@ -1,17 +1,16 @@
 <?php
 /**
- * This file is part of the SharePoint OAuth App Client library.
+ * This file is part of the SPOIL library.
  *
- * @author     Quetzy Garcia <qgarcia@wearearchitect.com>
- * @copyright  2014-2015 Architect 365
- * @link       http://architect365.co.uk
+ * @author     Quetzy Garcia <quetzyg@impensavel.com>
+ * @copyright  2014-2015
  *
  * For the full copyright and license information,
  * please view the LICENSE.md file that was distributed
  * with this source code.
  */
 
-namespace WeAreArchitect\SharePoint;
+namespace Impensavel\Spoil;
 
 use Exception;
 use Serializable;
@@ -131,7 +130,7 @@ class SPAccessToken extends SPObject implements Serializable
      * @throws  SPException
      * @return  SPAccessToken
      */
-    public static function createUOP(SPSite $site, $contextToken, array $extra = [])
+    public static function createUserOnlyPolicy(SPSite $site, $contextToken, array $extra = [])
     {
         $config = $site->getConfig();
 
@@ -182,7 +181,7 @@ class SPAccessToken extends SPObject implements Serializable
      * @throws  SPException
      * @return  SPAccessToken
      */
-    public static function createAOP(SPSite $site, array $extra = [])
+    public static function createAppOnlyPolicy(SPSite $site, array $extra = [])
     {
         $config = $site->getConfig();
 

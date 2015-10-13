@@ -1,17 +1,16 @@
 <?php
 /**
- * This file is part of the SharePoint OAuth App Client library.
+ * This file is part of the SPOIL library.
  *
- * @author     Quetzy Garcia <qgarcia@wearearchitect.com>
- * @copyright  2014-2015 Architect 365
- * @link       http://architect365.co.uk
+ * @author     Quetzy Garcia <quetzyg@impensavel.com>
+ * @copyright  2014-2015
  *
  * For the full copyright and license information,
  * please view the LICENSE.md file that was distributed
  * with this source code.
  */
 
-namespace WeAreArchitect\SharePoint;
+namespace Impensavel\Spoil;
 
 class SPItem extends SPObject implements SPItemInterface
 {

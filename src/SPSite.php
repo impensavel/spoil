@@ -1,17 +1,16 @@
 <?php
 /**
- * This file is part of the SharePoint OAuth App Client library.
+ * This file is part of the SPOIL library.
  *
- * @author     Quetzy Garcia <qgarcia@wearearchitect.com>
- * @copyright  2014-2015 Architect 365
- * @link       http://architect365.co.uk
+ * @author     Quetzy Garcia <quetzyg@impensavel.com>
+ * @copyright  2014-2015
  *
  * For the full copyright and license information,
  * please view the LICENSE.md file that was distributed
  * with this source code.
  */
 
-namespace WeAreArchitect\SharePoint;
+namespace Impensavel\Spoil;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
@@ -204,24 +203,23 @@ class SPSite implements SPRequesterInterface
         if ($httpStatus >= 400) {
             $json = $response->json();
 
-            // the error messages are fetched from most to the least detailed
             if (isset($json['odata.error']['message']['value'])) {
                 throw new SPException($json['odata.error']['message']['value'], $httpStatus);
-            }
-
-            if (isset($json['odata.error'])) {
-                throw new SPException($json['odata.error'], $httpStatus);
             }
 
             if (isset($json['error_description'])) {
                 throw new SPException($json['error_description'], $httpStatus);
             }
 
+            if (isset($json['odata.error'])) {
+                throw new SPException($json['odata.error'], $httpStatus);
+            }
+
             if (isset($json['error'])) {
                 throw new SPException($json['error'], $httpStatus);
             }
 
-            // resort to the response body if none of the above exist
+            // resort to the response body if we reach this point
             throw new SPException($response->getBody(), $httpStatus);
         }
     }
@@ -262,9 +260,9 @@ class SPSite implements SPRequesterInterface
     public function createSPAccessToken($contextToken = null, $extra = [])
     {
         if (empty($contextToken)) {
-            $this->token = SPAccessToken::createAOP($this, $extra);
+            $this->token = SPAccessToken::createAppOnlyPolicy($this, $extra);
         } else {
-            $this->token = SPAccessToken::createUOP($this, $contextToken, $extra);
+            $this->token = SPAccessToken::createUserOnlyPolicy($this, $contextToken, $extra);
         }
 
         return $this;
