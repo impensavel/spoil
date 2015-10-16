@@ -13,7 +13,7 @@ There are two ways to create a new **App-only Policy** `SPAccessToken` instance.
 require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPAccessToken;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -40,7 +40,7 @@ try {
 require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPAccessToken;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -70,7 +70,7 @@ Like with the **App-only Policy** `SPAccessToken`, there's also two ways to inst
 require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPAccessToken;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -98,8 +98,8 @@ try {
 
 require 'vendor/autoload.php';
 
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPAccessToken;
-use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {

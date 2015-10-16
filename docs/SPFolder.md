@@ -10,7 +10,7 @@ Gets a SharePoint Folder by it's GUID
 require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPFolder;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -41,7 +41,7 @@ Gets a SharePoint Folder by it's relative URL
 require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPFolder;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -72,7 +72,7 @@ Gets all the Folders within a SharePoint Folder
 require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPFolder;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -109,7 +109,7 @@ require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\SPList;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -150,7 +150,7 @@ Update a SharePoint Folder
 require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPFolder;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -187,8 +187,8 @@ Delete a SharePoint Folder
 
 require 'vendor/autoload.php';
 
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFolder;
-use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {

@@ -12,7 +12,7 @@ There are two ways to create an `SPSite` instance.
 require 'vendor/autoload.php';
 
 use GuzzleHttp\Client;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -41,7 +41,7 @@ try {
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {

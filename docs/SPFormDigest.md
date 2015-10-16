@@ -11,7 +11,7 @@ There are two ways to instantiate a `SPFormDigest` object.
 require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPFormDigest;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -37,8 +37,8 @@ try {
 
 require 'vendor/autoload.php';
 
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFormDigest;
-use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {

@@ -11,7 +11,7 @@ require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -54,7 +54,7 @@ Gets a SharePoint File by it's relative URL
 require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPFile;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -86,7 +86,7 @@ require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -121,7 +121,7 @@ require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -174,7 +174,7 @@ require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -223,7 +223,7 @@ require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -273,7 +273,7 @@ require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -324,9 +324,9 @@ Delete a SharePoint File
 
 require 'vendor/autoload.php';
 
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
-use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
