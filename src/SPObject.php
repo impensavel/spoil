@@ -79,33 +79,33 @@ abstract class SPObject implements SPObjectInterface
     }
 
     /**
-     * Get a value from a JSON array
+     * Extract a value from an OData response payload
      *
      * @access  protected
-     * @param   array     $json JSON response from the SharePoint REST API
-     * @param   string    $path Path to the value we want to get
+     * @param   array     $payload OData response payload
+     * @param   string    $path    Path to the value
      * @return  mixed
      */
-    protected function getJsonValue(array $json, $path)
+    protected function extractFromPayload(array $payload, $path)
     {
         if (is_string($path)) {
-            foreach (explode('->', $path) as $level) {
-                if (is_array($json) === false || array_key_exists($level, $json) === false) {
+            foreach (explode('/', $path) as $level) {
+                if (is_array($payload) === false || array_key_exists($level, $payload) === false) {
                     return null;
                 }
 
-                $json = $json[$level];
+                $payload = $payload[$level];
             }
         }
 
-        return $json;
+        return $payload;
     }
 
     /**
      * Hydration handler
      *
      * @access  protected
-     * @param   mixed     $data      SPObject / JSON response from the SharePoint REST API
+     * @param   mixed     $data      SPObject / OData response payload
      * @param   bool      $rehydrate Are we rehydrating?
      * @throws  SPBadMethodCallException
      * @return  SPObject
@@ -127,7 +127,7 @@ abstract class SPObject implements SPObjectInterface
                 // make spaces SharePoint compatible
                 $path = str_replace(' ', '_x0020_', $path);
 
-                $value = $this->getJsonValue($data, $path);
+                $value = $this->extractFromPayload($data, $path);
 
                 if ($value !== null || $rehydrate === false) {
                     $this->assign($property, $value);
