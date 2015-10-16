@@ -12,6 +12,9 @@
 
 namespace Impensavel\Spoil;
 
+use Impensavel\Spoil\Exception\SPBadMethodCallException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
+
 class SPList extends SPListObject
 {
     use SPTimestampsTrait;
@@ -141,6 +144,7 @@ class SPList extends SPListObject
      * @param   SPSite $site     SharePoint Site
      * @param   array  $json     JSON response from the SharePoint REST API
      * @param   array  $settings Instantiation settings
+     * @throws  SPBadMethodCallException|SPRuntimeException
      * @return  SPList
      */
     public function __construct(SPSite $site, array $json, array $settings = [])
@@ -214,7 +218,7 @@ class SPList extends SPListObject
         $writable = in_array($this->template, static::$writableListTypes);
 
         if ($exception && ! $writable) {
-            throw new SPException('SPList Template Type ['.$this->template.'] does not allow SharePoint Folder/File operations');
+            throw new SPRuntimeException('SPList Template Type ['.$this->template.'] does not allow SharePoint Folder/File operations');
         }
 
         return $writable;
@@ -262,7 +266,7 @@ class SPList extends SPListObject
      * @access  public
      * @param   SPSite $site     SharePoint Site
      * @param   array  $settings Instantiation settings
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  array
      */
     public static function getAll(SPSite $site, array $settings = [])
@@ -298,7 +302,7 @@ class SPList extends SPListObject
      * @param   SPSite $site     SharePoint Site
      * @param   string $guid     SharePoint List GUID
      * @param   array  $settings Instantiation settings
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPList
      */
     public static function getByGUID(SPSite $site, $guid, array $settings = [])
@@ -325,7 +329,7 @@ class SPList extends SPListObject
      * @param   SPSite $site     SharePoint Site
      * @param   string $title    SharePoint List Title
      * @param   array  $settings Instantiation settings
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPList
      */
     public static function getByTitle(SPSite $site, $title, array $settings = [])
@@ -352,7 +356,7 @@ class SPList extends SPListObject
      * @param   SPSite $site       SharePoint Site
      * @param   array  $properties SharePoint List properties (Title, Description, ...)
      * @param   array  $settings   Instantiation settings
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPList
      */
     public static function create(SPSite $site, array $properties, array $settings = [])
@@ -389,7 +393,7 @@ class SPList extends SPListObject
      *
      * @access  public
      * @param   array  $properties SharePoint List properties (Title, Description, ...)
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPList
      */
     public function update(array $properties)
@@ -424,7 +428,7 @@ class SPList extends SPListObject
      * Delete a List and all it's content
      *
      * @access  public
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  bool
      */
     public function delete()
@@ -447,7 +451,7 @@ class SPList extends SPListObject
      *
      * @access  public
      * @param   array  $properties Field properties (Title, FieldTypeKind, ...)
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  string
      */
     public function createSPField(array $properties)
@@ -479,7 +483,7 @@ class SPList extends SPListObject
      * Get the SharePoint List Item count
      *
      * @access  public
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  int
      */
     public function getSPItemCount()
@@ -500,6 +504,7 @@ class SPList extends SPListObject
      * @static
      * @access  public
      * @param   array  $settings Instantiation settings
+     * @throws  SPRuntimeException
      * @return  array
      */
     public function getSPItems(array $settings = [])
@@ -522,6 +527,7 @@ class SPList extends SPListObject
      * @access  public
      * @param   int    $id    Item ID
      * @param   array  $extra Extra SharePoint Item properties to map
+     * @throws  SPRuntimeException
      * @return  SPItem
      */
     public function getSPItem($id, array $extra = [])
@@ -538,7 +544,7 @@ class SPList extends SPListObject
      *
      * @access  public
      * @param   array  $properties List properties (Title, ...)
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  array
      */
     public function createSPItem(array $properties)
@@ -556,6 +562,7 @@ class SPList extends SPListObject
      * @access  public
      * @param   string $guid       SharePoint Item GUID
      * @param   array  $properties SharePoint Item properties (Title, ...)
+     * @throws  SPRuntimeException
      * @return  SPItem
      */
     public function updateSPItem($guid, array $properties)
@@ -568,7 +575,7 @@ class SPList extends SPListObject
      *
      * @access  public
      * @param   string $guid SharePoint Item index
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  bool
      */
     public function deleteSPItem($guid)

@@ -18,6 +18,10 @@ use Serializable;
 use Carbon\Carbon;
 use JWT;
 
+use Impensavel\Spoil\Exception\SPBadMethodCallException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPInvalidArgumentException;
+
 class SPAccessToken extends SPObject implements Serializable
 {
     /**
@@ -54,7 +58,7 @@ class SPAccessToken extends SPObject implements Serializable
      * @access  public
      * @param   array  $json  JSON response from the SharePoint REST API
      * @param   array  $extra Extra SharePoint Access Token properties to map
-     * @throws  SPException
+     * @throws  SPBadMethodCallException
      * @return  SPAccessToken
      */
     public function __construct(array $json, array $extra = [])
@@ -127,7 +131,7 @@ class SPAccessToken extends SPObject implements Serializable
      * @param   SPSite $site         SharePoint Site
      * @param   string $contextToken Context Token
      * @param   array  $extra        Extra SharePoint Access Token properties to map
-     * @throws  SPException
+     * @throws  SPBadMethodCallException|SPRuntimeException
      * @return  SPAccessToken
      */
     public static function createUserOnlyPolicy(SPSite $site, $contextToken, array $extra = [])
@@ -135,13 +139,13 @@ class SPAccessToken extends SPObject implements Serializable
         $config = $site->getConfig();
 
         if (empty($config['secret'])) {
-            throw new SPException('The Secret is empty/not set');
+            throw new SPBadMethodCallException('The Secret is empty/not set');
         }
 
         try {
             $jwt = JWT::decode($contextToken, $config['secret'], false);
         } catch (Exception $e) {
-            throw new SPException('Unable to decode the Context Token', 0, $e);
+            throw new SPRuntimeException('Unable to decode the Context Token', 0, $e);
         }
 
         // get URL hostname
@@ -178,7 +182,7 @@ class SPAccessToken extends SPObject implements Serializable
      * @access  public
      * @param   SPSite $site  SharePoint Site
      * @param   array  $extra Extra SharePoint Access Token properties to map
-     * @throws  SPException
+     * @throws  SPBadMethodCallException|SPInvalidArgumentException
      * @return  SPAccessToken
      */
     public static function createAppOnlyPolicy(SPSite $site, array $extra = [])
@@ -186,23 +190,23 @@ class SPAccessToken extends SPObject implements Serializable
         $config = $site->getConfig();
 
         if (empty($config['secret'])) {
-            throw new SPException('The Secret is empty/not set');
+            throw new SPBadMethodCallException('The Secret is empty/not set');
         }
 
         if (empty($config['acs'])) {
-            throw new SPException('The Azure Access Control Service URL is empty/not set');
+            throw new SPBadMethodCallException('The Azure Access Control Service URL is empty/not set');
         }
 
         if (! filter_var($config['acs'], FILTER_VALIDATE_URL)) {
-            throw new SPException('The Azure Access Control Service URL is invalid');
+            throw new SPInvalidArgumentException('The Azure Access Control Service URL is invalid');
         }
 
         if (empty($config['client_id'])) {
-            throw new SPException('The Client ID is empty/not set');
+            throw new SPBadMethodCallException('The Client ID is empty/not set');
         }
 
         if (empty($config['resource'])) {
-            throw new SPException('The Resource is empty/not set');
+            throw new SPBadMethodCallException('The Resource is empty/not set');
         }
 
         $json = $site->request($config['acs'], [

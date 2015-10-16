@@ -16,6 +16,9 @@ use Serializable;
 
 use Carbon\Carbon;
 
+use Impensavel\Spoil\Exception\SPBadMethodCallException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
+
 class SPFormDigest extends SPObject implements Serializable
 {
     /**
@@ -52,7 +55,7 @@ class SPFormDigest extends SPObject implements Serializable
      * @access  public
      * @param   array  $json  JSON response from the SharePoint REST API
      * @param   array  $extra Extra SharePoint Form Digest properties to map
-     * @throws  SPException
+     * @throws  SPBadMethodCallException
      * @return  SPFormDigest
      */
     public function __construct(array $json, array $extra = [])
@@ -124,7 +127,7 @@ class SPFormDigest extends SPObject implements Serializable
      * @access  public
      * @param   SPSite $site  SharePoint List
      * @param   array  $extra Extra SharePoint Form Digest properties to map
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPFormDigest
      */
     public static function create(SPSite $site, array $extra = [])

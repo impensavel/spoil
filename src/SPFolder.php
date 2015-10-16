@@ -12,6 +12,9 @@
 
 namespace Impensavel\Spoil;
 
+use Impensavel\Spoil\Exception\SPBadMethodCallException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
+
 class SPFolder extends SPListObject implements SPItemInterface
 {
     use SPTimestampsTrait;
@@ -58,6 +61,7 @@ class SPFolder extends SPListObject implements SPItemInterface
      * @param   SPSite $site     SharePoint Site
      * @param   array  $json     JSON response from the SharePoint REST API
      * @param   array  $settings Instantiation settings
+     * @throws  SPBadMethodCallException|SPRuntimeException
      * @return  SPFolder
      */
     public function __construct(SPSite $site, array $json, array $settings = [])
@@ -179,7 +183,7 @@ class SPFolder extends SPListObject implements SPItemInterface
      *
      * @access  public
      * @param   array  $settings Instantiation settings
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPList
      */
     public function getSPList(array $settings = [])
@@ -199,7 +203,7 @@ class SPFolder extends SPListObject implements SPItemInterface
      * @param   SPSite $site     SharePoint Site
      * @param   string $guid     SharePoint Folder GUID
      * @param   array  $settings Instantiation settings
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPFolder
      */
     public static function getByGUID(SPSite $site, $guid, array $settings = [])
@@ -226,13 +230,13 @@ class SPFolder extends SPListObject implements SPItemInterface
      * @param   SPSite $site        SharePoint Site
      * @param   string $relativeUrl SharePoint Folder relative URL
      * @param   array  $settings    Instantiation settings
-     * @throws  SPException
+     * @throws  SPBadMethodCallException
      * @return  SPFolder
      */
     public static function getByRelativeUrl(SPSite $site, $relativeUrl, array $settings = [])
     {
         if (static::isSystemFolder($relativeUrl)) {
-            throw new SPException('Trying to get a SharePoint System Folder');
+            throw new SPBadMethodCallException('Trying to get a SharePoint System Folder');
         }
 
         $json = $site->request("_api/web/GetFolderByServerRelativeUrl('".$relativeUrl."')", [
@@ -257,7 +261,7 @@ class SPFolder extends SPListObject implements SPItemInterface
      * @param   SPSite $site        SharePoint Site
      * @param   string $relativeUrl SharePoint Folder relative URL
      * @param   array  $settings    Instantiation settings
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  array
      */
     public static function getSubFolders(SPSite $site, $relativeUrl, array $settings = [])
@@ -293,7 +297,7 @@ class SPFolder extends SPListObject implements SPItemInterface
      * @param   SPFolderInterface $folder   Parent SharePoint Folder
      * @param   array             $name     SharePoint Folder name
      * @param   array             $settings Instantiation settings
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPFolder
      */
     public static function create(SPFolderInterface $folder, $name, array $settings = [])
@@ -329,7 +333,7 @@ class SPFolder extends SPListObject implements SPItemInterface
      *
      * @access  public
      * @param   array  $properties SharePoint Folder properties (Name, ...)
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPFolder
      */
     public function update(array $properties)
@@ -368,7 +372,7 @@ class SPFolder extends SPListObject implements SPItemInterface
      * Delete a SharePoint Folder
      *
      * @access  public
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  bool
      */
     public function delete()
@@ -389,7 +393,7 @@ class SPFolder extends SPListObject implements SPItemInterface
      * Get the SharePoint Folder Item count (Folders and Files)
      *
      * @access  public
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  int
      */
     public function getSPItemCount()
@@ -410,6 +414,7 @@ class SPFolder extends SPListObject implements SPItemInterface
      * @static
      * @access  public
      * @param   array  $settings Instantiation settings
+     * @throws  SPRuntimeException
      * @return  array
      */
     public function getSPItems(array $settings = [])

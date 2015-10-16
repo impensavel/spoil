@@ -12,9 +12,13 @@
 
 namespace Impensavel\Spoil;
 
+use Impensavel\Spoil\Exception\SPBadMethodCallException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
+
 class SPItem extends SPObject implements SPItemInterface
 {
-    use SPPropertiesTrait, SPTimestampsTrait;
+    use SPPropertiesTrait;
+    use SPTimestampsTrait;
 
     /**
      * SharePoint List
@@ -39,6 +43,7 @@ class SPItem extends SPObject implements SPItemInterface
      * @param   SPList $list  SharePoint List object
      * @param   array  $json  JSON response from the SharePoint REST API
      * @param   array  $extra Extra SharePoint Item properties to map
+     * @throws  SPBadMethodCallException
      * @return  SPItem
      */
     public function __construct(SPList $list, array $json, array $extra = [])
@@ -102,7 +107,7 @@ class SPItem extends SPObject implements SPItemInterface
      * @access  public
      * @param   SPList $list     SharePoint List
      * @param   array  $settings Instantiation settings
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  array
      */
     public static function getAll(SPList $list, array $settings = [])
@@ -141,7 +146,7 @@ class SPItem extends SPObject implements SPItemInterface
      * @param   SPList $list  SharePoint List
      * @param   int    $id    Item ID
      * @param   array  $extra Extra SharePoint Item properties to map
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPItem
      */
     public static function getByID(SPList $list, $id, array $extra = [])
@@ -164,7 +169,7 @@ class SPItem extends SPObject implements SPItemInterface
      * @param   SPList $list       SharePoint List
      * @param   array  $properties SharePoint Item properties (Title, ...)
      * @param   array  $extra      Extra SharePoint Item properties to map
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPItem
      */
     public static function create(SPList $list, array $properties, array $extra = [])
@@ -196,7 +201,7 @@ class SPItem extends SPObject implements SPItemInterface
      *
      * @access  public
      * @param   array  $properties SharePoint Item properties (Title, ...)
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPItem
      */
     public function update(array $properties)
@@ -232,7 +237,7 @@ class SPItem extends SPObject implements SPItemInterface
      * Recycle a SharePoint Item
      *
      * @access  public
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  string
      */
     public function recycle()
@@ -253,7 +258,7 @@ class SPItem extends SPObject implements SPItemInterface
      * Delete a SharePoint Item
      *
      * @access  public
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  bool
      */
     public function delete()

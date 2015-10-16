@@ -13,8 +13,13 @@
 namespace Impensavel\Spoil;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\TransferException;
+use GuzzleHttp\Exception\ParseException;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Message\ResponseInterface;
+
+use Impensavel\Spoil\Exception\SPInvalidArgumentException;
+use Impensavel\Spoil\Exception\SPObjectNotFoundException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 
 class SPSite implements SPRequesterInterface
 {
@@ -79,7 +84,7 @@ class SPSite implements SPRequesterInterface
      * @access  public
      * @param   \GuzzleHttp\Client $http   Guzzle HTTP client
      * @param   array              $config SharePoint Site configuration
-     * @throws  SPException
+     * @throws  SPInvalidArgumentException
      * @return  SPSite
      */
     public function __construct(Client $http, array $config)
@@ -95,7 +100,7 @@ class SPSite implements SPRequesterInterface
         $components = parse_url($this->http->getBaseUrl());
 
         if (! isset($components['scheme'], $components['host'], $components['path'])) {
-            throw new SPException('The SharePoint Site URL is invalid');
+            throw new SPInvalidArgumentException('The SharePoint Site URL is invalid');
         }
 
         $this->hostname = $components['scheme'].'://'.$components['host'];
@@ -193,34 +198,45 @@ class SPSite implements SPRequesterInterface
      *
      * @access  protected
      * @param   \GuzzleHttp\Message\ResponseInterface $response
-     * @throws  SPException
+     * @throws  SPObjectNotFoundException|SPRuntimeException
      * @return  void
      */
     protected function checkSPErrors(ResponseInterface $response)
     {
-        $httpStatus = $response->getStatusCode();
+        $code = $response->getStatusCode();
 
-        if ($httpStatus >= 400) {
+        if ($code >= 400) {
             $json = $response->json();
 
-            if (isset($json['odata.error']['message']['value'])) {
-                throw new SPException($json['odata.error']['message']['value'], $httpStatus);
+            $message = null;
+
+            if (isset($json['odata.error']['message']['value']) && $message === null) {
+                $message = $json['odata.error']['message']['value'];
             }
 
-            if (isset($json['error_description'])) {
-                throw new SPException($json['error_description'], $httpStatus);
+            if (isset($json['error_description']) && $message === null) {
+                $message = $json['error_description'];
             }
 
-            if (isset($json['odata.error'])) {
-                throw new SPException($json['odata.error'], $httpStatus);
+            if (isset($json['odata.error']) && $message === null) {
+                $message = $json['odata.error'];
             }
 
-            if (isset($json['error'])) {
-                throw new SPException($json['error'], $httpStatus);
+            if (isset($json['error']) && $message === null) {
+                $message = $json['error'];
             }
 
-            // resort to the response body if we reach this point
-            throw new SPException($response->getBody(), $httpStatus);
+            if ($message === null) {
+                $message = $response->getBody();
+            }
+
+            switch ($code) {
+                case 404:
+                    throw new SPObjectNotFoundException($message, $code);
+
+                default:
+                    throw new SPRuntimeException($message, $code);
+            }
         }
     }
 
@@ -243,8 +259,10 @@ class SPSite implements SPRequesterInterface
             }
 
             return $response;
-        } catch (TransferException $e) {
-            throw SPException::fromTransferException($e);
+        } catch (ParseException $e) {
+            throw new SPRuntimeException('Could not parse response body as JSON', 0, $e);
+        } catch (RequestException $e) {
+            throw new SPRuntimeException('Unable to make HTTP request', 0, $e);
         }
     }
 
@@ -254,7 +272,7 @@ class SPSite implements SPRequesterInterface
      * @access  public
      * @param   string $contextToken SharePoint Context Token
      * @param   array  $extra        Extra SharePoint Access Token properties to map
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPSite
      */
     public function createSPAccessToken($contextToken = null, $extra = [])
@@ -274,11 +292,11 @@ class SPSite implements SPRequesterInterface
     public function getSPAccessToken()
     {
         if (! $this->token instanceof SPAccessToken) {
-            throw new SPException('Invalid SharePoint Access Token');
+            throw new SPRuntimeException('Invalid SharePoint Access Token');
         }
 
         if ($this->token->hasExpired()) {
-            throw new SPException('Expired SharePoint Access Token');
+            throw new SPRuntimeException('Expired SharePoint Access Token');
         }
 
         return $this->token;
@@ -289,13 +307,13 @@ class SPSite implements SPRequesterInterface
      *
      * @access  public
      * @param   SPAccessToken $token SharePoint Access Token
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  void
      */
     public function setSPAccessToken(SPAccessToken $token)
     {
         if ($token->hasExpired()) {
-            throw new SPException('Expired SharePoint Access Token');
+            throw new SPRuntimeException('Expired SharePoint Access Token');
         }
 
         $this->token = $token;
@@ -306,7 +324,7 @@ class SPSite implements SPRequesterInterface
      *
      * @access  public
      * @param   array  $extra Extra SharePoint Access Token properties to map
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPSite
      */
     public function createSPFormDigest($extra = [])
@@ -322,11 +340,11 @@ class SPSite implements SPRequesterInterface
     public function getSPFormDigest()
     {
         if (! $this->digest instanceof SPFormDigest) {
-            throw new SPException('Invalid SharePoint Form Digest');
+            throw new SPRuntimeException('Invalid SharePoint Form Digest');
         }
 
         if ($this->digest->hasExpired()) {
-            throw new SPException('Expired SharePoint Form Digest');
+            throw new SPRuntimeException('Expired SharePoint Form Digest');
         }
 
         return $this->digest;
@@ -337,13 +355,13 @@ class SPSite implements SPRequesterInterface
      *
      * @access  public
      * @param   SPFormDigest $digest SharePoint Form Digest
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  void
      */
     public function setSPFormDigest(SPFormDigest $digest)
     {
         if ($digest->hasExpired()) {
-            throw new SPException('Expired SharePoint Form Digest');
+            throw new SPRuntimeException('Expired SharePoint Form Digest');
         }
 
         $this->digest = $digest;

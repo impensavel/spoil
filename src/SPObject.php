@@ -14,6 +14,9 @@ namespace Impensavel\Spoil;
 
 use Carbon\Carbon;
 
+use Impensavel\Spoil\Exception\SPBadMethodCallException;
+use Impensavel\Spoil\Exception\SPInvalidArgumentException;
+
 abstract class SPObject implements SPObjectInterface
 {
     /**
@@ -50,7 +53,7 @@ abstract class SPObject implements SPObjectInterface
      *
      * @access  public
      * @param   string $property Extra property name
-     * @throws  SPException
+     * @throws  SPInvalidArgumentException
      * @return  mixed
      */
     public function getExtra($property = null)
@@ -63,7 +66,7 @@ abstract class SPObject implements SPObjectInterface
             return $this->extra[$property];
         }
 
-        throw new SPException('Invalid property: '.$property);
+        throw new SPInvalidArgumentException('Invalid property: '.$property);
     }
 
     /**
@@ -117,7 +120,7 @@ abstract class SPObject implements SPObjectInterface
      * @access  protected
      * @param   mixed     $data      SPObject / JSON response from the SharePoint REST API
      * @param   bool      $rehydrate Are we rehydrating?
-     * @throws  SPException
+     * @throws  SPBadMethodCallException
      * @return  SPObject
      */
     protected function hydrate($data, $rehydrate = false)
@@ -147,6 +150,6 @@ abstract class SPObject implements SPObjectInterface
             return $this;
         }
 
-        throw new SPException('Could not hydrate '.get_class($this));
+        throw new SPBadMethodCallException('Could not hydrate '.get_class($this).' with data from '.gettype($data));
     }
 }

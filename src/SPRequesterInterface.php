@@ -12,6 +12,8 @@
 
 namespace Impensavel\Spoil;
 
+use Impensavel\Spoil\Exception\SPRuntimeException;
+
 interface SPRequesterInterface
 {
     /**
@@ -22,7 +24,7 @@ interface SPRequesterInterface
      * @param   array  $options HTTP client options (see GuzzleHttp\Client options)
      * @param   string $method  HTTP method name (GET, POST, PUT, DELETE, ...)
      * @param   bool   $json    Return JSON if true, return Response object otherwise
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  \GuzzleHttp\Message\Response|array
      */
     public function request($url, array $options = [], $method = 'GET', $json = true);
@@ -31,7 +33,7 @@ interface SPRequesterInterface
      * Get the current SharePoint Access Token
      *
      * @access  public
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPAccessToken
      */
     public function getSPAccessToken();
@@ -40,7 +42,7 @@ interface SPRequesterInterface
      * Get the current SharePoint Form Digest
      *
      * @access  public
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPFormDigest
      */
     public function getSPFormDigest();

@@ -16,9 +16,14 @@ use SplFileInfo;
 
 use Carbon\Carbon;
 
+use Impensavel\Spoil\Exception\SPBadMethodCallException;
+use Impensavel\Spoil\Exception\SPInvalidArgumentException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
+
 class SPFile extends SPObject implements SPItemInterface
 {
-    use SPPropertiesTrait, SPTimestampsTrait;
+    use SPPropertiesTrait;
+    use SPTimestampsTrait;
 
     /**
      * SharePoint Folder
@@ -75,6 +80,7 @@ class SPFile extends SPObject implements SPItemInterface
      * @param   SPFolderInterface $folder SharePoint Folder
      * @param   array             $json   JSON response from the SharePoint REST API
      * @param   array             $extra  Extra properties to map
+     * @throws  SPBadMethodCallException
      * @return  SPFile
      */
     public function __construct(SPFolderInterface $folder, array $json, array $extra = [])
@@ -235,7 +241,7 @@ class SPFile extends SPObject implements SPItemInterface
      *
      * @access  public
      * @param   array  $extra Extra properties to map
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPItem
      */
     public function getSPItem(array $extra = [])
@@ -250,7 +256,7 @@ class SPFile extends SPObject implements SPItemInterface
      * @access  public
      * @param   SPFolderInterface $folder SharePoint Folder
      * @param   array             $extra  Extra properties to map
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  array
      */
     public static function getAll(SPFolderInterface $folder, array $extra = [])
@@ -283,7 +289,7 @@ class SPFile extends SPObject implements SPItemInterface
      * @param   SPSite $site        SharePoint Site
      * @param   string $relativeUrl SharePoint Folder relative URL
      * @param   array  $extra       Extra properties to map
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPFile
      */
     public static function getByRelativeUrl(SPSite $site, $relativeUrl, array $extra = [])
@@ -312,7 +318,7 @@ class SPFile extends SPObject implements SPItemInterface
      * @param   SPFolderInterface $folder SharePoint Folder
      * @param   string            $name   File Name
      * @param   array             $extra  Extra properties to map
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPFile
      */
     public static function getByName(SPFolderInterface $folder, $name, array $extra = [])
@@ -339,7 +345,7 @@ class SPFile extends SPObject implements SPItemInterface
      * @static
      * @access  protected
      * @param   mixed   $input
-     * @throws  SPException
+     * @throws  SPRuntimeException|SPInvalidArgumentException
      * @return  string
      */
     protected static function contentTypeHandler($input)
@@ -348,7 +354,7 @@ class SPFile extends SPObject implements SPItemInterface
             $data = file_get_contents($input->getPathname());
 
             if ($data === false) {
-                throw new SPException('Unable to get file contents');
+                throw new SPRuntimeException('Unable to get file contents');
             }
 
             return $data;
@@ -362,19 +368,19 @@ class SPFile extends SPObject implements SPItemInterface
             $type = get_resource_type($input);
 
             if ($type != 'stream') {
-                throw new SPException('Invalid resource type: '.$type);
+                throw new SPInvalidArgumentException('Invalid resource type: '.$type);
             }
 
             $data = stream_get_contents($input);
 
             if ($data === false) {
-                throw new SPException('Failed to get data from stream');
+                throw new SPRuntimeException('Failed to get data from stream');
             }
 
             return $data;
         }
 
-        throw new SPException('Invalid input type: '.gettype($input));
+        throw new SPInvalidArgumentException('Invalid input type: '.gettype($input));
     }
 
     /**
@@ -387,7 +393,7 @@ class SPFile extends SPObject implements SPItemInterface
      * @param   string            $name      Name for the file being uploaded
      * @param   bool              $overwrite Overwrite if file already exists?
      * @param   array             $extra     Extra properties to map
-     * @throws  SPException
+     * @throws  SPBadMethodCallException
      * @return  SPFile
      */
     public static function create(SPFolderInterface $folder, $content, $name = null, $overwrite = false, array $extra = [])
@@ -400,7 +406,7 @@ class SPFile extends SPObject implements SPItemInterface
             }
 
             if (is_resource($content) || is_string($content)) {
-                throw new SPException('SharePoint File Name is empty/not set');
+                throw new SPBadMethodCallException('SharePoint File Name is empty/not set');
             }
         }
 
@@ -429,7 +435,7 @@ class SPFile extends SPObject implements SPItemInterface
      *
      * @access  public
      * @param   mixed $content File content
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPFile
      */
     public function update($content)
@@ -464,7 +470,7 @@ class SPFile extends SPObject implements SPItemInterface
      * @param   SPFolderInterface $folder SharePoint Folder to move to
      * @param   string            $name   SharePoint File name
      * @param   array             $extra  Extra properties to map
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPFile
      */
     public function move(SPFolderInterface $folder, $name = null, array $extra = [])
@@ -497,7 +503,7 @@ class SPFile extends SPObject implements SPItemInterface
      * @param   string            $name      SharePoint File name
      * @param   bool              $overwrite Overwrite if file already exists?
      * @param   array             $extra     Extra properties to map
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  SPFile
      */
     public function copy(SPFolderInterface $folder, $name = null, $overwrite = false, array $extra = [])
@@ -524,7 +530,7 @@ class SPFile extends SPObject implements SPItemInterface
      * Recycle a SharePoint File
      *
      * @access  public
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  string
      */
     public function recycle()
@@ -545,7 +551,7 @@ class SPFile extends SPObject implements SPItemInterface
      * Delete a SharePoint File
      *
      * @access  public
-     * @throws  SPException
+     * @throws  SPRuntimeException
      * @return  bool
      */
     public function delete()

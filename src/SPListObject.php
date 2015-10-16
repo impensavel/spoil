@@ -17,6 +17,9 @@ use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 
+use Impensavel\Spoil\Exception\SPBadMethodCallException;
+use Impensavel\Spoil\Exception\SPInvalidArgumentException;
+
 abstract class SPListObject extends SPObject implements ArrayAccess, Countable, IteratorAggregate, SPFolderInterface
 {
     use SPPropertiesTrait;
@@ -86,7 +89,7 @@ abstract class SPListObject extends SPObject implements ArrayAccess, Countable, 
             return $this->items[$offset];
         }
 
-        throw new SPException('Invalid SharePoint Item GUID');
+        throw new SPInvalidArgumentException('Invalid SharePoint Item GUID');
     }
 
     /**
@@ -95,7 +98,7 @@ abstract class SPListObject extends SPObject implements ArrayAccess, Countable, 
     public function offsetSet($offset, $value)
     {
         if (! $value instanceof SPItemInterface) {
-            throw new SPException('SharePoint Item expected');
+            throw new SPBadMethodCallException('SharePoint Item expected');
         }
 
         // always set the GUID as the array index

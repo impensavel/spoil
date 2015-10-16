@@ -12,6 +12,8 @@
 
 namespace Impensavel\Spoil;
 
+use Impensavel\Spoil\Exception\SPRuntimeException;
+
 interface SPFolderInterface extends SPRequesterInterface
 {
     /**
@@ -36,6 +38,7 @@ interface SPFolderInterface extends SPRequesterInterface
      *
      * @access  public
      * @param   bool   $exception Throw exception if not writable?
+     * @throws  SPRuntimeException
      * @return  bool
      */
     public function isWritable($exception = false);
