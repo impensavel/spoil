@@ -24,7 +24,7 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
     /**
      * Test SPSite constructor to FAIL (invalid URL)
      *
-     * @expectedException         \Impensavel\Spoil\SPException
+     * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
      * @expectedExceptionMessage  The SharePoint Site URL is invalid
      *
      * @access  public
@@ -75,7 +75,7 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      * Test SPSite getSPAccessToken() method to FAIL (invalid token)
      *
      * @depends                   testSPSiteConstructorPass
-     * @expectedException         \Impensavel\Spoil\SPException
+     * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
      * @expectedExceptionMessage  Invalid SharePoint Access Token
      *
      * @access  public
@@ -91,7 +91,7 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      * Test SPSite getSPAccessToken() method to FAIL (expired token)
      *
      * @depends                   testSPSiteConstructorPass
-     * @expectedException         \Impensavel\Spoil\SPException
+     * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
      * @expectedExceptionMessage  Expired SharePoint Access Token
      *
      * @access  public
@@ -171,7 +171,7 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      * Test SPSite setSPAccessToken() method to FAIL (invalid token)
      *
      * @depends                   testSPSiteConstructorPass
-     * @expectedException         \Impensavel\Spoil\SPException
+     * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
      * @expectedExceptionMessage  Expired SharePoint Access Token
      *
      * @access  public
@@ -211,7 +211,7 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      * Test SPSite getSPFormDigest() method to FAIL (invalid digest)
      *
      * @depends                   testSPSiteConstructorPass
-     * @expectedException         \Impensavel\Spoil\SPException
+     * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
      * @expectedExceptionMessage  Invalid SharePoint Form Digest
      *
      * @access  public
@@ -227,7 +227,7 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      * Test SPSite getSPFormDigest() method to FAIL (expired digest)
      *
      * @depends                   testSPSiteConstructorPass
-     * @expectedException         \Impensavel\Spoil\SPException
+     * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
      * @expectedExceptionMessage  Expired SharePoint Form Digest
      *
      * @access  public
@@ -271,7 +271,7 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      * Test SPSite setSPFormDigest() method to FAIL (invalid digest)
      *
      * @depends                   testSPSiteConstructorPass
-     * @expectedException         \Impensavel\Spoil\SPException
+     * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
      * @expectedExceptionMessage  Expired SharePoint Form Digest
      *
      * @access  public
