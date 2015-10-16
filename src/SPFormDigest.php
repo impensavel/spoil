@@ -53,19 +53,19 @@ class SPFormDigest extends SPObject implements Serializable
      * SharePoint Form Digest constructor
      *
      * @access  public
-     * @param   array  $json  JSON response from the SharePoint REST API
-     * @param   array  $extra Extra SharePoint Form Digest properties to map
+     * @param   array  $payload OData response payload
+     * @param   array  $extra   Extra payload values to map
      * @throws  SPBadMethodCallException
      * @return  SPFormDigest
      */
-    public function __construct(array $json, array $extra = [])
+    public function __construct(array $payload, array $extra = [])
     {
         $this->mapper = array_merge([
             'digest'  => 'FormDigestValue',
             'expires' => 'FormDigestTimeoutSeconds',
         ], $extra);
 
-        $this->hydrate($json);
+        $this->hydrate($payload);
     }
 
     /**
@@ -126,7 +126,7 @@ class SPFormDigest extends SPObject implements Serializable
      * @static
      * @access  public
      * @param   SPSite $site  SharePoint List
-     * @param   array  $extra Extra SharePoint Form Digest properties to map
+     * @param   array  $extra Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPFormDigest
      */

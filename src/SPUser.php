@@ -93,20 +93,20 @@ class SPUser extends SPObject
      * SharePoint User constructor
      *
      * @access  public
-     * @param   SPSite $site  SharePoint Site
-     * @param   array  $json  JSON response from the SharePoint REST API
-     * @param   array  $extra Extra properties to map
+     * @param   SPSite $site    SharePoint Site
+     * @param   array  $payload OData response payload
+     * @param   array  $extra   Extra payload values to map
      * @throws  SPBadMethodCallException
      * @return  SPUser
      */
-    public function __construct(SPSite $site, array $json, array $extra = [])
+    public function __construct(SPSite $site, array $payload, array $extra = [])
     {
         $this->mapper = array_merge([
             'account'   => 'AccountName',
             'email'     => 'Email',
             'fullName'  => 'DisplayName',
-            'firstName' => 'UserProfileProperties->4->Value',
-            'lastName'  => 'UserProfileProperties->6->Value',
+            'firstName' => 'UserProfileProperties/4/Value',
+            'lastName'  => 'UserProfileProperties/6/Value',
             'title'     => 'Title',
             'picture'   => 'PictureUrl',
             'url'       => 'PersonalUrl',
@@ -114,7 +114,7 @@ class SPUser extends SPObject
 
         $this->site = $site;
 
-        $this->hydrate($json);
+        $this->hydrate($payload);
     }
 
     /**
@@ -228,7 +228,7 @@ class SPUser extends SPObject
      *
      * @access  public
      * @param   SPSite $site  SharePoint Site object
-     * @param   array  $extra Extra properties to map
+     * @param   array  $extra Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPUser
      */
@@ -250,7 +250,7 @@ class SPUser extends SPObject
      * @access  public
      * @param   SPSite $site    SharePoint Site object
      * @param   string $account SharePoint User account
-     * @param   array  $extra   Extra properties to map
+     * @param   array  $extra   Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPUser
      */

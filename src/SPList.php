@@ -142,12 +142,12 @@ class SPList extends SPListObject
      *
      * @access  public
      * @param   SPSite $site     SharePoint Site
-     * @param   array  $json     JSON response from the SharePoint REST API
+     * @param   array  $payload  OData response payload
      * @param   array  $settings Instantiation settings
      * @throws  SPBadMethodCallException|SPRuntimeException
      * @return  SPList
      */
-    public function __construct(SPSite $site, array $json, array $settings = [])
+    public function __construct(SPSite $site, array $payload, array $settings = [])
     {
         $settings = array_replace_recursive([
             'fetch' => false, // fetch SharePoint Items?
@@ -162,16 +162,16 @@ class SPList extends SPListObject
             'itemType'    => 'ListItemEntityTypeFullName',
             'guid'        => 'Id',
             'title'       => 'Title',
-            'relativeUrl' => 'RootFolder->ServerRelativeUrl',
+            'relativeUrl' => 'RootFolder/ServerRelativeUrl',
             'description' => 'Description',
             'itemCount'   => 'ItemCount',
-            'created'     => 'RootFolder->TimeCreated',
-            'modified'    => 'RootFolder->TimeLastModified',
+            'created'     => 'RootFolder/TimeCreated',
+            'modified'    => 'RootFolder/TimeLastModified',
         ], $settings['extra']);
 
         $this->site = $site;
 
-        $this->hydrate($json);
+        $this->hydrate($payload);
 
         if ($settings['fetch'] && $this->itemCount > 0) {
             $this->getSPItems($settings['items']);
@@ -526,7 +526,7 @@ class SPList extends SPListObject
      * @static
      * @access  public
      * @param   int    $id    Item ID
-     * @param   array  $extra Extra SharePoint Item properties to map
+     * @param   array  $extra Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPItem
      */

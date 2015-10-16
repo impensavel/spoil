@@ -271,7 +271,7 @@ class SPSite implements SPRequesterInterface
      *
      * @access  public
      * @param   string $contextToken SharePoint Context Token
-     * @param   array  $extra        Extra SharePoint Access Token properties to map
+     * @param   array  $extra        Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPSite
      */
@@ -323,7 +323,7 @@ class SPSite implements SPRequesterInterface
      * Create a SharePoint Form Digest
      *
      * @access  public
-     * @param   array  $extra Extra SharePoint Access Token properties to map
+     * @param   array  $extra Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPSite
      */

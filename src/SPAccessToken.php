@@ -56,19 +56,19 @@ class SPAccessToken extends SPObject implements Serializable
      * SharePoint Access Token constructor
      *
      * @access  public
-     * @param   array  $json  JSON response from the SharePoint REST API
-     * @param   array  $extra Extra SharePoint Access Token properties to map
+     * @param   array  $payload OData response payload
+     * @param   array  $extra   Extra payload values to map
      * @throws  SPBadMethodCallException
      * @return  SPAccessToken
      */
-    public function __construct(array $json, array $extra = [])
+    public function __construct(array $payload, array $extra = [])
     {
         $this->mapper = array_merge([
             'token'   => 'access_token',
             'expires' => 'expires_on',
         ], $extra);
 
-        $this->hydrate($json);
+        $this->hydrate($payload);
     }
 
     /**
@@ -130,7 +130,7 @@ class SPAccessToken extends SPObject implements Serializable
      * @access  public
      * @param   SPSite $site         SharePoint Site
      * @param   string $contextToken Context Token
-     * @param   array  $extra        Extra SharePoint Access Token properties to map
+     * @param   array  $extra        Extra payload values to map
      * @throws  SPBadMethodCallException|SPRuntimeException
      * @return  SPAccessToken
      */
@@ -181,7 +181,7 @@ class SPAccessToken extends SPObject implements Serializable
      * @static
      * @access  public
      * @param   SPSite $site  SharePoint Site
-     * @param   array  $extra Extra SharePoint Access Token properties to map
+     * @param   array  $extra Extra payload values to map
      * @throws  SPBadMethodCallException|SPInvalidArgumentException
      * @return  SPAccessToken
      */

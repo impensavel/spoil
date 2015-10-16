@@ -77,30 +77,30 @@ class SPFile extends SPObject implements SPItemInterface
      * SharePoint File constructor
      *
      * @access  public
-     * @param   SPFolderInterface $folder SharePoint Folder
-     * @param   array             $json   JSON response from the SharePoint REST API
-     * @param   array             $extra  Extra properties to map
+     * @param   SPFolderInterface $folder  SharePoint Folder
+     * @param   array             $payload OData response payload
+     * @param   array             $extra   Extra payload values to map
      * @throws  SPBadMethodCallException
      * @return  SPFile
      */
-    public function __construct(SPFolderInterface $folder, array $json, array $extra = [])
+    public function __construct(SPFolderInterface $folder, array $payload, array $extra = [])
     {
         $this->mapper = array_merge([
             'type'        => 'odata.type',
-            'id'          => 'ListItemAllFields->ID',
-            'guid'        => 'ListItemAllFields->GUID',
+            'id'          => 'ListItemAllFields/ID',
+            'guid'        => 'ListItemAllFields/GUID',
             'title'       => 'Title',
             'name'        => 'Name',
             'size'        => 'Length',
             'created'     => 'TimeCreated',
             'modified'    => 'TimeLastModified',
             'relativeUrl' => 'ServerRelativeUrl',
-            'author'      => 'Author->LoginName',
+            'author'      => 'Author/LoginName',
         ], $extra);
 
         $this->folder = $folder;
 
-        $this->hydrate($json);
+        $this->hydrate($payload);
     }
 
     /**
@@ -240,7 +240,7 @@ class SPFile extends SPObject implements SPItemInterface
      * Get the SharePoint Item of this File
      *
      * @access  public
-     * @param   array  $extra Extra properties to map
+     * @param   array  $extra Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPItem
      */
@@ -255,7 +255,7 @@ class SPFile extends SPObject implements SPItemInterface
      * @static
      * @access  public
      * @param   SPFolderInterface $folder SharePoint Folder
-     * @param   array             $extra  Extra properties to map
+     * @param   array             $extra  Extra payload values to map
      * @throws  SPRuntimeException
      * @return  array
      */
@@ -288,7 +288,7 @@ class SPFile extends SPObject implements SPItemInterface
      * @access  public
      * @param   SPSite $site        SharePoint Site
      * @param   string $relativeUrl SharePoint Folder relative URL
-     * @param   array  $extra       Extra properties to map
+     * @param   array  $extra       Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPFile
      */
@@ -317,7 +317,7 @@ class SPFile extends SPObject implements SPItemInterface
      * @access  public
      * @param   SPFolderInterface $folder SharePoint Folder
      * @param   string            $name   File Name
-     * @param   array             $extra  Extra properties to map
+     * @param   array             $extra  Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPFile
      */
@@ -392,7 +392,7 @@ class SPFile extends SPObject implements SPItemInterface
      * @param   mixed             $content   File content
      * @param   string            $name      Name for the file being uploaded
      * @param   bool              $overwrite Overwrite if file already exists?
-     * @param   array             $extra     Extra properties to map
+     * @param   array             $extra     Extra payload values to map
      * @throws  SPBadMethodCallException
      * @return  SPFile
      */
@@ -469,7 +469,7 @@ class SPFile extends SPObject implements SPItemInterface
      * @access  public
      * @param   SPFolderInterface $folder SharePoint Folder to move to
      * @param   string            $name   SharePoint File name
-     * @param   array             $extra  Extra properties to map
+     * @param   array             $extra  Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPFile
      */
@@ -502,7 +502,7 @@ class SPFile extends SPObject implements SPItemInterface
      * @param   SPFolderInterface $folder    SharePoint Folder to copy to
      * @param   string            $name      SharePoint File name
      * @param   bool              $overwrite Overwrite if file already exists?
-     * @param   array             $extra     Extra properties to map
+     * @param   array             $extra     Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPFile
      */

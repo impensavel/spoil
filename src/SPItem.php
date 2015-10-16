@@ -40,13 +40,13 @@ class SPItem extends SPObject implements SPItemInterface
      * SharePoint Item constructor
      *
      * @access  public
-     * @param   SPList $list  SharePoint List object
-     * @param   array  $json  JSON response from the SharePoint REST API
-     * @param   array  $extra Extra SharePoint Item properties to map
+     * @param   SPList $list    SharePoint List object
+     * @param   array  $payload OData response payload
+     * @param   array  $extra   Extra payload values to map
      * @throws  SPBadMethodCallException
      * @return  SPItem
      */
-    public function __construct(SPList $list, array $json, array $extra = [])
+    public function __construct(SPList $list, array $payload, array $extra = [])
     {
         $this->mapper = array_merge([
             'type'     => 'odata.type',
@@ -59,7 +59,7 @@ class SPItem extends SPObject implements SPItemInterface
 
         $this->list = $list;
 
-        $this->hydrate($json);
+        $this->hydrate($payload);
     }
 
     /**
@@ -145,7 +145,7 @@ class SPItem extends SPObject implements SPItemInterface
      * @access  public
      * @param   SPList $list  SharePoint List
      * @param   int    $id    Item ID
-     * @param   array  $extra Extra SharePoint Item properties to map
+     * @param   array  $extra Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPItem
      */
@@ -168,7 +168,7 @@ class SPItem extends SPObject implements SPItemInterface
      * @access  public
      * @param   SPList $list       SharePoint List
      * @param   array  $properties SharePoint Item properties (Title, ...)
-     * @param   array  $extra      Extra SharePoint Item properties to map
+     * @param   array  $extra      Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPItem
      */
