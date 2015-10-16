@@ -25,7 +25,7 @@ composer require "impensavel/spoil"
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPList;
 use Impensavel\Spoil\SPSite;
 
@@ -59,7 +59,7 @@ try {
         }
     }
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```

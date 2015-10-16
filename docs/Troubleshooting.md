@@ -1,7 +1,7 @@
 # Troubleshooting
 Here you will find a list of common library problems and possible solutions to overcome them.
 
-## Unable to make an HTTP request (SPException thrown)
+## Unable to make an HTTP request (SPRuntimeException thrown)
 This is a common issue, usually triggered by an error in **libcURL**. There are several reasons for it, but we'll list the most common ones. If you bump into it, check the exception code and read the corresponding entry.
 
 ### Error code 4

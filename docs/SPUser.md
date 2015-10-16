@@ -9,7 +9,7 @@ Get a `SPUser` instance of the current logged user.
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 use Impensavel\Spoil\SPUser;
 
@@ -18,7 +18,7 @@ try {
 
     $user = SPUser::getCurrent($site);
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -31,7 +31,7 @@ Get a `SPUser` instance from a specific user account.
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 use Impensavel\Spoil\SPUser;
 
@@ -40,7 +40,7 @@ try {
 
     $user = SPUser::getByAccount($site, 'i:0#.f|membership|username@example.onmicrosoft.com');
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```

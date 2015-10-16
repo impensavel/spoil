@@ -9,9 +9,9 @@ Gets all the SharePoint Files from a SharePoint Folder
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -40,7 +40,7 @@ try {
         var_dump($file);
     }
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -53,8 +53,8 @@ Gets a SharePoint File by it's relative URL
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFile;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -71,7 +71,7 @@ try {
 
     $file = SPFile::getByRelativeUrl($site, 'myFolder/mySubfolder/image.png');
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -84,9 +84,9 @@ Gets a SharePoint File by it's name
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -106,7 +106,7 @@ try {
 
     $file = SPFile::getByName($folder, 'image.png');
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -119,9 +119,9 @@ Create a SharePoint File
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -148,18 +148,18 @@ try {
 
     // content from a resource
     $content = fopen('document.pdf', 'r');
-    $name = 'document.pdf'; // an SPException will be thrown if the name is not provided
+    $name = 'document.pdf'; // an SPBadMethodCallException will be thrown if the name is not provided
 
     // content from a string
     $content = 'Document content...';
-    $name = 'document.pdf'; // an SPException will be thrown if the name is not provided
+    $name = 'document.pdf'; // an SPRuntimeException will be thrown if the name is not provided
 
     // allow overwriting the file if it already exists
-    $overwrite = false; // an SPException will be thrown if the file exists and we didn't allow overwriting
+    $overwrite = false; // an SPBadMethodCallException will be thrown if the file exists and we didn't allow overwriting
 
     $file = SPFile::create($folder, $content, $name, $overwrite);
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -172,9 +172,9 @@ Update a SharePoint File
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -208,7 +208,7 @@ try {
 
     $file = $file->update($content);
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -221,9 +221,9 @@ Move and/or rename a SharePoint File.
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -258,7 +258,7 @@ try {
 
     $file->move($folder2, $name);
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -271,9 +271,9 @@ Copy a SharePoint File
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -307,11 +307,11 @@ try {
     $name = 'copied_document.pdf'; // if null, the original name will be used
     
     // allow overwriting the file if it already exists
-    $overwrite = false; // an SPException will be thrown if the file exists and we didn't allow overwriting
+    $overwrite = false; // an SPRuntimeException will be thrown if the file exists and we didn't allow overwriting
 
     $file->copy($folder2, $name, $overwrite);
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -324,9 +324,9 @@ Delete a SharePoint File
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -352,7 +352,7 @@ try {
 
     $file->delete();
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -504,7 +504,7 @@ try {
         // custom fields
         'CustomField1' => 'Foo',
     ]);
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```

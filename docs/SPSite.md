@@ -12,7 +12,7 @@ There are two ways to create an `SPSite` instance.
 require 'vendor/autoload.php';
 
 use GuzzleHttp\Client;
-use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -30,7 +30,7 @@ try {
 
     $site = new SPSite($http, $settings);
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -41,7 +41,7 @@ try {
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -55,7 +55,7 @@ try {
 
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -164,7 +164,7 @@ Make an HTTP request to the SharePoint API. Use this method when extending the l
     ], 'POST');
 ```
 The `$json` variable will be an `array` with the response of a successful request.
-If the response contains an error object, an `SPException` will be thrown.
+If the response contains an error object, either a `SPRuntimeException` or a `SPObjectNotFoundException` will be thrown.
 
 To **debug** a response, the 4th argument should be set to `false`.
 ```php
@@ -203,14 +203,14 @@ The `createSPAccessToken()` method isn't more than a shorthand that creates a `S
 Refer to the [SharePoint Access Token](SPAccessToken.md) documentation for usage examples.
 
 ### Set
-The `setSPAccessToken()` method assigns a `SPAccessToken` to the `SPSite`. An `SPException` will be thrown if the token has expired.
+The `setSPAccessToken()` method assigns a `SPAccessToken` to the `SPSite`. An `SPRuntimeException` will be thrown if the token has expired.
 
 ```php
 $site->setSPAccessToken($token);
 ```
 
 ### Get
-The `getSPAccessToken()` method returns the `SPAccessToken` in use by the `SPSite`. If it hasn't been set yet or if it's expired, an `SPException` will be thrown.
+The `getSPAccessToken()` method returns the `SPAccessToken` in use by the `SPSite`. If it hasn't been set yet or if it's expired, an `SPRuntimeException` will be thrown.
 
 ```php
 $token = $site->getSPAccessToken();
@@ -224,14 +224,14 @@ Like it's `createSPAccessToken()` couterpart, the `createSPFormDigest()` method 
 Refer to the [SharePoint Form Digest](SPFormDigest.md) documentation for usage examples.
 
 ### Set
-The `setSPFormDigest()` method will assign a `SPFormDigest` to the `SPSite`. An `SPException` will be thrown if the digest has expired.
+The `setSPFormDigest()` method will assign a `SPFormDigest` to the `SPSite`. An `SPRuntimeException` will be thrown if the digest has expired.
 
 ```php
 $site->setSPFormDigest($token);
 ```
 
 ### Get
-The `getSPFormDigest()` method returns the `SPFormDigest` in use by the `SPSite`. An `SPException` will be thrown if it's expired or non existent.
+The `getSPFormDigest()` method returns the `SPFormDigest` in use by the `SPSite`. An `SPRuntimeException` will be thrown if it's expired or non existent.
 
 ```php
 $digest = $site->getSPFormDigest();

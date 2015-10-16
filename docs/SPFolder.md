@@ -9,8 +9,8 @@ Gets a SharePoint Folder by it's GUID
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -27,7 +27,7 @@ try {
 
     $folder = SPFolder::getByGUID($site, '00000000-0000-ffff-0000-000000000000');
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -40,8 +40,8 @@ Gets a SharePoint Folder by it's relative URL
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -58,7 +58,7 @@ try {
 
     $folder = SPFolder::getByRelativeUrl($site, 'myFolder');
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -71,8 +71,8 @@ Gets all the Folders within a SharePoint Folder
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -94,7 +94,7 @@ try {
         var_dump($folder);
     }
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -107,9 +107,9 @@ Create a SharePoint Folder
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\SPList;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -134,7 +134,7 @@ try {
 
     $newFolder = SPFolder::create($folder, $name);
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -149,8 +149,8 @@ Update a SharePoint Folder
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -174,7 +174,7 @@ try {
 
     $folder = $folder->update($properties);
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -187,8 +187,8 @@ Delete a SharePoint Folder
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -208,7 +208,7 @@ try {
 
     $folder->delete();
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```

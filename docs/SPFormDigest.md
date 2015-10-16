@@ -10,8 +10,8 @@ There are two ways to instantiate a `SPFormDigest` object.
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFormDigest;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -26,7 +26,7 @@ try {
 
     $digest = $site->getSPFormDigest();
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -37,8 +37,8 @@ try {
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPException;
 use Impensavel\Spoil\SPFormDigest;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -53,7 +53,7 @@ try {
 
     $site->setSPFormDigest($digest);
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```

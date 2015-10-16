@@ -13,7 +13,7 @@ There are two ways to create a new **App-only Policy** `SPAccessToken` instance.
 require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPAccessToken;
-use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -28,7 +28,7 @@ try {
 
     $token = $site->getSPAccessToken();
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -40,7 +40,7 @@ try {
 require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPAccessToken;
-use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -55,7 +55,7 @@ try {
 
     $site->setSPAccessToken($token);
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -70,7 +70,7 @@ Like with the **App-only Policy** `SPAccessToken`, there's also two ways to inst
 require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPAccessToken;
-use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -87,7 +87,7 @@ try {
 
     $token = $site->getSPAccessToken();
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
@@ -99,7 +99,7 @@ try {
 require 'vendor/autoload.php';
 
 use Impensavel\Spoil\SPAccessToken;
-use Impensavel\Spoil\SPException;
+use Impensavel\Spoil\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -116,7 +116,7 @@ try {
 
     $site->setSPAccessToken($token);
 
-} catch (SPException $e) {
+} catch (SPRuntimeException $e) {
     // handle exceptions
 }
 ```
