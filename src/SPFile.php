@@ -85,7 +85,7 @@ class SPFile extends SPObject implements SPItemInterface
      */
     public function __construct(SPFolderInterface $folder, array $json, array $extra = [])
     {
-        parent::__construct([
+        $this->mapper = array_merge([
             'type'        => 'odata.type',
             'id'          => 'ListItemAllFields->ID',
             'guid'        => 'ListItemAllFields->GUID',

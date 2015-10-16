@@ -73,7 +73,7 @@ class SPFolder extends SPListObject implements SPItemInterface
             'items' => [],    // SharePoint Item instantiation settings
         ]);
 
-        parent::__construct([
+        $this->mapper = array_merge([
             'type'        => 'odata.type',
             'guid'        => 'UniqueId',
             'name'        => 'Name',

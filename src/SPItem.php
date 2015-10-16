@@ -48,7 +48,7 @@ class SPItem extends SPObject implements SPItemInterface
      */
     public function __construct(SPList $list, array $json, array $extra = [])
     {
-        parent::__construct([
+        $this->mapper = array_merge([
             'type'     => 'odata.type',
             'id'       => 'Id',
             'guid'     => 'GUID',

@@ -60,7 +60,7 @@ class SPFormDigest extends SPObject implements Serializable
      */
     public function __construct(array $json, array $extra = [])
     {
-        parent::__construct([
+        $this->mapper = array_merge([
             'digest'  => 'FormDigestValue',
             'expires' => 'FormDigestTimeoutSeconds',
         ], $extra);

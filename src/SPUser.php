@@ -101,7 +101,7 @@ class SPUser extends SPObject
      */
     public function __construct(SPSite $site, array $json, array $extra = [])
     {
-        parent::__construct([
+        $this->mapper = array_merge([
             'account'   => 'AccountName',
             'email'     => 'Email',
             'fullName'  => 'DisplayName',

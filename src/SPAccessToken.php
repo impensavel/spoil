@@ -63,7 +63,7 @@ class SPAccessToken extends SPObject implements Serializable
      */
     public function __construct(array $json, array $extra = [])
     {
-        parent::__construct([
+        $this->mapper = array_merge([
             'token'   => 'access_token',
             'expires' => 'expires_on',
         ], $extra);

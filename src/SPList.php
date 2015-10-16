@@ -156,7 +156,7 @@ class SPList extends SPListObject
             'items' => [],    // SharePoint Item instantiation settings
         ]);
 
-        parent::__construct([
+        $this->mapper = array_merge([
             'template'    => 'BaseTemplate',
             'type'        => 'odata.type',
             'itemType'    => 'ListItemEntityTypeFullName',

@@ -36,19 +36,6 @@ abstract class SPObject implements SPObjectInterface
     protected $extra = [];
 
     /**
-     * SharePoint Object constructor
-     *
-     * @access  public
-     * @param   array  $mapper Dot notation property mapper
-     * @param   array  $extra  Extra properties to map
-     * @return  SPObject
-     */
-    public function __construct(array $mapper, array $extra = [])
-    {
-        $this->mapper = array_merge($mapper, $extra);
-    }
-
-    /**
      * Get extra properties
      *
      * @access  public
@@ -96,18 +83,18 @@ abstract class SPObject implements SPObjectInterface
      *
      * @access  protected
      * @param   array     $json JSON response from the SharePoint REST API
-     * @param   string    $path Dot notation path to the value we want to get
+     * @param   string    $path Path to the value we want to get
      * @return  mixed
      */
     protected function getJsonValue(array $json, $path)
     {
         if (is_string($path)) {
-            foreach (explode('->', $path) as $segment) {
-                if (! is_array($json) || ! array_key_exists($segment, $json)) {
+            foreach (explode('->', $path) as $level) {
+                if (is_array($json) === false || array_key_exists($level, $json) === false) {
                     return null;
                 }
 
-                $json = $json[$segment];
+                $json = $json[$level];
             }
         }
 
