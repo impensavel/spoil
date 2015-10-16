@@ -25,7 +25,7 @@ composer require "impensavel/spoil"
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPRuntimeException;
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPList;
 use Impensavel\Spoil\SPSite;
 
