@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Spoil by impensavel</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Spoil</h1>
+          <h2>SPOIL is a client library for PHP to easily use the SharePoint Online (2013) REST API</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/impensavel/spoil/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/impensavel/spoil/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/impensavel/spoil" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a id="spoil" class="anchor" href="#spoil" aria-hidden="true"><span class="octicon octicon-link"></span></a>SPOIL</h1>
+
+<p>SPOIL (<strong>S</strong>hare<strong>P</strong>oint <strong>O</strong>nline <strong>I</strong>nquiry <strong>L</strong>ibrary) is a client library for <a href="http://www.php.net">PHP</a> to easily use the SharePoint Online (2013) REST API.</p>
+
+<p>Currently supported are SharePoint <strong>Lists</strong>, <strong>Folders</strong>, <strong>Items</strong>, <strong>Files</strong> and <strong>Users</strong>.</p>
+
+<p>The library aims to comply with the <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md">PSR-2</a> and <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md">PSR-4</a> standards.</p>
+
+<h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<ul>
+<li>
+<a href="http://www.php.net">PHP</a> 5.4+</li>
+<li><a href="https://packagist.org/packages/guzzlehttp/guzzle">Guzzle</a></li>
+<li><a href="https://packagist.org/packages/firebase/php-jwt">PHP-JWT</a></li>
+<li><a href="https://packagist.org/packages/nesbot/carbon">Carbon</a></li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<div class="highlight highlight-source-shell"><pre>composer require <span class="pl-s"><span class="pl-pds">"</span>impensavel/spoil<span class="pl-pds">"</span></span></pre></div>
+
+<h2>
+<a id="basic-usage-example" class="anchor" href="#basic-usage-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic usage example</h2>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-pse">&lt;?php</span><span class="pl-s1"></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>vendor/autoload.php<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">use</span> <span class="pl-c1">Impensavel\Spoil\Exception\SPRuntimeException</span>;</span>
+<span class="pl-s1"><span class="pl-k">use</span> <span class="pl-c1">Impensavel\Spoil\SPList</span>;</span>
+<span class="pl-s1"><span class="pl-k">use</span> <span class="pl-c1">Impensavel\Spoil\SPSite</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">try</span> {</span>
+<span class="pl-s1">    <span class="pl-smi">$settings</span> <span class="pl-k">=</span> [</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>site<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>resource<span class="pl-pds">'</span></span>  <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>00000000-0000-ffff-0000-000000000000/example.sharepoint.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>client_id<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>52848cad-bc13-4d69-a371-30deff17bb4d/example.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>secret<span class="pl-pds">'</span></span>    <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scrum5mXVgE=<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">        ]</span>
+<span class="pl-s1">    ];</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// create a SharePoint Site instance</span></span>
+<span class="pl-s1">    <span class="pl-smi">$site</span> <span class="pl-k">=</span> <span class="pl-c1">SPSite</span><span class="pl-k">::</span>create(<span class="pl-s"><span class="pl-pds">'</span>https://example.sharepoint.com/sites/mySite/<span class="pl-pds">'</span></span>, <span class="pl-smi">$settings</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// generate an Access Token (App-only Policy)</span></span>
+<span class="pl-s1">    <span class="pl-smi">$site</span><span class="pl-k">-&gt;</span>createSPAccessToken();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// get all the Lists and respective Items </span></span>
+<span class="pl-s1">    <span class="pl-smi">$lists</span> <span class="pl-k">=</span> <span class="pl-c1">SPList</span><span class="pl-k">::</span>getAll(<span class="pl-smi">$site</span>, [</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>fetch<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">true</span>,</span>
+<span class="pl-s1">    ]);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// iterate through each List</span></span>
+<span class="pl-s1">    <span class="pl-k">foreach</span> (<span class="pl-smi">$lists</span> <span class="pl-k">as</span> <span class="pl-smi">$list</span>) {</span>
+<span class="pl-s1">        <span class="pl-c1">var_dump</span>(<span class="pl-smi">$list</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">        <span class="pl-c">// iterate through each List Item</span></span>
+<span class="pl-s1">        <span class="pl-k">foreach</span> (<span class="pl-smi">$list</span> <span class="pl-k">as</span> <span class="pl-smi">$item</span>) {</span>
+<span class="pl-s1">            <span class="pl-c1">var_dump</span>(<span class="pl-smi">$item</span>);</span>
+<span class="pl-s1">        }</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">} <span class="pl-k">catch</span> (<span class="pl-c1">SPRuntimeException</span> <span class="pl-smi">$e</span>) {</span>
+<span class="pl-s1">    <span class="pl-c">// handle exceptions</span></span>
+<span class="pl-s1">}</span></pre></div>
+
+<h2>
+<a id="class-documentation" class="anchor" href="#class-documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Class documentation</h2>
+
+<ul>
+<li><a href="docs/SPSite.md">SPSite</a></li>
+<li><a href="docs/SPAccessToken.md">SPAccessToken</a></li>
+<li><a href="docs/SPFormDigest.md">SPFormDigest</a></li>
+<li><a href="docs/SPList.md">SPList</a></li>
+<li><a href="docs/SPItem.md">SPItem</a></li>
+<li><a href="docs/SPFolder.md">SPFolder</a></li>
+<li><a href="docs/SPFile.md">SPFile</a></li>
+<li><a href="docs/SPUser.md">SPUser</a></li>
+</ul>
+
+<h2>
+<a id="sharepoint-credentials" class="anchor" href="#sharepoint-credentials" aria-hidden="true"><span class="octicon octicon-link"></span></a>SharePoint credentials</h2>
+
+<p><a href="docs/Credentials.md">Instructions</a> on how to generate SharePoint credentials. </p>
+
+<h2>
+<a id="troubleshooting" class="anchor" href="#troubleshooting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Troubleshooting</h2>
+
+<p>Common issues and how to <a href="docs/Troubleshooting.md">solve them</a>.</p>
+
+<h2>
+<a id="sharepoint-documentation" class="anchor" href="#sharepoint-documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>SharePoint Documentation</h2>
+
+<ul>
+<li><a href="https://msdn.microsoft.com/en-us/library/office/dn292552%28v=office.15%29.aspx">Working with lists and list items with REST</a></li>
+<li><a href="https://msdn.microsoft.com/en-us/library/office/dn292553%28v=office.15%29.aspx">Working with folders and files with REST</a></li>
+<li><a href="https://msdn.microsoft.com/en-us/library/office/dn450841%28v=office.15%29.aspx">Files and folders REST API reference</a></li>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>The MIT License (MIT). Please see <a href="LICENSE.md">License File</a> for more information.</p>
+        </section>
+
+        <footer>
+          Spoil is maintained by <a href="https://github.com/impensavel">impensavel</a><br>
+          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
