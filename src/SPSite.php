@@ -3,7 +3,7 @@
  * This file is part of the SPOIL library.
  *
  * @author     Quetzy Garcia <quetzyg@impensavel.com>
- * @copyright  2014-2015
+ * @copyright  2014-2016
  *
  * For the full copyright and license information,
  * please view the LICENSE.md file that was distributed
@@ -93,10 +93,10 @@ class SPSite implements SPRequesterInterface
             'acs' => static::ACS,
         ], $config);
 
-        // set Guzzle HTTP client
+        // Set Guzzle HTTP client
         $this->http = $http;
 
-        // set Site Hostname and Path
+        // Set Site Hostname and Path
         $components = parse_url($this->http->getBaseUrl());
 
         if (! isset($components['scheme'], $components['host'], $components['path'])) {
@@ -176,7 +176,7 @@ class SPSite implements SPRequesterInterface
      */
     public static function create($url, array $settings = [])
     {
-        // ensure we have a trailing slash
+        // Ensure we have a trailing slash
         if (is_string($url)) {
             $url = sprintf('%s/', rtrim($url, '/'));
         }
@@ -247,7 +247,7 @@ class SPSite implements SPRequesterInterface
     {
         try {
             $options = array_replace_recursive($options, [
-                'exceptions' => false, // avoid throwing exceptions when we get HTTP errors (4XX, 5XX)
+                'exceptions' => false, // Avoid throwing exceptions when we get HTTP errors (4XX, 5XX)
             ]);
 
             $response = $this->http->send($this->http->createRequest($method, $url, $options));

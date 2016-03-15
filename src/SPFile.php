@@ -3,7 +3,7 @@
  * This file is part of the SPOIL library.
  *
  * @author     Quetzy Garcia <quetzyg@impensavel.com>
- * @copyright  2014-2015
+ * @copyright  2014-2016
  *
  * For the full copyright and license information,
  * please view the LICENSE.md file that was distributed
@@ -454,9 +454,8 @@ class SPFile extends SPObject implements SPItemInterface
 
         ], 'POST');
 
-        // Rehydration is done in a best effort manner,
-        // since the SharePoint API doesn't return a response
-        // on a successful update
+        // Rehydration is done in a best effort manner, since the SharePoint
+        // API doesn't return a response on a successful update
         return $this->hydrate([
             'Length'           => strlen($data),
             'TimeLastModified' => Carbon::now(),
@@ -543,7 +542,7 @@ class SPFile extends SPObject implements SPItemInterface
             ],
         ], 'POST');
 
-        // return the the recycle bin item GUID
+        // Return the the recycle bin item GUID
         return $json['value'];
     }
 

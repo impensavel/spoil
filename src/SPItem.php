@@ -3,7 +3,7 @@
  * This file is part of the SPOIL library.
  *
  * @author     Quetzy Garcia <quetzyg@impensavel.com>
- * @copyright  2014-2015
+ * @copyright  2014-2016
  *
  * For the full copyright and license information,
  * please view the LICENSE.md file that was distributed
@@ -115,7 +115,7 @@ class SPItem extends SPObject implements SPItemInterface
         $settings = array_replace_recursive([
             'top'   => 5000, // SharePoint Item threshold
         ], $settings, [
-            'extra' => [],   // extra SharePoint Item properties to map
+            'extra' => [],   // Extra SharePoint Item properties to map
         ]);
 
         $json = $list->request("_api/web/Lists(guid'".$list->getGUID()."')/items", [
@@ -250,7 +250,7 @@ class SPItem extends SPObject implements SPItemInterface
             ],
         ], 'POST');
 
-        // return the the recycle bin item GUID
+        // Return the the recycle bin item GUID
         return $json['value'];
     }
 

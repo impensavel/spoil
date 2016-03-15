@@ -3,7 +3,7 @@
  * This file is part of the SPOIL library.
  *
  * @author     Quetzy Garcia <quetzyg@impensavel.com>
- * @copyright  2014-2015
+ * @copyright  2014-2016
  *
  * For the full copyright and license information,
  * please view the LICENSE.md file that was distributed
@@ -66,7 +66,7 @@ abstract class SPObject implements SPObjectInterface
      */
     protected function assign($property, $value)
     {
-        // convert ISO 8601 dates into Carbon objects
+        // Convert ISO 8601 dates into Carbon objects
         if (preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})?$/', $value) === 1) {
             $value = new Carbon($value);
         }
@@ -112,7 +112,7 @@ abstract class SPObject implements SPObjectInterface
      */
     protected function hydrate($data, $rehydrate = false)
     {
-        // hydrate from an SPObject
+        // Hydrate from an SPObject
         if ($data instanceof $this) {
             foreach (get_object_vars($data) as $key => $value) {
                 $this->$key = $value;
@@ -121,10 +121,10 @@ abstract class SPObject implements SPObjectInterface
             return $this;
         }
 
-        // hydrate from an array (JSON)
+        // Hydrate from an array (JSON)
         if (is_array($data)) {
             foreach ($this->mapper as $property => $path) {
-                // make spaces SharePoint compatible
+                // Make spaces SharePoint compatible
                 $path = str_replace(' ', '_x0020_', $path);
 
                 $value = $this->extractFromPayload($data, $path);

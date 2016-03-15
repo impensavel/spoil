@@ -3,7 +3,7 @@
  * This file is part of the SPOIL library.
  *
  * @author     Quetzy Garcia <quetzyg@impensavel.com>
- * @copyright  2014-2015
+ * @copyright  2014-2016
  *
  * For the full copyright and license information,
  * please view the LICENSE.md file that was distributed
@@ -150,9 +150,9 @@ class SPList extends SPListObject
     public function __construct(SPSite $site, array $payload, array $settings = [])
     {
         $settings = array_replace_recursive([
-            'fetch' => false, // fetch SharePoint Items?
+            'fetch' => false, // Fetch SharePoint Items?
         ], $settings, [
-            'extra' => [],    // extra SharePoint List properties to map
+            'extra' => [],    // Extra SharePoint List properties to map
             'items' => [],    // SharePoint Item instantiation settings
         ]);
 
@@ -285,7 +285,7 @@ class SPList extends SPListObject
         $lists = [];
 
         foreach ($json['value'] as $list) {
-            // allowed SharePoint List Types only
+            // Allowed SharePoint List Types
             if (static::isListTypeAllowed($list['BaseTemplate'])) {
                 $lists[$list['Id']] = new static($site, $list, $settings);
             }
@@ -512,7 +512,7 @@ class SPList extends SPListObject
         $settings = array_replace_recursive([
             'top'   => 5000, // SharePoint Item threshold
         ], $settings, [
-            'extra' => [],   // extra SharePoint Item properties to map
+            'extra' => [],   // Extra SharePoint Item properties to map
         ]);
 
         $this->items = SPItem::getAll($this, $settings);

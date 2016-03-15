@@ -3,7 +3,7 @@
  * This file is part of the SPOIL library.
  *
  * @author     Quetzy Garcia <quetzyg@impensavel.com>
- * @copyright  2014-2015
+ * @copyright  2014-2016
  *
  * For the full copyright and license information,
  * please view the LICENSE.md file that was distributed
@@ -148,13 +148,13 @@ class SPAccessToken extends SPObject implements Serializable
             throw new SPRuntimeException('Unable to decode the Context Token', 0, $e);
         }
 
-        // get URL hostname
+        // Get URL hostname
         $hostname = parse_url($site->getUrl(), PHP_URL_HOST);
 
-        // build resource
+        // Build resource
         $resource = str_replace('@', '/'.$hostname.'@', $jwt->appctxsender);
 
-        // decode application context
+        // Decode application context
         $oauth2 = json_decode($jwt->appctx);
 
         $json = $site->request($oauth2->SecurityTokenServiceUri, [
@@ -162,7 +162,7 @@ class SPAccessToken extends SPObject implements Serializable
                 'Content-Type' => 'application/x-www-form-urlencoded',
             ],
 
-            // the POST body must be passed as a query string
+            // The POST body must be passed as a query string
             'body'    => http_build_query([
                 'grant_type'    => 'refresh_token',
                 'client_id'     => $jwt->aud,
@@ -214,7 +214,7 @@ class SPAccessToken extends SPObject implements Serializable
                 'Content-Type' => 'application/x-www-form-urlencoded',
             ],
 
-            // the POST body must be passed as a query string
+            // The POST body must be passed as a query string
             'body'    => http_build_query([
                 'grant_type'    => 'client_credentials',
                 'client_id'     => $config['client_id'],

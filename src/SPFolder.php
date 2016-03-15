@@ -3,7 +3,7 @@
  * This file is part of the SPOIL library.
  *
  * @author     Quetzy Garcia <quetzyg@impensavel.com>
- * @copyright  2014-2015
+ * @copyright  2014-2016
  *
  * For the full copyright and license information,
  * please view the LICENSE.md file that was distributed
@@ -67,9 +67,9 @@ class SPFolder extends SPListObject implements SPItemInterface
     public function __construct(SPSite $site, array $payload, array $settings = [])
     {
         $settings = array_replace_recursive([
-            'fetch' => false, // fetch SharePoint Items (Folders/Files)?
+            'fetch' => false, // Fetch SharePoint Items (Folders/Files)?
         ], $settings, [
-            'extra' => [],    // extra SharePoint Folder properties to map
+            'extra' => [],    // Extra SharePoint Folder properties to map
             'items' => [],    // SharePoint Item instantiation settings
         ]);
 
@@ -83,10 +83,10 @@ class SPFolder extends SPListObject implements SPItemInterface
             'relativeUrl' => 'ServerRelativeUrl',
             'itemCount'   => 'ItemCount',
 
-            // only available in sub Folders
+            // Only available in sub Folders
             'listGUID'    => 'ListItemAllFields/ParentList/Id',
 
-            // only available in the root Folder
+            // Only available in the root Folder
             'listTitle'   => 'Properties/vti_x005f_listtitle',
         ], $settings['extra']);
 
@@ -280,7 +280,7 @@ class SPFolder extends SPListObject implements SPItemInterface
         $folders = [];
 
         foreach ($json['value'] as $subFolder) {
-            // skip System Folders
+            // Skip System Folders
             if (! static::isSystemFolder($subFolder['Name'])) {
                 $folders[$subFolder['UniqueId']] = new static($site, $subFolder, $settings);
             }
@@ -421,11 +421,11 @@ class SPFolder extends SPListObject implements SPItemInterface
     {
         $settings = array_replace_recursive($settings, [
             'folders' => [
-                'extra' => [], // extra SharePoint Folder properties to map
+                'extra' => [], // Extra SharePoint Folder properties to map
             ],
 
             'files' => [
-                'extra' => [], // extra SharePoint File properties to map
+                'extra' => [], // Extra SharePoint File properties to map
             ],
         ]);
 
