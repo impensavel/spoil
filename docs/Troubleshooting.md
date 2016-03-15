@@ -42,3 +42,6 @@ Given that this is a mix of SharePoint not following the TLS protocol correctly 
 
 ### Other codes
 If you get other cURL errors, check the libcURL [error list](http://curl.haxx.se/libcurl/c/libcurl-errors.html).
+
+## Access denied. You do not have permission to perform this action or access this resource.
+This issue can happen when using **App-only Policy** without the **AllowAppOnlyPolicy** attribute being added to the **AppPermissionRequests** node within the app manifest with a value of `true`.
