@@ -130,7 +130,7 @@ class SPFolder extends SPListObject implements SPItemInterface
     }
 
     /**
-     * Is this a root SharePoint Folder?
+     * Is this a SharePoint root Folder?
      *
      * @access  public
      * @return  bool
@@ -143,21 +143,17 @@ class SPFolder extends SPListObject implements SPItemInterface
     /**
      * {@inheritdoc}
      */
+     public function getUrl($path = null)
+     {
+         return $this->site->getHostname($this->getRelativeUrl($path));
+     }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isWritable($exception = false)
     {
         return true;
-    }
-
-    /**
-     * Get URL
-     *
-     * @access  public
-     * @param   string $path Path to append to the URL
-     * @return  string
-     */
-    public function getUrl($path = null)
-    {
-        return $this->site->getHostname($this->getRelativeUrl($path));
     }
 
     /**

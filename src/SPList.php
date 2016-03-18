@@ -213,6 +213,14 @@ class SPList extends SPListObject
     /**
      * {@inheritdoc}
      */
+    public function getUrl($path = null)
+    {
+        return $this->site->getHostname($this->getRelativeUrl($path));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isWritable($exception = false)
     {
         $writable = in_array($this->template, static::$writableListTypes);
