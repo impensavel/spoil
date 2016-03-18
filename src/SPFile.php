@@ -246,7 +246,7 @@ class SPFile extends SPObject implements SPItemInterface
      */
     public function getSPItem(array $extra = [])
     {
-        return $this->folder->getSPList()->getSPItem($this->id, $extra);
+        return $this->folder->toSPList()->getSPItem($this->id, $extra);
     }
 
     /**
@@ -478,7 +478,7 @@ class SPFile extends SPObject implements SPItemInterface
 
         $newUrl = $folder->getRelativeUrl($name ?: $this->name);
 
-        $this->folder->request("_api/Web/GetFileByServerRelativeUrl('".$this->relativeUrl."')/moveTo(newUrl='".$newUrl."',flags=1)", [
+        $this->folder->request("_api/web/GetFileByServerRelativeUrl('".$this->relativeUrl."')/moveTo(newUrl='".$newUrl."',flags=1)", [
             'headers' => [
                 'Authorization'   => 'Bearer '.$folder->getSPAccessToken(),
                 'Accept'          => 'application/json',
@@ -511,7 +511,7 @@ class SPFile extends SPObject implements SPItemInterface
 
         $newUrl = $folder->getRelativeUrl($name ?: $this->name);
 
-        $this->folder->request("_api/Web/GetFileByServerRelativeUrl('".$this->relativeUrl."')/copyTo(strNewUrl='".$newUrl."',boverwrite=".($overwrite ? 'true' : 'false').")", [
+        $this->folder->request("_api/web/GetFileByServerRelativeUrl('".$this->relativeUrl."')/copyTo(strNewUrl='".$newUrl."',boverwrite=".($overwrite ? 'true' : 'false').")", [
             'headers' => [
                 'Authorization'   => 'Bearer '.$folder->getSPAccessToken(),
                 'Accept'          => 'application/json',
