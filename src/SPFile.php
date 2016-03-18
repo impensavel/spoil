@@ -237,14 +237,14 @@ class SPFile extends SPObject implements SPItemInterface
     }
 
     /**
-     * Get the SharePoint Item of this File
+     * Get the SharePoint Item equivalent
      *
      * @access  public
      * @param   array  $extra Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPItem
      */
-    public function getSPItem(array $extra = [])
+    public function toSPItem(array $extra = [])
     {
         return $this->folder->toSPList()->getSPItem($this->id, $extra);
     }
