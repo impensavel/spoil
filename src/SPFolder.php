@@ -157,6 +157,18 @@ class SPFolder extends SPListObject implements SPItemInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function toSPList(array $settings = [])
+    {
+        if ($this->isRootFolder()) {
+            return SPList::getByTitle($this->site, $this->listTitle, $settings);
+        }
+
+        return SPList::getByGUID($this->site, $this->listGUID, $settings);
+    }
+
+    /**
      * Check if a name matches a SharePoint System Folder
      *
      * @static
@@ -169,26 +181,6 @@ class SPFolder extends SPListObject implements SPItemInterface
         $normalized = strtolower(basename($name));
 
         return in_array($normalized, static::$systemFolders);
-    }
-
-    /**
-     * Get the SharePoint List of this Folder
-     *
-     * Depending if this is a root Folder,
-     * retrieve the SharePoint List accordingly
-     *
-     * @access  public
-     * @param   array  $settings Instantiation settings
-     * @throws  SPRuntimeException
-     * @return  SPList
-     */
-    public function getSPList(array $settings = [])
-    {
-        if ($this->isRootFolder()) {
-            return SPList::getByTitle($this->site, $this->listTitle, $settings);
-        }
-
-        return SPList::getByGUID($this->site, $this->listGUID, $settings);
     }
 
     /**

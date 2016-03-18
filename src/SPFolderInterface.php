@@ -51,4 +51,14 @@ interface SPFolderInterface extends SPRequesterInterface
      * @return  bool
      */
     public function isWritable($exception = false);
+
+    /**
+     * Get the SharePoint List equivalent
+     *
+     * @access  public
+     * @param   array  $settings Instantiation settings
+     * @throws  SPRuntimeException
+     * @return  SPList
+     */
+    public function toSPList(array $settings = []);
 }
