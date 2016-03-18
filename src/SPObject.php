@@ -20,6 +20,14 @@ use Impensavel\Spoil\Exception\SPInvalidArgumentException;
 abstract class SPObject implements SPObjectInterface
 {
     /**
+     * Payload data
+     *
+     * @access  protected
+     * @var     array
+     */
+    protected $payload = [];
+
+    /**
      * Property mapper
      *
      * @access  protected
@@ -123,6 +131,9 @@ abstract class SPObject implements SPObjectInterface
 
         // Hydrate from an array (JSON)
         if (is_array($data)) {
+            // Store payload data
+            $this->payload = $data;
+
             foreach ($this->mapper as $property => $path) {
                 // Make spaces SharePoint compatible
                 $path = str_replace(' ', '_x0020_', $path);
@@ -138,5 +149,16 @@ abstract class SPObject implements SPObjectInterface
         }
 
         throw new SPBadMethodCallException('Could not hydrate '.get_class($this).' with data from '.gettype($data));
+    }
+
+    /**
+     * Get the Payload data
+     *
+     * @access  public
+     * @return  array
+     */
+    public function getPayload()
+    {
+        return $this->payload;
     }
 }
