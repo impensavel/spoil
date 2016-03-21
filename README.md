@@ -1,5 +1,5 @@
 # SPOIL
-SPOIL (**S**hare**P**oint **O**nline **I**nquiry **L**ibrary) is a client library for [PHP](http://www.php.net) to easily use the SharePoint Online (2013) REST API.
+SPOIL (**S**hare**P**oint **O**nline **I**nquiry **L**ibrary) is a [PHP](http://www.php.net) library for **SharePoint Online (2013)** and **SharePoint for Office 365**.
 
 Currently supported are SharePoint **Lists**, **Folders**, **Items**, **Files** and **Users**.
 
@@ -72,6 +72,8 @@ try {
 - [SPItem](docs/SPItem.md)
 - [SPFolder](docs/SPFolder.md)
 - [SPFile](docs/SPFile.md)
+- [SPRecycleBinItem](docs/SPRecycleBinItem.md)
+- [SPRecycleBinItemCollection](docs/SPRecycleBinItemCollection.md)
 - [SPUser](docs/SPUser.md)
 
 ## SharePoint credentials

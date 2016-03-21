@@ -364,7 +364,7 @@ Retrieve an `array` representation of the `SPFile` object.
     var_dump($file->toArray());
     
     // array(11) {
-    //   ["type"]=>
+    //   ["sp_type"]=>
     //   string(18) "SP.Data.mySubfolderItem"
     //   ["id"]=>
     //   int(123)
@@ -454,7 +454,7 @@ file_put_contents('document.pdf', $file->getContents());
 ```
 
 ## Get metadata
-This method is similar to the `toArray()` one, with the exception that it includes the `url` and excludes the `type`, `title`, `relative_url`, `author` and `extra`.
+This method is similar to the `toArray()` one, with the exception that it includes the `url` and excludes the `sp_type`, `title`, `relative_url`, `author` and `extra`.
 
 ```php
     var_dump($file->toArray());

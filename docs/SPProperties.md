@@ -6,6 +6,7 @@ The `SPPropertiesTrait` contains methods related to common properties of SharePo
 - [SPItem](docs/SPItem.md)
 - [SPFolder](docs/SPFolder.md)
 - [SPFile](docs/SPFile.md)
+- [SPRecycleBinItem](docs/SPRecycleBinItem.md)
 
 ## GUID
 Get the GUID of a `SPList`, `SPItem`, `SPFolder` or `SPFile` object.
@@ -21,9 +22,9 @@ Get the title of a `SPList`, `SPItem`, `SPFolder` or `SPFile` object.
 echo $object->getTitle(); // Some Title
 ```
 
-## Type
-Get the SharePoint type of a `SPList`, `SPItem`, `SPFolder` or `SPFile` object.
+## SPType
+Get the SharePoint type of a `SPList`, `SPItem`, `SPFolder`, `SPFile` or `SPRecycleBinItem` object.
 
 ```php
-echo $object->getType(); // SP.Folder
+echo $object->getSPType(); // SP.Folder
 ```

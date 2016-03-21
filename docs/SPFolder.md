@@ -220,7 +220,7 @@ Retrieve an `array` representation of the `SPFolder` object.
     var_dump($folder->toArray());
     
     // array(11) {
-    //   ["type"]=>
+    //   ["sp_type"]=>
     //   string(9) "SP.Folder"
     //   ["guid"]=>
     //   string(36) "00000000-0000-ffff-0000-000000000000"
