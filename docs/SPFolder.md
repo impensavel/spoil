@@ -19,16 +19,16 @@ try {
         // ...
     ];
 
-    // instantiate SharePoint Site
+    // Instantiate SharePoint Site
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    // generate Access Token
+    // Generate Access Token
     $site->createSPAccessToken();
 
     $folder = SPFolder::getByGUID($site, '00000000-0000-ffff-0000-000000000000');
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -50,16 +50,16 @@ try {
         // ...
     ];
 
-    // instantiate SharePoint Site
+    // Instantiate SharePoint Site
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    // generate Access Token
+    // Generate Access Token
     $site->createSPAccessToken();
 
     $folder = SPFolder::getByRelativeUrl($site, 'myFolder');
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -81,21 +81,21 @@ try {
         // ...
     ];
 
-    // instantiate SharePoint Site
+    // Instantiate SharePoint Site
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    // generate Access Token
+    // Generate Access Token
     $site->createSPAccessToken();
 
     $folders = SPFolder::getSubFolders($site, 'myFolder');
     
-    // do something with the folders
+    // Do something with the folders
     foreach ($folders as $folder) {
         var_dump($folder);
     }
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -118,16 +118,16 @@ try {
         // ...
     ];
 
-    // instantiate SharePoint Site
+    // Instantiate SharePoint Site
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    // generate Access Token and Form Digest
+    // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPFormDigest();
 
-    // get a Folder
+    // Get a Folder
     $folder = SPFolder::getByRelativeUrl($site, 'myFolder');
 
-    // get a List
+    // Get a List
     $folder = SPList::getByTitle($site, 'My List');
 
     $name = 'mySubfolder';
@@ -135,7 +135,7 @@ try {
     $newFolder = SPFolder::create($folder, $name);
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -159,13 +159,13 @@ try {
         // ...
     ];
 
-    // instantiate SharePoint Site
+    // Instantiate SharePoint Site
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    // generate Access Token and Form Digest
+    // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPFormDigest();
 
-    // get a Folder by relative URL
+    // Get a Folder by relative URL
     $folder = SPFolder::getByRelativeUrl($site, 'myFolder/mySubfolder');
 
     $properties = [
@@ -175,7 +175,7 @@ try {
     $folder = $folder->update($properties);
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -197,19 +197,19 @@ try {
         // ...
     ];
 
-    // instantiate SharePoint Site
+    // Instantiate SharePoint Site
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    // generate Access Token and Form Digest
+    // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPFormDigest();
 
-    // get a Folder by relative URL
+    // Get a Folder by relative URL
     $folder = SPFolder::getByRelativeUrl($site, 'myFolder/mySubfolder');
 
     $folder->delete();
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 

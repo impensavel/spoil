@@ -29,7 +29,7 @@ try {
     $token = $site->getSPAccessToken();
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -56,7 +56,7 @@ try {
     $site->setSPAccessToken($token);
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -88,7 +88,7 @@ try {
     $token = $site->getSPAccessToken();
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -117,7 +117,7 @@ try {
     $site->setSPAccessToken($token);
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -152,9 +152,9 @@ Check if the `SPAccessToken` has expired.
 
 ```php
     if ($token->hasExpired()) {
-        // it's time to get a fresh token
+        // It's time to get a fresh token
     } else {
-        // we're good
+        // We're good
     }
 ```
 
@@ -179,20 +179,20 @@ The `SPAccessToken` class implements the `Serializable` interface.
 This allows saving the token to use at a later time, avoiding new token requests to the SharePoint API each time something needs doing.
 
 ```php
-    // serialize the token
+    // Serialize the token
     $serialized = serialize($token);
     
-    // store it in a database
+    // Store it in a database
     
-    // when needed, get it back
+    // When needed, get it back
 
-    // unserialize the data
+    // Unserialize the data
     $oldToken = unserialize($serialized);
     
-    // check if it's still valid
+    // Check if it's still valid
     if ($oldToken->hasExpired()) {
-        // request a new token from the API
+        // Request a new token from the API
     }
 
-    // do something
+    // Do something
 ```

@@ -14,12 +14,12 @@ use Impensavel\Spoil\SPSite;
 use Impensavel\Spoil\SPUser;
 
 try {
-    // instantiate a SPSite class
+    // Instantiate a SPSite class
 
     $user = SPUser::getCurrent($site);
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -36,12 +36,12 @@ use Impensavel\Spoil\SPSite;
 use Impensavel\Spoil\SPUser;
 
 try {
-    // instantiate a SPSite class
+    // Instantiate a SPSite class
 
     $user = SPUser::getByAccount($site, 'i:0#.f|membership|username@example.onmicrosoft.com');
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 

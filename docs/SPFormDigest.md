@@ -27,7 +27,7 @@ try {
     $digest = $site->getSPFormDigest();
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -54,7 +54,7 @@ try {
     $site->setSPFormDigest($digest);
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -87,9 +87,9 @@ Check if the `SPFormDigest` has expired.
 
 ```php
     if ($digest->hasExpired()) {
-        // it's time to get a new digest
+        // It's time to get a new digest
     } else {
-        // looking good
+        // Looking good
     }
 ```
 
@@ -114,20 +114,20 @@ The `SPFormDigest` class implements the `Serializable` interface.
 This allows saving the digest to use at a later time, avoiding new digest requests to the SharePoint API each time something needs doing.
 
 ```php
-    // serialize the digest
+    // Serialize the digest
     $serialized = serialize($digest);
     
-    // store it in a database
+    // Store it in a database
     
-    // when needed, get it back
+    // When needed, get it back
 
-    // unserialize the data
+    // Unserialize the data
     $oldDigest = unserialize($serialized);
     
-    // check if it's still valid
+    // Check if it's still valid
     if ($oldDigest->hasExpired()) {
-        // request a new digest from the API
+        // Request a new digest from the API
     }
 
-    // do something
+    // Do something
 ```

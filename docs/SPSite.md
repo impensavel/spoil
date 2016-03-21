@@ -31,7 +31,7 @@ try {
     $site = new SPSite($http, $settings);
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -56,7 +56,7 @@ try {
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -72,7 +72,7 @@ $settings = [
 
     'http' => [
         'defaults' => [
-            'verify' => '/path/to/cert.pem', // enable verification using a custom certificate
+            'verify' => '/path/to/cert.pem', // Enable verification using a custom certificate
             'config' => [
                 'curl' => [
                     CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_0, // use TLS v1.0

@@ -1,7 +1,7 @@
 # SPOIL
 SPOIL (**S**hare**P**oint **O**nline **I**nquiry **L**ibrary) is a [PHP](http://www.php.net) library for **SharePoint Online (2013)** and **SharePoint for Office 365**.
 
-Currently supported are SharePoint **Lists**, **Folders**, **Items**, **Files** and **Users**.
+Currently supported are SharePoint **Lists**, **Folders**, **Items**, **Files**, **RecycleBinItems** and **Users**.
 
 The library aims to comply with the [PSR-2][] and [PSR-4][] standards.
 
@@ -38,29 +38,29 @@ try {
         ]
     ];
 
-    // create a SharePoint Site instance
+    // Create a SharePoint Site instance
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    // generate an Access Token (App-only Policy)
+    // Generate an Access Token (App-only Policy)
     $site->createSPAccessToken();
 
-    // get all the Lists and respective Items 
+    // Get all the Lists and respective Items 
     $lists = SPList::getAll($site, [
         'fetch' => true,
     ]);
 
-    // iterate through each List
+    // Iterate through each List
     foreach ($lists as $list) {
         var_dump($list);
 
-        // iterate through each List Item
+        // Iterate through each List Item
         foreach ($list as $item) {
             var_dump($item);
         }
     }
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 

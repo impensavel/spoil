@@ -20,28 +20,28 @@ try {
         // ...
     ];
 
-    // instantiate SharePoint Site
+    // Instantiate SharePoint Site
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    // generate Access Token
+    // Generate Access Token
     $site->createSPAccessToken();
 
-    // get a Folder by relative URL
+    // Get a Folder by relative URL
     $folder = SPFolder::getByRelativeUrl($site, 'myFolder');
 
-    // get a List by title
+    // Get a List by title
     $folder = SPList::getByTitle($site, 'My List');
 
-    // get all the Files from the Folder/List we just got
+    // Get all the Files from the Folder/List we just got
     $files = SPFile::getAll($folder);
     
-    // do something with the files
+    // Do something with the files
     foreach ($files as $file) {
         var_dump($file);
     }
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -63,16 +63,16 @@ try {
         // ...
     ];
 
-    // instantiate SharePoint Site
+    // Instantiate SharePoint Site
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    // generate Access Token
+    // Generate Access Token
     $site->createSPAccessToken();
 
     $file = SPFile::getByRelativeUrl($site, 'myFolder/mySubfolder/image.png');
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -95,19 +95,19 @@ try {
         // ...
     ];
 
-    // instantiate SharePoint Site
+    // Instantiate SharePoint Site
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    // generate Access Token
+    // Generate Access Token
     $site->createSPAccessToken();
 
-    // get a Folder by relative URL
+    // Get a Folder by relative URL
     $folder = SPFolder::getByRelativeUrl($site, 'myFolder/mySubfolder');
 
     $file = SPFile::getByName($folder, 'image.png');
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -130,37 +130,44 @@ try {
         // ...
     ];
 
-    // instantiate SharePoint Site
+    // Instantiate SharePoint Site
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    // generate Access Token and Form Digest
+    // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPFormDigest();
 
-    // get a Folder by relative URL
+    // Get a Folder by relative URL
     $folder = SPFolder::getByRelativeUrl($site, 'myFolder/mySubfolder');
 
-    // get a List by title
+    // Get a List by title
     $folder = SPList::getByTitle($site, 'My List');
 
-    // content from an SplFileInfo object
+    // Content from an SplFileInfo object
     $content = new SplFileInfo('document.pdf');
-    $name = null; // if null, the file name from the SplFileInfo will be used
+    
+    // If null, the file name from the SplFileInfo will be used
+    $name = null;
 
-    // content from a resource
+    // Content from a resource
     $content = fopen('document.pdf', 'r');
-    $name = 'document.pdf'; // an SPBadMethodCallException will be thrown if the name is not provided
+    
+    // An SPBadMethodCallException will be thrown if the name is not provided
+    $name = 'document.pdf';
 
-    // content from a string
+    // Content from a string
     $content = 'Document content...';
-    $name = 'document.pdf'; // an SPRuntimeException will be thrown if the name is not provided
+    
+    // An SPRuntimeException will be thrown if the name is not provided
+    $name = 'document.pdf';
 
-    // allow overwriting the file if it already exists
-    $overwrite = false; // an SPBadMethodCallException will be thrown if the file exists and we didn't allow overwriting
+    // Allow overwriting the file if it already exists
+    // An SPBadMethodCallException will be thrown if the file exists and we didn't allow overwriting
+    $overwrite = false;
 
     $file = SPFile::create($folder, $content, $name, $overwrite);
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -183,33 +190,33 @@ try {
         // ...
     ];
 
-    // instantiate SharePoint Site
+    // Instantiate SharePoint Site
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    // generate Access Token and Form Digest
+    // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPFormDigest();
 
-    // get a Folder by relative URL
+    // Get a Folder by relative URL
     $folder = SPFolder::getByRelativeUrl($site, 'myFolder/mySubfolder');
 
-    // get a List by title
+    // Get a List by title
     $folder = SPList::getByTitle($site, 'My List');
 
     $file = SPFile::getByName($folder, 'document.pdf');
 
-    // content from an SplFileInfo object
+    // Content from an SplFileInfo object
     $content = new SplFileInfo('document2.pdf');
 
-    // content from a resource
+    // Content from a resource
     $content = fopen('document2.pdf', 'r');
 
-    // content from a string
+    // Content from a string
     $content = 'New document content...';
 
     $file = $file->update($content);
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -232,34 +239,34 @@ try {
         // ...
     ];
 
-    // instantiate SharePoint Site
+    // Instantiate SharePoint Site
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    // generate Access Token and Form Digest
+    // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPFormDigest();
 
-    // get a Folder by relative URL
+    // Get a Folder by relative URL
     $folder1 = SPFolder::getByRelativeUrl($site, 'myFolder/mySubfolder');
 
-    // get another Folder by relative URL
+    // Get another Folder by relative URL
     $folder2 = SPFolder::getByRelativeUrl($site, 'otherFolder');
 
-    // get a List by title
+    // Get a List by title
     $folder1 = SPList::getByTitle($site, 'My List');
 
-    // get another List by title
+    // Get another List by title
     $folder2 = SPList::getByTitle($site, 'My Other List');
 
-    // get the File we want to move
+    // Get the File we want to move
     $file = SPFile::getByName($folder1, 'document.pdf');
 
-    // rename the file
-    $name = 'moved_document.pdf'; // if null, the original name will be used
+    // Rename the file (If null, the original name will be used)
+    $name = 'moved_document.pdf';
 
     $file->move($folder2, $name);
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -282,37 +289,38 @@ try {
         // ...
     ];
 
-    // instantiate SharePoint Site
+    // Instantiate SharePoint Site
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    // generate Access Token and Form Digest
+    // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPFormDigest();
 
-    // get a Folder by relative URL
+    // Get a Folder by relative URL
     $folder1 = SPFolder::getByRelativeUrl($site, 'myFolder/mySubfolder');
 
-    // get another Folder by relative URL
+    // Get another Folder by relative URL
     $folder2 = SPFolder::getByRelativeUrl($site, 'otherFolder');
 
-    // get a List by title
+    // Get a List by title
     $folder1 = SPList::getByTitle($site, 'My List');
 
-    // get another List by title
+    // Get another List by title
     $folder2 = SPList::getByTitle($site, 'My Other List');
 
-    // get the File we want to copy
+    // Get the File we want to copy
     $file = SPFile::getByName($folder1, 'document.pdf');
 
-    // rename the file
-    $name = 'copied_document.pdf'; // if null, the original name will be used
+    // Rename the file (If null, the original name will be used)
+    $name = 'copied_document.pdf';
     
-    // allow overwriting the file if it already exists
-    $overwrite = false; // an SPRuntimeException will be thrown if the file exists and we didn't allow overwriting
+    // Allow overwriting the file if it already exists
+    // An SPRuntimeException will be thrown if the file exists and overwriting wasn't allowed
+    $overwrite = false;
 
     $file->copy($folder2, $name, $overwrite);
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -335,25 +343,25 @@ try {
         // ...
     ];
 
-    // instantiate SharePoint Site
+    // Instantiate SharePoint Site
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
-    // generate Access Token and Form Digest
+    // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPFormDigest();
 
-    // get a Folder by relative URL
+    // Get a Folder by relative URL
     $folder = SPFolder::getByRelativeUrl($site, 'myFolder/mySubfolder');
 
-    // get a List by title
+    // Get a List by title
     $folder = SPList::getByTitle($site, 'My List');
 
-    // get the File we want to delete
+    // Get the File we want to delete
     $file = SPFile::getByName($folder, 'document.pdf');
 
     $file->delete();
 
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
@@ -501,11 +509,11 @@ try {
     $item->update([
         'Title'        => 'A PDF Document',
         
-        // custom fields
+        // Custom fields
         'CustomField1' => 'Foo',
     ]);
 } catch (SPRuntimeException $e) {
-    // handle exceptions
+    // Handle exceptions
 }
 ```
 
