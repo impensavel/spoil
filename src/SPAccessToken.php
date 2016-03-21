@@ -49,7 +49,7 @@ class SPAccessToken extends SPObject implements Serializable
             $data['expires_on'] = Carbon::now()->addSeconds($data['expires_on']);
         }
 
-        parent::hydrate($data, $exceptions);
+        return parent::hydrate($data, $exceptions);
     }
 
     /**
