@@ -158,7 +158,7 @@ class SPList extends SPListObject
 
         $this->mapper = array_merge([
             'template'    => 'BaseTemplate',
-            'type'        => 'odata.type',
+            'spType'      => 'odata.type',
             'itemType'    => 'ListItemEntityTypeFullName',
             'guid'        => 'Id',
             'title'       => 'Title',
@@ -184,7 +184,7 @@ class SPList extends SPListObject
     public function toArray()
     {
         return [
-            'type'         => $this->type,
+            'sp_type'      => $this->spType,
             'guid'         => $this->guid,
             'title'        => $this->title,
             'template'     => $this->template,

@@ -49,7 +49,7 @@ class SPItem extends SPObject implements SPItemInterface
     public function __construct(SPList $list, array $payload, array $extra = [])
     {
         $this->mapper = array_merge([
-            'type'     => 'odata.type',
+            'spType'   => 'odata.type',
             'id'       => 'Id',
             'guid'     => 'GUID',
             'title'    => 'Title',
@@ -90,7 +90,7 @@ class SPItem extends SPObject implements SPItemInterface
     public function toArray()
     {
         return [
-            'type'     => $this->type,
+            'sp_type'  => $this->spType,
             'id'       => $this->id,
             'guid'     => $this->guid,
             'title'    => $this->title,
@@ -207,7 +207,7 @@ class SPItem extends SPObject implements SPItemInterface
     public function update(array $properties)
     {
         $properties = array_replace_recursive($properties, [
-            'odata.type' => $this->type,
+            'odata.type' => $this->spType,
         ], $properties);
 
         $body = json_encode($properties);

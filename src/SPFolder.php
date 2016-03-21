@@ -74,7 +74,7 @@ class SPFolder extends SPListObject implements SPItemInterface
         ]);
 
         $this->mapper = array_merge([
-            'type'        => 'odata.type',
+            'spType'      => 'odata.type',
             'guid'        => 'UniqueId',
             'name'        => 'Name',
             'title'       => 'Name',
@@ -105,7 +105,7 @@ class SPFolder extends SPListObject implements SPItemInterface
     public function toArray()
     {
         return [
-            'type'         => $this->type,
+            'sp_type'      => $this->spType,
             'guid'         => $this->guid,
             'title'        => $this->title,
             'name'         => $this->name,

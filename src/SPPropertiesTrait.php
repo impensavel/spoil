@@ -20,7 +20,7 @@ trait SPPropertiesTrait
      * @access  protected
      * @var     string
      */
-    protected $type;
+    protected $spType;
 
     /**
      * SharePoint GUID
@@ -44,9 +44,9 @@ trait SPPropertiesTrait
      * @access  public
      * @return  string
      */
-    public function getType()
+    public function getSPType()
     {
-        return $this->type;
+        return $this->spType;
     }
 
     /**

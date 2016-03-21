@@ -86,7 +86,7 @@ class SPFile extends SPObject implements SPItemInterface
     public function __construct(SPFolderInterface $folder, array $payload, array $extra = [])
     {
         $this->mapper = array_merge([
-            'type'        => 'odata.type',
+            'spType'      => 'odata.type',
             'id'          => 'ListItemAllFields/ID',
             'guid'        => 'ListItemAllFields/GUID',
             'title'       => 'Title',
@@ -131,7 +131,7 @@ class SPFile extends SPObject implements SPItemInterface
     public function toArray()
     {
         return [
-            'type'         => $this->type,
+            'sp_type'      => $this->spType,
             'id'           => $this->id,
             'guid'         => $this->guid,
             'title'        => $this->title,
