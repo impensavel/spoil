@@ -12,9 +12,6 @@
 
 namespace Impensavel\Spoil;
 
-use Impensavel\Spoil\Exception\SPBadMethodCallException;
-use Impensavel\Spoil\Exception\SPRuntimeException;
-
 class SPRecycleBinItem extends SPObject
 {
     use SPPropertiesTrait;
@@ -131,7 +128,7 @@ class SPRecycleBinItem extends SPObject
      * @param   SPSite $site    SharePoint Site
      * @param   array  $payload OData response payload
      * @param   array  $extra   Extra properties to map
-     * @throws  SPBadMethodCallException
+     * @throws  \Impensavel\Spoil\Exception\SPBadMethodCallException
      * @return  SPRecycleBinItem
      */
     public function __construct(SPSite $site, array $payload, array $extra = [])
@@ -272,7 +269,7 @@ class SPRecycleBinItem extends SPObject
      * @param   SPSite $site  SharePoint Site
      * @param   string $guid  SharePoint RecycleBinItem GUID
      * @param   array  $extra Extra properties to map
-     * @throws  SPRuntimeException
+     * @throws  \Impensavel\Spoil\Exception\SPRuntimeException
      * @return  SPFile
      */
     public static function getByGUID(SPSite $site, $guid, array $extra = [])
@@ -291,7 +288,7 @@ class SPRecycleBinItem extends SPObject
      * Restore a SharePoint RecycleBin Item
      *
      * @access  public
-     * @throws  SPRuntimeException
+     * @throws  \Impensavel\Spoil\Exception\SPRuntimeException
      * @return  bool
      */
     public function restore()
@@ -310,7 +307,7 @@ class SPRecycleBinItem extends SPObject
      * Permanently delete a SharePoint RecycleBin Item
      *
      * @access  public
-     * @throws  SPRuntimeException
+     * @throws  \Impensavel\Spoil\Exception\SPRuntimeException
      * @return  bool
      */
     public function delete()
