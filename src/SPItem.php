@@ -94,9 +94,9 @@ class SPItem extends SPObject implements SPItemInterface
             'id'       => $this->id,
             'guid'     => $this->guid,
             'title'    => $this->title,
-            'extra'    => $this->extra,
             'created'  => $this->created,
             'modified' => $this->modified,
+            'extra'    => $this->extra,
         ];
     }
 
