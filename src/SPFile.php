@@ -26,6 +26,28 @@ class SPFile extends SPObject implements SPItemInterface
     use SPTimestampsTrait;
 
     /**
+     * SharePoint Check In Types (SharePoint 2013)
+     *
+     * @link https://msdn.microsoft.com/en-us/library/office/microsoft.sharepoint.client.checkintype.aspx
+     * @var  int
+     */
+    const CHECKIN_MINOR     = 0; // Minor check in
+    const CHECKIN_MAJOR     = 1; // Major check in
+    const CHECKIN_OVERWRITE = 2; // Overwrite check in
+
+    /**
+     * SharePoint Check Out Types (SharePoint 2013)
+     *
+     * @link https://msdn.microsoft.com/en-us/library/microsoft.sharepoint.spfile.spcheckouttype.aspx
+     * @var  int
+     */
+    static $checkOutTypes = [
+        0 => 'Online',  // The file is checked out for editing on the server
+        1 => 'Offline', // The file is checked out for editing on the local computer
+        2 => 'None',    // The file is not checked out (Published)
+    ];
+
+    /**
      * SharePoint Folder
      *
      * @access  protected
@@ -74,6 +96,22 @@ class SPFile extends SPObject implements SPItemInterface
     protected $author;
 
     /**
+     * Check In Comment
+     *
+     * @access  protected
+     * @var     string
+     */
+    protected $checkInComment;
+
+    /**
+     * Check Out Type
+     *
+     * @access  protected
+     * @var     int
+     */
+    protected $checkOutType;
+
+    /**
      * SharePoint File constructor
      *
      * @access  public
@@ -86,16 +124,18 @@ class SPFile extends SPObject implements SPItemInterface
     public function __construct(SPFolderInterface $folder, array $payload, array $extra = [])
     {
         $this->mapper = array_merge([
-            'spType'      => 'odata.type',
-            'id'          => 'ListItemAllFields/ID',
-            'guid'        => 'ListItemAllFields/GUID',
-            'title'       => 'Title',
-            'name'        => 'Name',
-            'size'        => 'Length',
-            'created'     => 'TimeCreated',
-            'modified'    => 'TimeLastModified',
-            'relativeUrl' => 'ServerRelativeUrl',
-            'author'      => 'Author/LoginName',
+            'spType'         => 'odata.type',
+            'id'             => 'ListItemAllFields/ID',
+            'guid'           => 'ListItemAllFields/GUID',
+            'title'          => 'Title',
+            'name'           => 'Name',
+            'size'           => 'Length',
+            'created'        => 'TimeCreated',
+            'modified'       => 'TimeLastModified',
+            'relativeUrl'    => 'ServerRelativeUrl',
+            'author'         => 'Author/LoginName',
+            'checkInComment' => 'CheckInComment',
+            'checkOutType'   => 'CheckOutType',
         ], $extra);
 
         $this->folder = $folder;
@@ -131,17 +171,19 @@ class SPFile extends SPObject implements SPItemInterface
     public function toArray()
     {
         return [
-            'sp_type'      => $this->spType,
-            'id'           => $this->id,
-            'guid'         => $this->guid,
-            'title'        => $this->title,
-            'name'         => $this->name,
-            'size'         => $this->size,
-            'created'      => $this->created,
-            'modified'     => $this->modified,
-            'relative_url' => $this->relativeUrl,
-            'author'       => $this->author,
-            'extra'        => $this->extra,
+            'sp_type'         => $this->spType,
+            'id'              => $this->id,
+            'guid'            => $this->guid,
+            'title'           => $this->title,
+            'name'            => $this->name,
+            'size'            => $this->size,
+            'created'         => $this->created,
+            'modified'        => $this->modified,
+            'relative_url'    => $this->relativeUrl,
+            'author'          => $this->author,
+            'checkin_comment' => $this->checkInComment,
+            'checkout_type'   => $this->checkOutType,
+            'extra'           => $this->extra,
         ];
     }
 
@@ -198,6 +240,28 @@ class SPFile extends SPObject implements SPItemInterface
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Get Check In Comment
+     *
+     * @access  public
+     * @return  string
+     */
+    public function getCheckInComment()
+    {
+        return $this->checkInComment;
+    }
+
+    /**
+     * Get Check Out Type
+     *
+     * @access  public
+     * @return  int
+     */
+    public function getCheckOutType()
+    {
+        return $this->checkOutType;
     }
 
     /**
@@ -561,6 +625,48 @@ class SPFile extends SPObject implements SPItemInterface
                 'X-RequestDigest' => (string) $this->folder->getSPFormDigest(),
                 'IF-MATCH'        => '*',
                 'X-HTTP-Method'   => 'DELETE',
+            ],
+        ], 'POST');
+
+        return true;
+    }
+
+    /**
+     * Check in a SharePoint File
+     *
+     * @access  public
+     * @param   string $comment Check in comment
+     * @param   int    $type    Check in Type
+     * @throws  SPRuntimeException
+     * @return  bool
+     */
+    public function checkIn($comment, $type = self::CHECKIN_MINOR)
+    {
+        $this->folder->request("_api/web/GetFileByServerRelativeUrl('".$this->relativeUrl."')/checkin(comment='".$comment."',checkintype=".$type.")", [
+            'headers' => [
+                'Authorization'   => 'Bearer '.$this->folder->getSPAccessToken(),
+                'Accept'          => 'application/json',
+                'X-RequestDigest' => (string) $this->folder->getSPFormDigest(),
+            ],
+        ], 'POST');
+
+        return true;
+    }
+
+    /**
+     * Check out a SharePoint File
+     *
+     * @access  public
+     * @throws  SPRuntimeException
+     * @return  bool
+     */
+    public function checkOut()
+    {
+        $this->folder->request("_api/web/GetFileByServerRelativeUrl('".$this->relativeUrl."')/checkout()", [
+            'headers' => [
+                'Authorization'   => 'Bearer '.$this->folder->getSPAccessToken(),
+                'Accept'          => 'application/json',
+                'X-RequestDigest' => (string) $this->folder->getSPFormDigest(),
             ],
         ], 'POST');
 
