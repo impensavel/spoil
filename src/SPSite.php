@@ -194,50 +194,51 @@ class SPSite implements SPRequesterInterface
     }
 
     /**
-     * Check for errors in the SharePoint API response
+     * Parse the SharePoint API response
      *
      * @access  protected
      * @param   \GuzzleHttp\Message\ResponseInterface $response
      * @throws  SPObjectNotFoundException|SPRuntimeException
-     * @return  void
+     * @return  array
      */
-    protected function checkSPErrors(ResponseInterface $response)
+    protected function parseResponse(ResponseInterface $response)
     {
         $code = $response->getStatusCode();
+        $json = json_decode($response->getBody(), true);
 
         if ($code >= 400) {
-            $json = $response->json();
-
             $message = null;
 
-            if (isset($json['odata.error']['message']['value']) && $message === null) {
-                $message = $json['odata.error']['message']['value'];
-            }
-
-            if (isset($json['error_description']) && $message === null) {
-                $message = $json['error_description'];
-            }
-
-            if (isset($json['odata.error']) && $message === null) {
-                $message = $json['odata.error'];
-            }
-
-            if (isset($json['error']) && $message === null) {
-                $message = $json['error'];
-            }
-
-            if ($message === null) {
+            // If the response body cannot be parsed as JSON,
+            // the body will be used as the error message
+            if (json_last_error() !== JSON_ERROR_NONE) {
                 $message = $response->getBody();
+            } else {
+                if (isset($json['odata.error']['message']['value']) && $message === null) {
+                    $message = $json['odata.error']['message']['value'];
+                }
+
+                if (isset($json['error_description']) && $message === null) {
+                    $message = $json['error_description'];
+                }
+
+                if (isset($json['odata.error']) && $message === null) {
+                    $message = $json['odata.error'];
+                }
+
+                if (isset($json['error']) && $message === null) {
+                    $message = $json['error'];
+                }
             }
 
-            switch ($code) {
-                case 404:
-                    throw new SPObjectNotFoundException($message, $code);
-
-                default:
-                    throw new SPRuntimeException($message, $code);
+            if ($code == 404) {
+                throw new SPObjectNotFoundException($message, $code);
             }
+
+            throw new SPRuntimeException($message, $code);
         }
+
+        return $json;
     }
 
     /**
@@ -252,15 +253,8 @@ class SPSite implements SPRequesterInterface
 
             $response = $this->http->send($this->http->createRequest($method, $url, $options));
 
-            if ($json) {
-                $this->checkSPErrors($response);
+            return $json ? $this->parseResponse($response) : $response;
 
-                return $response->json();
-            }
-
-            return $response;
-        } catch (ParseException $e) {
-            throw new SPRuntimeException('Could not parse response body as JSON', 0, $e);
         } catch (RequestException $e) {
             throw new SPRuntimeException('Unable to make HTTP request', 0, $e);
         }
