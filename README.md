@@ -10,14 +10,17 @@ The library aims to comply with the [PSR-2][] and [PSR-4][] standards.
 
 ## Requirements
 * [PHP](http://www.php.net) 5.4+
-* [Guzzle](https://packagist.org/packages/guzzlehttp/guzzle)
+* [HTTP Message related tools](https://packagist.org/packages/php-http/message)
 * [PHP-JWT](https://packagist.org/packages/firebase/php-jwt)
 * [Carbon](https://packagist.org/packages/nesbot/carbon)
+* A package that provides [php-http/client-implementation](https://packagist.org/providers/php-http/client-implementation)
 
 ## Installation
 ``` bash
 composer require "impensavel/spoil"
+composer require "php-http/guzzle6-adapter"
 ```
+>**TIP:** The library will try to use the [Guzzle 6 HTTP adapter](https://packagist.org/packages/php-http/guzzle6-adapter) by default. See the SPSite [documentation](docs/SPSite.md) for other use cases.
 
 ## Basic usage example
 ```php
@@ -81,11 +84,6 @@ try {
 
 ## Troubleshooting
 Common issues and how to [solve them](docs/Troubleshooting.md).
-
-## SharePoint Documentation
-- [Working with lists and list items with REST](https://msdn.microsoft.com/en-us/library/office/dn292552%28v=office.15%29.aspx)
-- [Working with folders and files with REST](https://msdn.microsoft.com/en-us/library/office/dn292553%28v=office.15%29.aspx)
-- [Files and folders REST API reference](https://msdn.microsoft.com/en-us/library/office/dn450841%28v=office.15%29.aspx)
 
 ## License
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
