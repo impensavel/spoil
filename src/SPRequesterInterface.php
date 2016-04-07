@@ -21,11 +21,11 @@ interface SPRequesterInterface
      *
      * @access  public
      * @param   string $url     URL to make the request to
-     * @param   array  $options HTTP client options (see GuzzleHttp\Client options)
+     * @param   array  $options HTTP client options
      * @param   string $method  HTTP method name (GET, POST, PUT, DELETE, ...)
      * @param   bool   $json    Return JSON if true, return Response object otherwise
      * @throws  SPRuntimeException
-     * @return  \GuzzleHttp\Message\Response|array
+     * @return  \Psr\Http\Message\ResponseInterface|array
      */
     public function request($url, array $options = [], $method = 'GET', $json = true);
 

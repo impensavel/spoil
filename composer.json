@@ -1,8 +1,18 @@
 {
     "name": "impensavel/spoil",
     "type": "library",
-    "description": " SPOIL is a client library for PHP to easily use the SharePoint Online (2013) REST API",
-    "keywords": ["sharepoint", "online", "2013", "oauth", "rest", "api", "client"],
+    "description": "SPOIL is a PHP library for SharePoint Online (2013) and SharePoint for Office 365.",
+    "keywords": [
+        "sharepoint",
+        "online",
+        "2013",
+        "office",
+        "365",
+        "oauth",
+        "rest",
+        "api",
+        "client"
+    ],
     "homepage": "https://github.com/impensavel/spoil",
     "license": "MIT",
     "authors": [
@@ -14,13 +24,15 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "guzzlehttp/guzzle": "~5.0",
+        "php-http/client-implementation": "^1.0.0",
+        "php-http/message": "^1.0",
         "firebase/php-jwt": "1.*",
         "nesbot/carbon": "~1.0"
     },
     "require-dev": {
-      "phpunit/phpunit": "~4.0",
-      "fabpot/php-cs-fixer": "~1.0"
+        "php-http/guzzle6-adapter": "^1.0.0",
+        "phpunit/phpunit": "~4.0",
+        "fabpot/php-cs-fixer": "~1.0"
     },
     "autoload": {
         "psr-4": {

@@ -12,10 +12,10 @@
 
 namespace Impensavel\Spoil;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ParseException;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Message\ResponseInterface;
+use Http\Client\Exception as HttpClientException;
+use Http\Client\HttpClient;
+use Http\Message\MessageFactory;
+use Psr\Http\Message\ResponseInterface;
 
 use Impensavel\Spoil\Exception\SPInvalidArgumentException;
 use Impensavel\Spoil\Exception\SPObjectNotFoundException;
@@ -31,12 +31,20 @@ class SPSite implements SPRequesterInterface
     const ACS = 'https://accounts.accesscontrol.windows.net/tokens/OAuth/2';
 
     /**
-     * HTTP Client object
+     * HTTP client
      *
      * @access  protected
-     * @var     \GuzzleHttp\Client
+     * @var     \Http\Client\HttpClient
      */
-    protected $http;
+    protected $client;
+
+    /**
+     * Message factory
+     *
+     * @access  protected
+     * @var     \Http\Message\MessageFactory
+     */
+    protected $message;
 
     /**
      * Access Token
@@ -82,22 +90,28 @@ class SPSite implements SPRequesterInterface
      * SharePoint Site constructor
      *
      * @access  public
-     * @param   \GuzzleHttp\Client $http   Guzzle HTTP client
-     * @param   array              $config SharePoint Site configuration
+     * @param   string                       $url     SharePoint Site URL
+     * @param   array                        $config  SharePoint Site configuration
+     * @param   \Http\Client\HttpClient      $client  HTTP client
+     * @param   \Http\Message\MessageFactory $message Message factory
      * @throws  SPInvalidArgumentException
      * @return  SPSite
      */
-    public function __construct(Client $http, array $config)
+    public function __construct($url, array $config, HttpClient $client, MessageFactory $message)
     {
         $this->config = array_replace_recursive([
             'acs' => static::ACS,
         ], $config);
 
-        // Set Guzzle HTTP client
-        $this->http = $http;
+        // Set HTTP client and Message factory
+        $this->client = $client;
+        $this->message = $message;
 
-        // Set Site Hostname and Path
-        $components = parse_url($this->http->getBaseUrl());
+        // Ensure the URL has a trailing slash
+        $url = sprintf('%s/', rtrim($url, '/'));
+
+        // Set Site hostname and path
+        $components = parse_url($url);
 
         if (! isset($components['scheme'], $components['host'], $components['path'])) {
             throw new SPInvalidArgumentException('The SharePoint Site URL is invalid');
@@ -172,32 +186,36 @@ class SPSite implements SPRequesterInterface
      * @access  public
      * @param   string $url      SharePoint Site URL
      * @param   array  $settings Instantiation settings
+     * @throws  SPRuntimeException
      * @return  SPSite
      */
-    public static function create($url, array $settings = [])
+    public static function create($url, array $settings)
     {
-        // Ensure we have a trailing slash
-        if (is_string($url)) {
-            $url = sprintf('%s/', rtrim($url, '/'));
-        }
+        $settings = array_replace_recursive([
+            // HTTP client class
+            'client'  => '\Http\Adapter\Guzzle6\Client',
 
-        $settings = array_replace_recursive($settings, [
-            'site' => [], // SharePoint Site configuration
-            'http' => [   // Guzzle HTTP Client configuration
-                'base_url' => $url,
-            ],
+            // HTTP message factory class
+            'message' => '\Http\Message\MessageFactory\GuzzleMessageFactory',
+        ], $settings, [
+            // SharePoint Site configuration
+            'site' => [],
         ]);
 
-        $http = new Client($settings['http']);
+        foreach (['client', 'message'] as $class) {
+            if (! class_exists($settings[$class])) {
+                throw new SPRuntimeException(sprintf('Class "%s" not found', $settings[$class]));
+            }
+        }
 
-        return new static($http, $settings['site']);
+        return new static($url, $settings['site'], new $settings['client'], new $settings['message']);
     }
 
     /**
      * Parse the SharePoint API response
      *
      * @access  protected
-     * @param   \GuzzleHttp\Message\ResponseInterface $response
+     * @param   \Psr\Http\Message\ResponseInterface $response
      * @throws  SPObjectNotFoundException|SPRuntimeException
      * @return  array
      */
@@ -247,15 +265,24 @@ class SPSite implements SPRequesterInterface
     public function request($url, array $options = [], $method = 'GET', $json = true)
     {
         try {
-            $options = array_replace_recursive($options, [
-                'exceptions' => false, // Avoid throwing exceptions when we get HTTP errors (4XX, 5XX)
-            ]);
+            $options = array_replace([
+                'body'    => null,
+                'headers' => [],
+                'query'   => [],
+            ], $options);
 
-            $response = $this->http->send($this->http->createRequest($method, $url, $options));
+            $url = filter_var($url, FILTER_VALIDATE_URL) === false ? $this->getUrl($url) : $url;
+
+            if (! empty($options['query'])) {
+                $url = sprintf('%s?%s', $url, http_build_query($options['query']));
+            }
+
+            $request = $this->message->createRequest($method, $url, $options['headers'], $options['body']);
+            $response = $this->client->sendRequest($request);
 
             return $json ? $this->parseResponse($response) : $response;
 
-        } catch (RequestException $e) {
+        } catch (HttpClientException $e) {
             throw new SPRuntimeException('Unable to make HTTP request', 0, $e);
         }
     }
