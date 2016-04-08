@@ -180,38 +180,6 @@ class SPSite implements SPRequesterInterface
     }
 
     /**
-     * Create a SharePoint Site
-     *
-     * @static
-     * @access  public
-     * @param   string $url      SharePoint Site URL
-     * @param   array  $settings Instantiation settings
-     * @throws  SPRuntimeException
-     * @return  SPSite
-     */
-    public static function create($url, array $settings)
-    {
-        $settings = array_replace_recursive([
-            // HTTP client class
-            'client'  => '\Http\Adapter\Guzzle6\Client',
-
-            // HTTP message factory class
-            'message' => '\Http\Message\MessageFactory\GuzzleMessageFactory',
-        ], $settings, [
-            // SharePoint Site configuration
-            'site' => [],
-        ]);
-
-        foreach (['client', 'message'] as $class) {
-            if (! class_exists($settings[$class])) {
-                throw new SPRuntimeException(sprintf('Class "%s" not found', $settings[$class]));
-            }
-        }
-
-        return new static($url, $settings['site'], new $settings['client'], new $settings['message']);
-    }
-
-    /**
      * Parse the SharePoint API response
      *
      * @access  protected
@@ -227,8 +195,8 @@ class SPSite implements SPRequesterInterface
         if ($code >= 400) {
             $message = null;
 
-            // If the response body cannot be parsed as JSON,
-            // the body will be used as the error message
+            // If the response body can't be parsed as JSON,
+            // it will be used as the error message itself
             if (json_last_error() !== JSON_ERROR_NONE) {
                 $message = $response->getBody();
             } else {
