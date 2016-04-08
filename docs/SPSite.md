@@ -1,89 +1,46 @@
 # SharePoint Site
-The `SPSite` class is the foundation for all the other classes of the **SharePoint OAuth App Client** library.
+The `SPSite` class is the foundation for all the other classes of the **SPOIL** library.
 It handles HTTP requests and manages [Access Tokens](SPAccessToken.md) and [Form Digests](SPFormDigest.md).
 
 ## Instantiation
-There are two ways to create an `SPSite` instance.
+The library uses [**HTTPlug**](http://httplug.io), so it doesn't depend on a specific HTTP client implementation.
+Here are some examples of how to create an `SPSite` instance using various HTTP adapters.
 
-### via constructor
+### Guzzle 6 HTTP Adapter
+
+``` bash
+composer require "impensavel/spoil"
+composer require "php-http/guzzle6-adapter"
+```
+
 ```php
 <?php
 
 require 'vendor/autoload.php';
 
-use GuzzleHttp\Client;
-use Impensavel\Spoil\Exception\SPRuntimeException;
-use Impensavel\Spoil\SPSite;
-
-try {
-    $settings = [
-        'site' => [
-            'resource'  => '00000000-0000-ffff-0000-000000000000/example.sharepoint.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
-            'client_id' => '52848cad-bc13-4d69-a371-30deff17bb4d/example.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
-            'secret'    => 'YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scrum5mXVgE='
-        ]
-    ];
-
-    $http = new Client([
-        'base_url' => 'https://example.sharepoint.com/sites/mySite/'
-    ]);
-
-    $site = new SPSite($http, $settings);
-
-} catch (SPRuntimeException $e) {
-    // Handle exceptions
-}
-```
-
-### via factory
-```php
-<?php
-
-require 'vendor/autoload.php';
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
 
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
-    $settings = [
-        'site' => [
-            'resource'  => '00000000-0000-ffff-0000-000000000000/example.sharepoint.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
-            'client_id' => '52848cad-bc13-4d69-a371-30deff17bb4d/example.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
-            'secret'    => 'YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scrum5mXVgE='
-        ]
+    $config = [
+        'resource'  => '00000000-0000-ffff-0000-000000000000/example.sharepoint.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
+        'client_id' => '52848cad-bc13-4d69-a371-30deff17bb4d/example.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
+        'secret'    => 'YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scrum5mXVgE=',
     ];
 
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    // Create a SharePoint Site instance
+    $client = new HttpClient;
+    $message = new MessageFactory;
+
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, $client, $message);
 
 } catch (SPRuntimeException $e) {
     // Handle exceptions
 }
 ```
-
-## HTTP client settings
-To pass custom settings to the HTTP client, the `http` key should be used in the settings `array`.
-
-```php
-$settings = [
-    // SharePoint Site credentials
-    'site' => [
-        // ...
-    ],
-
-    'http' => [
-        'defaults' => [
-            'verify' => '/path/to/cert.pem', // Enable verification using a custom certificate
-            'config' => [
-                'curl' => [
-                    CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_0, // use TLS v1.0
-                ],
-            ],
-        ],
-    ],
-];
-```
-
-For more info, refer to the [Guzzle HTTP client documentation](http://docs.guzzlephp.org/en/latest/clients.html#creating-a-client)
 
 ## Configuration
 Retrieve the `SPSite` configuration array.
@@ -188,7 +145,7 @@ To **debug** a response, the 4th argument should be set to `false`.
         ],
     ], 'POST', false);
 ```
-A **GuzzleHttp\Message\Response** object will always be returned, even if an error object exists in the response body.
+A `\Psr\Http\Message\ResponseInterface` object will always be returned, even if an error object exists in the response body.
 
 - When omitted, the 3rd argument will default to `GET`.
 - When omitted, the 4rd argument will default to `true`.
