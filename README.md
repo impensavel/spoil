@@ -20,7 +20,7 @@ The library aims to comply with the [PSR-2][] and [PSR-4][] standards.
 composer require "impensavel/spoil"
 composer require "php-http/guzzle6-adapter"
 ```
->**TIP:** The library will try to use the [Guzzle 6 HTTP adapter](https://packagist.org/packages/php-http/guzzle6-adapter) by default. See the SPSite [documentation](docs/SPSite.md) for other use cases.
+>**TIP:** The library isn't coupled to a specific HTTP client anymore! Read the **SPSite** [documentation](docs/SPSite.md) for more information.
 
 ## Basic usage example
 ```php
@@ -28,21 +28,26 @@ composer require "php-http/guzzle6-adapter"
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPList;
 use Impensavel\Spoil\SPSite;
 
 try {
-    $settings = [
-        'site' => [
-            'resource'  => '00000000-0000-ffff-0000-000000000000/example.sharepoint.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
-            'client_id' => '52848cad-bc13-4d69-a371-30deff17bb4d/example.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
-            'secret'    => 'YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scrum5mXVgE=',
-        ]
+    // SharePoint Site configuration
+    $config = [
+        'resource'  => '00000000-0000-ffff-0000-000000000000/example.sharepoint.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
+        'client_id' => '52848cad-bc13-4d69-a371-30deff17bb4d/example.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
+        'secret'    => 'YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scrum5mXVgE=',
     ];
 
     // Create a SharePoint Site instance
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    $client = new HttpClient;
+    $message = new MessageFactory;
+
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, $client, $message);
 
     // Generate an Access Token (App-only Policy)
     $site->createSPAccessToken();
