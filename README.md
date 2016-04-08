@@ -20,7 +20,7 @@ The library aims to comply with the [PSR-2][] and [PSR-4][] standards.
 composer require "impensavel/spoil"
 composer require "php-http/guzzle6-adapter"
 ```
->**TIP:** The library isn't coupled to a specific HTTP client anymore! Read the **SPSite** [documentation](docs/SPSite.md) for more information.
+>**TIP:** This library isn't coupled to a specific HTTP client! Read the **SPSite** [documentation](docs/SPSite.md) for more information.
 
 ## Basic usage example
 ```php
@@ -85,7 +85,7 @@ try {
 - [SPUser](docs/SPUser.md)
 
 ## SharePoint credentials
-[Instructions](docs/Credentials.md) on how to generate SharePoint credentials. 
+[Instructions](docs/Credentials.md) on how to generate SharePoint credentials.
 
 ## Troubleshooting
 Common issues and how to [solve them](docs/Troubleshooting.md).
