@@ -8,11 +8,13 @@ Here are some examples of how to create an `SPSite` instance using various HTTP 
 
 ### Guzzle 6 HTTP Adapter
 
+**Dependencies:**
 ``` bash
 composer require "impensavel/spoil"
 composer require "php-http/guzzle6-adapter"
 ```
 
+**Example:**
 ```php
 <?php
 
@@ -31,8 +33,46 @@ try {
         'secret'    => 'YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scrum5mXVgE=',
     ];
 
-    // Create a SharePoint Site instance
     $client = new HttpClient;
+    $message = new MessageFactory;
+
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, $client, $message);
+
+} catch (SPRuntimeException $e) {
+    // Handle exceptions
+}
+```
+
+### cURL client for PHP-HTTP + Guzzle PSR-7 message implementation
+
+**Dependencies:**
+``` bash
+composer require "impensavel/spoil"
+composer require "php-http/curl-client"
+composer require "guzzlehttp/psr7"
+```
+
+**Example:**
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+use Http\Client\Curl\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+use Http\Message\StreamFactory\GuzzleStreamFactory as StreamFactory;
+
+use Impensavel\Spoil\Exception\SPRuntimeException;
+use Impensavel\Spoil\SPSite;
+
+try {
+    $config = [
+        'resource'  => '00000000-0000-ffff-0000-000000000000/example.sharepoint.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
+        'client_id' => '52848cad-bc13-4d69-a371-30deff17bb4d/example.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
+        'secret'    => 'YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scrum5mXVgE=',
+    ];
+
+    $client = new HttpClient(new MessageFactory, new StreamFactory);
     $message = new MessageFactory;
 
     $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, $client, $message);
