@@ -37,7 +37,7 @@ try {
     
     // Do something with the files
     foreach ($files as $file) {
-        var_dump($file);
+        var_dump($file->toArray());
     }
 
 } catch (SPRuntimeException $e) {

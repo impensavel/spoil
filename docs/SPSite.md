@@ -185,7 +185,8 @@ To **debug** a response, the 4th argument should be set to `false`.
         ],
     ], 'POST', false);
 ```
-A `\Psr\Http\Message\ResponseInterface` object will always be returned, even if an error object exists in the response body.
+
+>**TIP:** An `\Psr\Http\Message\ResponseInterface` object will always be returned, even if an error object exists in the response body.
 
 - When omitted, the 3rd argument will default to `GET`.
 - When omitted, the 4rd argument will default to `true`.

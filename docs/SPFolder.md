@@ -91,7 +91,7 @@ try {
     
     // Do something with the folders
     foreach ($folders as $folder) {
-        var_dump($folder);
+        var_dump($folder->toArray());
     }
 
 } catch (SPRuntimeException $e) {
