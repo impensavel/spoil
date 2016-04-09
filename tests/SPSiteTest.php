@@ -12,9 +12,9 @@
 
 namespace Impensavel\Spoil\Tests;
 
+use Firebase\JWT\JWT;
 use Http\Mock\Client as HttpClient;
 use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
-use JWT;
 
 use Impensavel\Spoil\SPSite;
 
@@ -158,7 +158,7 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
             'isbrowserhostedapp' => true,
         ];
 
-        $access_token = JWT::encode($payload, 'secret');
+        $access_token = JWT::encode($payload, 'YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scrum5mXVgE=');
 
         $site->createSPAccessToken($access_token);
 

@@ -16,7 +16,7 @@ use Exception;
 use Serializable;
 
 use Carbon\Carbon;
-use JWT;
+use Firebase\JWT\JWT;
 
 use Impensavel\Spoil\Exception\SPBadMethodCallException;
 use Impensavel\Spoil\Exception\SPRuntimeException;
@@ -143,7 +143,9 @@ class SPAccessToken extends SPObject implements Serializable
         }
 
         try {
-            $jwt = JWT::decode($contextToken, $config['secret'], false);
+            $jwt = JWT::decode($contextToken, $config['secret'], [
+                'HS256',
+            ]);
         } catch (Exception $e) {
             throw new SPRuntimeException('Unable to decode the Context Token', 0, $e);
         }
