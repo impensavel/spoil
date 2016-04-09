@@ -63,7 +63,7 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
             'secret'    => 'YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scrum5mXVgE=',
         ], $client, $message);
 
-        $this->assertInstanceOf('\Impensavel\Spoil\SPSite', $site);
+        $this->assertInstanceOf(\Impensavel\Spoil\SPSite::class, $site);
 
         return $site;
     }
@@ -101,7 +101,7 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
 
         $token = unserialize($serialized);
 
-        $this->assertInstanceOf('\Impensavel\Spoil\SPAccessToken', $token);
+        $this->assertInstanceOf(\Impensavel\Spoil\SPAccessToken::class, $token);
         $this->assertFalse($token->hasExpired());
 
         $site->setSPAccessToken($token);
@@ -128,7 +128,7 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
 
         $token = $site->getSPAccessToken();
 
-        $this->assertInstanceOf('\Impensavel\Spoil\SPAccessToken', $token);
+        $this->assertInstanceOf(\Impensavel\Spoil\SPAccessToken::class, $token);
     }
 
     /**
@@ -162,7 +162,7 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
 
         $site->createSPAccessToken($access_token);
 
-        $this->assertInstanceOf('\Impensavel\Spoil\SPAccessToken', $site->getSPAccessToken());
+        $this->assertInstanceOf(\Impensavel\Spoil\SPAccessToken::class, $site->getSPAccessToken());
     }
 
     /**
@@ -180,7 +180,7 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
     {
         $token = unserialize('C:30:"Impensavel\Spoil\SPAccessToken":50:{a:3:{i:0;s:0:"";i:1;i:0;i:2;s:13:"Europe/London";}}');
 
-        $this->assertInstanceOf('\Impensavel\Spoil\SPAccessToken', $token);
+        $this->assertInstanceOf(\Impensavel\Spoil\SPAccessToken::class, $token);
         $this->assertTrue($token->hasExpired());
 
         $site->setSPAccessToken($token);
@@ -199,7 +199,7 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
     {
         $token = unserialize('C:30:"Impensavel\Spoil\SPAccessToken":59:{a:3:{i:0;s:0:"";i:1;i:2147483647;i:2;s:13:"Europe/London";}}');
 
-        $this->assertInstanceOf('\Impensavel\Spoil\SPAccessToken', $token);
+        $this->assertInstanceOf(\Impensavel\Spoil\SPAccessToken::class, $token);
         $this->assertFalse($token->hasExpired());
 
         $site->setSPAccessToken($token);
@@ -237,7 +237,7 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
         $serialized = sprintf('C:29:"Impensavel\Spoil\SPFormDigest":59:{a:3:{i:0;s:0:"";i:1;i:%d;i:2;s:13:"Europe/London";}}', time());
         $digest = unserialize($serialized);
 
-        $this->assertInstanceOf('\Impensavel\Spoil\SPFormDigest', $digest);
+        $this->assertInstanceOf(\Impensavel\Spoil\SPFormDigest::class, $digest);
         $this->assertFalse($digest->hasExpired());
 
         $site->setSPFormDigest($digest);
@@ -263,7 +263,7 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
 
         $digest = $site->getSPFormDigest();
 
-        $this->assertInstanceOf('\Impensavel\Spoil\SPFormDigest', $digest);
+        $this->assertInstanceOf(\Impensavel\Spoil\SPFormDigest::class, $digest);
     }
 
     /**
@@ -281,7 +281,7 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
     {
         $digest = unserialize('C:29:"Impensavel\Spoil\SPFormDigest":50:{a:3:{i:0;s:0:"";i:1;i:0;i:2;s:13:"Europe/London";}}');
 
-        $this->assertInstanceOf('\Impensavel\Spoil\SPFormDigest', $digest);
+        $this->assertInstanceOf(\Impensavel\Spoil\SPFormDigest::class, $digest);
         $this->assertTrue($digest->hasExpired());
 
         $site->setSPFormDigest($digest);
@@ -299,7 +299,7 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
     public function testSPSiteSetSPFormDigestPass(SPSite $site)
     {
         $digest = unserialize('C:29:"Impensavel\Spoil\SPFormDigest":59:{a:3:{i:0;s:0:"";i:1;i:2147483647;i:2;s:13:"Europe/London";}}');
-        $this->assertInstanceOf('\Impensavel\Spoil\SPFormDigest', $digest);
+        $this->assertInstanceOf(\Impensavel\Spoil\SPFormDigest::class, $digest);
         $this->assertFalse($digest->hasExpired());
 
         $site->setSPFormDigest($digest);

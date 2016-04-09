@@ -9,7 +9,7 @@ The library aims to comply with the [PSR-2][] and [PSR-4][] standards.
 [PSR-4]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
 
 ## Requirements
-* [PHP](http://www.php.net) 5.4+
+* [PHP](http://www.php.net) 5.5+
 * [HTTP Message related tools](https://packagist.org/packages/php-http/message)
 * [PHP-JWT](https://packagist.org/packages/firebase/php-jwt)
 * [Carbon](https://packagist.org/packages/nesbot/carbon)
@@ -59,11 +59,11 @@ try {
 
     // Iterate through each List
     foreach ($lists as $list) {
-        var_dump($list);
+        var_dump($list->toArray());
 
         // Iterate through each List Item
         foreach ($list as $item) {
-            var_dump($item);
+            var_dump($item->toArray());
         }
     }
 
