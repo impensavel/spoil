@@ -191,7 +191,6 @@ class SPList extends SPListObject
             'item_type'    => $this->itemType,
             'description'  => $this->description,
             'relative_url' => $this->relativeUrl,
-            'items'        => $this->items,
             'item_count'   => $this->itemCount,
             'created'      => $this->created,
             'modified'     => $this->modified,
