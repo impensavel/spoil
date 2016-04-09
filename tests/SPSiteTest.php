@@ -12,14 +12,13 @@
 
 namespace Impensavel\Spoil\Tests;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
+use Http\Mock\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
 use JWT;
-use PHPUnit_Framework_TestCase;
 
 use Impensavel\Spoil\SPSite;
 
-class SPSiteTest extends PHPUnit_Framework_TestCase
+class SPSiteTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Test SPSite constructor to FAIL (invalid URL)
@@ -32,7 +31,10 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      */
     public function testSPSiteConstructorFailInvalidUrl()
     {
-        new SPSite(new Client(), []);
+        $message = new MessageFactory;
+        $client = new HttpClient($message);
+
+        new SPSite(null, [], $client, $message);
     }
 
     /**
@@ -43,28 +45,23 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      */
     public function testSPSiteConstructorPass()
     {
-        $http = new Client([
-            'base_url' => 'https://example.sharepoint.com/sites/mySite/',
-        ]);
-
-        $mock = new Mock();
+        $message = new MessageFactory;
+        $client = new HttpClient($message);
 
         // testSPSiteGetSPAccessTokenWithoutContextPass
-        $mock->addResponse(__DIR__.'/responses/token');
+        $client->addResponse(\GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__.'/responses/token')));
 
         // testSPSiteGetSPAccessTokenWithContextPass
-        $mock->addResponse(__DIR__.'/responses/token');
+        $client->addResponse(\GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__.'/responses/token')));
 
-        //testSPSiteGetSPFormDigestPass
-        $mock->addResponse(__DIR__.'/responses/digest');
+        // testSPSiteGetSPFormDigestPass
+        $client->addResponse(\GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__.'/responses/digest')));
 
-        $http->getEmitter()->attach($mock);
-
-        $site = new SPSite($http, [
+        $site = new SPSite('https://example.sharepoint.com/sites/mySite/', [
             'resource'  => '00000000-0000-ffff-0000-000000000000/example.sharepoint.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
             'client_id' => '52848cad-bc13-4d69-a371-30deff17bb4d/example.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
             'secret'    => 'YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scrum5mXVgE=',
-        ]);
+        ], $client, $message);
 
         $this->assertInstanceOf('\Impensavel\Spoil\SPSite', $site);
 
@@ -109,7 +106,8 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
 
         $site->setSPAccessToken($token);
 
-        sleep(1); // wait 1 sec for token expiration
+        // Wait 1 sec for Access Token to expire
+        sleep(1);
 
         $this->assertTrue($token->hasExpired());
         $site->getSPAccessToken();
@@ -144,12 +142,12 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
      */
     public function testSPSiteGetSPAccessTokenWithContextPass(SPSite $site)
     {
-        // dummy payload
+        // Dummy payload
         $payload = [
             'aud'                => '52848cad-bc13-4d69-a371-30deff17bb4d/example.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
             'iss'                => '00000000-0000-ffff-0000-000000000000@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
             'nbf'                => time(),
-            'exp'                => time()+1800,
+            'exp'                => (time() + 1800),
             'appctxsender'       => '00000000-0000-ffff-0000-000000000000@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
             'appctx'             => json_encode([
                 'CacheKey'                => '3+$xWJW69Xy+k5%KD=Tp6<NYT=8:qY{H31w7Q8a6+=xi5Jq8(<m6bGz.8S6f*0$',
@@ -244,7 +242,8 @@ class SPSiteTest extends PHPUnit_Framework_TestCase
 
         $site->setSPFormDigest($digest);
 
-        sleep(1); // wait 1 sec for digest expiration
+        // Wait 1 sec for Form Digest to expire
+        sleep(1);
 
         $site->getSPFormDigest();
     }
