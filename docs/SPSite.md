@@ -4,7 +4,7 @@ It handles HTTP requests and manages [Access Tokens](SPAccessToken.md) and [Form
 
 ## Instantiation
 The library uses [**HTTPlug**](http://httplug.io), so it doesn't depend on a specific HTTP client implementation.
-Here are some examples of how to create an `SPSite` instance using various HTTP adapters.
+Here are some examples of how to create an `SPSite` instance using different HTTP adapters.
 
 ### Guzzle 6 HTTP Adapter
 
