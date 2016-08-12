@@ -270,7 +270,7 @@ class SPRecycleBinItem extends SPObject
      * @param   string $guid  SharePoint RecycleBinItem GUID
      * @param   array  $extra Extra properties to map
      * @throws  \Impensavel\Spoil\Exception\SPRuntimeException
-     * @return  SPFile
+     * @return  SPRecycleBinItem
      */
     public static function getByGUID(SPSite $site, $guid, array $extra = [])
     {
