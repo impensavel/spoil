@@ -122,18 +122,11 @@ abstract class SPObject implements SPObjectInterface
     {
         // Hydrate from an SPObject
         if ($data instanceof $this) {
-            foreach (get_object_vars($data) as $key => $value) {
-                $this->$key = $value;
-            }
-
-            return $this;
+            return $this->hydrate($data->getPayload(), $rehydrate);
         }
 
         // Hydrate from an array (JSON)
         if (is_array($data)) {
-            // Store payload data
-            $this->payload = $data;
-
             foreach ($this->mapper as $property => $path) {
                 // Make spaces SharePoint compatible
                 $path = str_replace(' ', '_x0020_', $path);
@@ -144,6 +137,9 @@ abstract class SPObject implements SPObjectInterface
                     $this->assign($property, $value);
                 }
             }
+
+            // Store payload data
+            $this->payload = $data;
 
             return $this;
         }
