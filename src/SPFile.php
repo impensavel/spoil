@@ -465,13 +465,11 @@ class SPFile extends SPObject implements SPItemInterface
         $folder->isWritable(true);
 
         if (empty($name)) {
-            if ($content instanceof SplFileInfo) {
-                $name = $content->getFilename();
+            if (! $content instanceof SplFileInfo) {
+                throw new SPBadMethodCallException('The SharePoint File Name is empty/not set');
             }
 
-            if (is_resource($content) || is_string($content)) {
-                throw new SPBadMethodCallException('SharePoint File Name is empty/not set');
-            }
+            $name = $content->getFilename();
         }
 
         $data = static::contentTypeHandler($content);
