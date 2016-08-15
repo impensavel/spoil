@@ -121,7 +121,7 @@ abstract class SPObject implements SPObjectInterface
     protected function hydrate($data, $rehydrate = false)
     {
         // Hydrate from an SPObject
-        if ($data instanceof $this) {
+        if ($data instanceof SPObject) {
             return $this->hydrate($data->getPayload(), $rehydrate);
         }
 
