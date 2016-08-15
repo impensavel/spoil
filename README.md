@@ -18,59 +18,8 @@ The library aims to comply with the [PSR-2][] and [PSR-4][] standards.
 ## Installation
 ``` bash
 composer require "impensavel/spoil"
-composer require "php-http/guzzle6-adapter"
 ```
 >**TIP:** This library isn't coupled to a specific HTTP client! Read the **SPSite** [documentation](docs/SPSite.md) for more information.
-
-## Basic usage example
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-use Http\Adapter\Guzzle6\Client as HttpClient;
-use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
-
-use Impensavel\Spoil\Exception\SPRuntimeException;
-use Impensavel\Spoil\SPList;
-use Impensavel\Spoil\SPSite;
-
-try {
-    // SharePoint Site configuration
-    $config = [
-        'resource'  => '00000000-0000-ffff-0000-000000000000/example.sharepoint.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
-        'client_id' => '52848cad-bc13-4d69-a371-30deff17bb4d/example.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
-        'secret'    => 'YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scrum5mXVgE=',
-    ];
-
-    // Create a SharePoint Site instance
-    $client = new HttpClient;
-    $message = new MessageFactory;
-
-    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, $client, $message);
-
-    // Generate an Access Token (App-only Policy)
-    $site->createSPAccessToken();
-
-    // Get all the Lists and respective Items 
-    $lists = SPList::getAll($site, [
-        'fetch' => true,
-    ]);
-
-    // Iterate through each List
-    foreach ($lists as $list) {
-        var_dump($list->toArray());
-
-        // Iterate through each List Item
-        foreach ($list as $item) {
-            var_dump($item->toArray());
-        }
-    }
-
-} catch (SPRuntimeException $e) {
-    // Handle exceptions
-}
-```
 
 ## Class documentation
 - [SPSite](docs/SPSite.md)
