@@ -45,6 +45,10 @@
             "Impensavel\\Spoil\\Tests\\": "tests/"
         }
     },
+    "suggest": {
+        "php-http/guzzle6-adapter": "Guzzle 6 HTTP adapter",
+        "php-http/curl-client": "cURL client HTTP adapter"
+    },
     "scripts": {
         "cs": "php-cs-fixer fix src --level=psr2 --verbose",
         "test": "phpunit --verbose"
