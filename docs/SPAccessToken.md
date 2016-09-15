@@ -162,7 +162,7 @@ Check if the `SPAccessToken` has expired.
 Get the expiration date of a `SPAccessToken` in the form of a `Carbon` object.
 
 ```php
-    $carbon = $token->expireDate();
+    $carbon = $token->expiration();
 
     echo $carbon->diffForHumans(); // 12 hours from now
 ```

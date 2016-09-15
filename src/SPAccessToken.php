@@ -30,15 +30,15 @@ class SPAccessToken extends SPObject implements Serializable
      * @access  protected
      * @var     string
      */
-    protected $token;
+    protected $value;
 
     /**
-     * Expire date
+     * Expiration date
      *
      * @access  protected
      * @var     \Carbon\Carbon
      */
-    protected $expires;
+    protected $expiration;
 
     /**
      * {@inheritdoc}
@@ -64,8 +64,8 @@ class SPAccessToken extends SPObject implements Serializable
     public function __construct(array $payload, array $extra = [])
     {
         $this->mapper = array_merge([
-            'token'   => 'access_token',
-            'expires' => 'expires_on',
+            'value'      => 'access_token',
+            'expiration' => 'expires_on',
         ], $extra);
 
         $this->hydrate($payload);
@@ -77,9 +77,9 @@ class SPAccessToken extends SPObject implements Serializable
     public function toArray()
     {
         return [
-            'token'   => $this->token,
-            'expires' => $this->expires,
-            'extra'   => $this->extra,
+            'value'      => $this->value,
+            'expiration' => $this->expiration,
+            'extra'      => $this->extra,
         ];
     }
 
@@ -92,9 +92,9 @@ class SPAccessToken extends SPObject implements Serializable
     public function serialize()
     {
         return serialize([
-            $this->token,
-            $this->expires->getTimestamp(),
-            $this->expires->getTimezone()->getName(),
+            $this->value,
+            $this->expiration->getTimestamp(),
+            $this->expiration->getTimezone()->getName(),
         ]);
     }
 
@@ -107,9 +107,9 @@ class SPAccessToken extends SPObject implements Serializable
      */
     public function unserialize($serialized)
     {
-        list($this->token, $timestamp, $timezone) = unserialize($serialized);
+        list($this->value, $timestamp, $timezone) = unserialize($serialized);
 
-        $this->expires = Carbon::createFromTimeStamp($timestamp, $timezone);
+        $this->expiration = Carbon::createFromTimeStamp($timestamp, $timezone);
     }
 
     /**
@@ -120,7 +120,7 @@ class SPAccessToken extends SPObject implements Serializable
      */
     public function __toString()
     {
-        return $this->token;
+        return $this->value;
     }
 
     /**
@@ -236,17 +236,17 @@ class SPAccessToken extends SPObject implements Serializable
      */
     public function hasExpired()
     {
-        return $this->expires->isPast();
+        return $this->expiration->isPast();
     }
 
     /**
-     * Get the SharePoint Access Token expire date
+     * Get the SharePoint Access Token expiration
      *
      * @access  public
      * @return  Carbon
      */
-    public function expireDate()
+    public function expiration()
     {
-        return $this->expires;
+        return $this->expiration;
     }
 }
