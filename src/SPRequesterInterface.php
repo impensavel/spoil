@@ -39,11 +39,11 @@ interface SPRequesterInterface
     public function getSPAccessToken();
 
     /**
-     * Get the current SharePoint Form Digest
+     * Get the current SharePoint Context Info
      *
      * @access  public
      * @throws  SPRuntimeException
-     * @return  SPFormDigest
+     * @return  SPContextInfo
      */
-    public function getSPFormDigest();
+    public function getSPContextInfo();
 }

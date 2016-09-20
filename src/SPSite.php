@@ -55,12 +55,12 @@ class SPSite implements SPRequesterInterface
     protected $token;
 
     /**
-     * Form Digest
+     * Context Info
      *
      * @access  protected
-     * @var     SPFormDigest
+     * @var     SPContextInfo
      */
-    protected $digest;
+    protected $contextInfo;
 
     /**
      * Site Hostname
@@ -309,16 +309,16 @@ class SPSite implements SPRequesterInterface
     }
 
     /**
-     * Create a SharePoint Form Digest
+     * Create a SharePoint Context Info
      *
      * @access  public
      * @param   array  $extra Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPSite
      */
-    public function createSPFormDigest($extra = [])
+    public function createSPContextInfo($extra = [])
     {
-        $this->digest = SPFormDigest::create($this, $extra);
+        $this->contextInfo = SPContextInfo::create($this, $extra);
 
         return $this;
     }
@@ -326,33 +326,33 @@ class SPSite implements SPRequesterInterface
     /**
      * {@inheritdoc}
      */
-    public function getSPFormDigest()
+    public function getSPContextInfo()
     {
-        if (! $this->digest instanceof SPFormDigest) {
-            throw new SPRuntimeException('Invalid SharePoint Form Digest');
+        if (! $this->contextInfo instanceof SPContextInfo) {
+            throw new SPRuntimeException('Invalid SharePoint Context Info');
         }
 
-        if ($this->digest->hasExpired()) {
-            throw new SPRuntimeException('Expired SharePoint Form Digest');
+        if ($this->contextInfo->formDigestHasExpired()) {
+            throw new SPRuntimeException('SharePoint Context Info with expired Form Digest');
         }
 
-        return $this->digest;
+        return $this->contextInfo;
     }
 
     /**
-     * Set the SharePoint Form Digest
+     * Set the SharePoint Context Info
      *
      * @access  public
-     * @param   SPFormDigest $digest SharePoint Form Digest
+     * @param   SPContextInfo $contextInfo SharePoint Context Info
      * @throws  SPRuntimeException
      * @return  void
      */
-    public function setSPFormDigest(SPFormDigest $digest)
+    public function setSPContextInfo(SPContextInfo $contextInfo)
     {
-        if ($digest->hasExpired()) {
-            throw new SPRuntimeException('Expired SharePoint Form Digest');
+        if ($contextInfo->formDigestHasExpired()) {
+            throw new SPRuntimeException('SharePoint Context Info with expired Form Digest');
         }
 
-        $this->digest = $digest;
+        $this->contextInfo = $contextInfo;
     }
 }

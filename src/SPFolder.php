@@ -300,7 +300,7 @@ class SPFolder extends SPListObject implements SPItemInterface
             'headers' => [
                 'Authorization'   => 'Bearer '.$folder->getSPAccessToken(),
                 'Accept'          => 'application/json',
-                'X-RequestDigest' => (string) $folder->getSPFormDigest(),
+                'X-RequestDigest' => $folder->getSPContextInfo()->getFormDigest(),
                 'Content-type'    => 'application/json',
                 'Content-length'  => strlen($body),
             ],
@@ -335,7 +335,7 @@ class SPFolder extends SPListObject implements SPItemInterface
             'headers' => [
                 'Authorization'   => 'Bearer '.$this->getSPAccessToken(),
                 'Accept'          => 'application/json',
-                'X-RequestDigest' => (string) $this->getSPFormDigest(),
+                'X-RequestDigest' => $this->getSPContextInfo()->getFormDigest(),
                 'X-HTTP-Method'   => 'MERGE',
                 'IF-MATCH'        => '*',
                 'Content-type'    => 'application/json',
@@ -367,7 +367,7 @@ class SPFolder extends SPListObject implements SPItemInterface
         $this->request("_api/web/GetFolderByServerRelativeUrl('".$this->relativeUrl."')", [
             'headers' => [
                 'Authorization'   => 'Bearer '.$this->getSPAccessToken(),
-                'X-RequestDigest' => (string) $this->getSPFormDigest(),
+                'X-RequestDigest' => $this->getSPContextInfo()->getFormDigest(),
                 'X-HTTP-Method'   => 'DELETE',
                 'IF-MATCH'        => '*',
             ],

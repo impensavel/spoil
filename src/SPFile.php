@@ -478,7 +478,7 @@ class SPFile extends SPObject implements SPItemInterface
             'headers' => [
                 'Authorization'   => 'Bearer '.$folder->getSPAccessToken(),
                 'Accept'          => 'application/json',
-                'X-RequestDigest' => (string) $folder->getSPFormDigest(),
+                'X-RequestDigest' => $folder->getSPContextInfo()->getFormDigest(),
                 'Content-length'  => strlen($data),
             ],
 
@@ -507,7 +507,7 @@ class SPFile extends SPObject implements SPItemInterface
         $this->folder->request("_api/web/GetFileByServerRelativeUrl('".$this->relativeUrl."')/\$value", [
             'headers' => [
                 'Authorization'   => 'Bearer '.$this->folder->getSPAccessToken(),
-                'X-RequestDigest' => (string) $this->folder->getSPFormDigest(),
+                'X-RequestDigest' => $this->folder->getSPContextInfo()->getFormDigest(),
                 'X-HTTP-Method'   => 'PUT',
                 'Content-length'  => strlen($data),
             ],
@@ -544,7 +544,7 @@ class SPFile extends SPObject implements SPItemInterface
             'headers' => [
                 'Authorization'   => 'Bearer '.$folder->getSPAccessToken(),
                 'Accept'          => 'application/json',
-                'X-RequestDigest' => (string) $this->folder->getSPFormDigest(),
+                'X-RequestDigest' => $this->folder->getSPContextInfo()->getFormDigest(),
             ],
         ], 'POST');
 
@@ -577,7 +577,7 @@ class SPFile extends SPObject implements SPItemInterface
             'headers' => [
                 'Authorization'   => 'Bearer '.$folder->getSPAccessToken(),
                 'Accept'          => 'application/json',
-                'X-RequestDigest' => (string) $this->folder->getSPFormDigest(),
+                'X-RequestDigest' => $this->folder->getSPContextInfo()->getFormDigest(),
             ],
         ], 'POST');
 
@@ -600,7 +600,7 @@ class SPFile extends SPObject implements SPItemInterface
             'headers' => [
                 'Authorization'   => 'Bearer '.$this->folder->getSPAccessToken(),
                 'Accept'          => 'application/json',
-                'X-RequestDigest' => (string) $this->folder->getSPFormDigest(),
+                'X-RequestDigest' => $this->folder->getSPContextInfo()->getFormDigest(),
             ],
         ], 'POST');
 
@@ -620,7 +620,7 @@ class SPFile extends SPObject implements SPItemInterface
         $this->folder->request("_api/web/GetFileByServerRelativeUrl('".$this->relativeUrl."')", [
             'headers' => [
                 'Authorization'   => 'Bearer '.$this->folder->getSPAccessToken(),
-                'X-RequestDigest' => (string) $this->folder->getSPFormDigest(),
+                'X-RequestDigest' => $this->folder->getSPContextInfo()->getFormDigest(),
                 'IF-MATCH'        => '*',
                 'X-HTTP-Method'   => 'DELETE',
             ],
@@ -644,7 +644,7 @@ class SPFile extends SPObject implements SPItemInterface
             'headers' => [
                 'Authorization'   => 'Bearer '.$this->folder->getSPAccessToken(),
                 'Accept'          => 'application/json',
-                'X-RequestDigest' => (string) $this->folder->getSPFormDigest(),
+                'X-RequestDigest' => $this->folder->getSPContextInfo()->getFormDigest(),
             ],
         ], 'POST');
 
@@ -664,7 +664,7 @@ class SPFile extends SPObject implements SPItemInterface
             'headers' => [
                 'Authorization'   => 'Bearer '.$this->folder->getSPAccessToken(),
                 'Accept'          => 'application/json',
-                'X-RequestDigest' => (string) $this->folder->getSPFormDigest(),
+                'X-RequestDigest' => $this->folder->getSPContextInfo()->getFormDigest(),
             ],
         ], 'POST');
 

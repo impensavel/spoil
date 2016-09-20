@@ -184,7 +184,7 @@ class SPItem extends SPObject implements SPItemInterface
             'headers' => [
                 'Authorization'   => 'Bearer '.$list->getSPAccessToken(),
                 'Accept'          => 'application/json',
-                'X-RequestDigest' => (string) $list->getSPFormDigest(),
+                'X-RequestDigest' => $list->getSPContextInfo()->getFormDigest(),
                 'Content-type'    => 'application/json',
                 'Content-length'  => strlen($body),
             ],
@@ -216,7 +216,7 @@ class SPItem extends SPObject implements SPItemInterface
             'headers' => [
                 'Authorization'   => 'Bearer '.$this->list->getSPAccessToken(),
                 'Accept'          => 'application/json',
-                'X-RequestDigest' => (string) $this->list->getSPFormDigest(),
+                'X-RequestDigest' => $this->list->getSPContextInfo()->getFormDigest(),
                 'X-HTTP-Method'   => 'MERGE',
                 'IF-MATCH'        => '*',
                 'Content-type'    => 'application/json',
@@ -246,7 +246,7 @@ class SPItem extends SPObject implements SPItemInterface
             'headers' => [
                 'Authorization'   => 'Bearer '.$this->list->getSPAccessToken(),
                 'Accept'          => 'application/json',
-                'X-RequestDigest' => (string) $this->list->getSPFormDigest(),
+                'X-RequestDigest' => $this->list->getSPContextInfo()->getFormDigest(),
             ],
         ], 'POST');
 
@@ -266,7 +266,7 @@ class SPItem extends SPObject implements SPItemInterface
         $this->list->request("_api/web/Lists(guid'".$this->list->getGUID()."')/items(".$this->id.")", [
             'headers' => [
                 'Authorization'   => 'Bearer '.$this->list->getSPAccessToken(),
-                'X-RequestDigest' => (string) $this->list->getSPFormDigest(),
+                'X-RequestDigest' => $this->list->getSPContextInfo()->getFormDigest(),
                 'IF-MATCH'        => '*',
                 'X-HTTP-Method'   => 'DELETE',
             ],

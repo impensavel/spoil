@@ -134,9 +134,9 @@ abstract class SPListObject extends SPObject implements ArrayAccess, Countable, 
     /**
      * {@inheritdoc}
      */
-    public function getSPFormDigest()
+    public function getSPContextInfo()
     {
-        return $this->site->getSPFormDigest();
+        return $this->site->getSPContextInfo();
     }
 
     /**

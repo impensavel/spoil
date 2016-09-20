@@ -388,7 +388,7 @@ class SPList extends SPListObject
             'headers' => [
                 'Authorization'   => 'Bearer '.$site->getSPAccessToken(),
                 'Accept'          => 'application/json',
-                'X-RequestDigest' => (string) $site->getSPFormDigest(),
+                'X-RequestDigest' => $site->getSPContextInfo()->getFormDigest(),
                 'Content-type'    => 'application/json',
                 'Content-length'  => strlen($body),
             ],
@@ -423,7 +423,7 @@ class SPList extends SPListObject
             'headers' => [
                 'Authorization'   => 'Bearer '.$this->getSPAccessToken(),
                 'Accept'          => 'application/json',
-                'X-RequestDigest' => (string) $this->getSPFormDigest(),
+                'X-RequestDigest' => $this->getSPContextInfo()->getFormDigest(),
                 'X-HTTP-Method'   => 'MERGE',
                 'IF-MATCH'        => '*',
                 'Content-type'    => 'application/json',
@@ -452,7 +452,7 @@ class SPList extends SPListObject
             'headers' => [
                 'Authorization'   => 'Bearer '.$this->getSPAccessToken(),
                 'Accept'          => 'application/json',
-                'X-RequestDigest' => (string) $this->getSPFormDigest(),
+                'X-RequestDigest' => $this->getSPContextInfo()->getFormDigest(),
                 'X-HTTP-Method'   => 'DELETE',
                 'IF-MATCH'        => '*',
             ],
@@ -483,7 +483,7 @@ class SPList extends SPListObject
             'headers' => [
                 'Authorization'   => 'Bearer '.$this->getSPAccessToken(),
                 'Accept'          => 'application/json',
-                'X-RequestDigest' => (string) $this->getSPFormDigest(),
+                'X-RequestDigest' => $this->getSPContextInfo()->getFormDigest(),
                 'Content-type'    => 'application/json',
                 'Content-length'  => strlen($body),
             ],
