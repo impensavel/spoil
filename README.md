@@ -1,7 +1,7 @@
 # SPOIL
 SPOIL (**S**hare**P**oint **O**nline **I**nquiry **L**ibrary) is a [PHP](http://www.php.net) library for **SharePoint Online (2013)** and **SharePoint for Office 365**.
 
-Currently supported are SharePoint **Lists**, **Folders**, **Items**, **Files**, **RecycleBinItems** and **Users**.
+Currently supported are SharePoint **Lists**, **Folders**, **Items**, **Files**, **RecycleBinItems**, **RecycleBinItemCollections** and **Users**.
 
 The library aims to comply with the [PSR-2][] and [PSR-4][] standards.
 
@@ -24,7 +24,7 @@ composer require "impensavel/spoil"
 ## Class documentation
 - [SPSite](docs/SPSite.md)
 - [SPAccessToken](docs/SPAccessToken.md)
-- [SPFormDigest](docs/SPFormDigest.md)
+- [SPContextInfo](docs/SPContextInfo.md)
 - [SPList](docs/SPList.md)
 - [SPItem](docs/SPItem.md)
 - [SPFolder](docs/SPFolder.md)
