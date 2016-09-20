@@ -75,7 +75,9 @@ abstract class SPObject implements SPObjectInterface
     protected function assign($property, $value)
     {
         // Convert ISO 8601 dates into Carbon objects
-        if (preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})?$/', $value) === 1) {
+        $pattern = '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})?$/';
+
+        if (is_string($value) && preg_match($pattern, $value) === 1) {
             $value = new Carbon($value);
         }
 
