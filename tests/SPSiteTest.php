@@ -54,7 +54,7 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
         // testSPSiteGetSPAccessTokenWithContextPass
         $client->addResponse(\GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__.'/responses/token')));
 
-        // testSPSiteGetSPFormDigestPass
+        // testSPSiteGetSPContextInfoPass
         $client->addResponse(\GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__.'/responses/digest')));
 
         $site = new SPSite('https://example.sharepoint.com/sites/mySite/', [
@@ -206,50 +206,53 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test SPSite getSPFormDigest() method to FAIL (invalid digest)
+     * Test SPSite getSPContextInfo() method to FAIL (invalid digest)
      *
      * @depends                   testSPSiteConstructorPass
      * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
-     * @expectedExceptionMessage  Invalid SharePoint Form Digest
+     * @expectedExceptionMessage  Invalid SharePoint Context Info
      *
      * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
-    public function testSPSiteGetSPFormDigestFailInvalidDigest(SPSite $site)
+    public function testSPSiteGetSPContextInfoFailInvalidDigest(SPSite $site)
     {
-        $site->getSPFormDigest();
+        $site->getSPContextInfo();
     }
 
     /**
-     * Test SPSite getSPFormDigest() method to FAIL (expired digest)
+     * Test SPSite getSPContextInfo() method to FAIL (expired digest)
      *
      * @depends                   testSPSiteConstructorPass
      * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
-     * @expectedExceptionMessage  Expired SharePoint Form Digest
+     * @expectedExceptionMessage  SharePoint Context Info with expired Form Digest
      *
      * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
-    public function testSPSiteGetSPFormDigestFailExpiredDigest(SPSite $site)
+    public function testSPSiteGetSPContextInfoFailExpiredDigest(SPSite $site)
     {
-        $serialized = sprintf('C:29:"Impensavel\Spoil\SPFormDigest":59:{a:3:{i:0;s:0:"";i:1;i:%d;i:2;s:13:"Europe/London";}}', time());
-        $digest = unserialize($serialized);
+        $serialized = sprintf(
+            'C:30:"Impensavel\Spoil\SPContextInfo":128:{a:5:{i:0;s:14:"16.0.1234.5678";i:1;a:2:{i:0;s:8:"14.0.0.0";i:1;s:8:"15.0.0.0";}i:2;N;i:3;i:%d;i:4;s:13:"Europe/Lisbon";}}',
+            time()
+        );
+        $contextInfo = unserialize($serialized);
 
-        $this->assertInstanceOf(\Impensavel\Spoil\SPFormDigest::class, $digest);
-        $this->assertFalse($digest->hasExpired());
+        $this->assertInstanceOf(\Impensavel\Spoil\SPContextInfo::class, $contextInfo);
+        $this->assertFalse($contextInfo->formDigestHasExpired());
 
-        $site->setSPFormDigest($digest);
+        $site->setSPContextInfo($contextInfo);
 
-        // Wait 1 sec for Form Digest to expire
+        // Wait 1 sec for Context Info Form Digest to expire
         sleep(1);
 
-        $site->getSPFormDigest();
+        $site->getSPContextInfo();
     }
 
     /**
-     * Test SPSite getSPFormDigest() method to PASS
+     * Test SPSite getSPContextInfo() method to PASS
      *
      * @depends testSPSiteConstructorPass
      *
@@ -257,38 +260,40 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
-    public function testSPSiteGetSPFormDigestPass(SPSite $site)
+    public function testSPSiteGetSPContextInfoPass(SPSite $site)
     {
-        $site->createSPFormDigest();
+        $site->createSPContextInfo();
 
-        $digest = $site->getSPFormDigest();
+        $contextInfo = $site->getSPContextInfo();
 
-        $this->assertInstanceOf(\Impensavel\Spoil\SPFormDigest::class, $digest);
+        $this->assertInstanceOf(\Impensavel\Spoil\SPContextInfo::class, $contextInfo);
     }
 
     /**
-     * Test SPSite setSPFormDigest() method to FAIL (invalid digest)
+     * Test SPSite setSPContextInfo() method to FAIL (invalid digest)
      *
      * @depends                   testSPSiteConstructorPass
      * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
-     * @expectedExceptionMessage  Expired SharePoint Form Digest
+     * @expectedExceptionMessage  SharePoint Context Info with expired Form Digest
      *
      * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
-    public function testSPSiteSetSPFormDigestInvalidDigest(SPSite $site)
+    public function testSPSiteSetSPContextInfoInvalidDigest(SPSite $site)
     {
-        $digest = unserialize('C:29:"Impensavel\Spoil\SPFormDigest":50:{a:3:{i:0;s:0:"";i:1;i:0;i:2;s:13:"Europe/London";}}');
+        $contextInfo = unserialize(
+            'C:30:"Impensavel\Spoil\SPContextInfo":88:{a:5:{i:0;s:0:"";i:1;a:2:{i:0;s:0:"";i:1;s:0:"";}i:2;N;i:3;i:0;i:4;s:13:"Europe/Lisbon";}}'
+        );
 
-        $this->assertInstanceOf(\Impensavel\Spoil\SPFormDigest::class, $digest);
-        $this->assertTrue($digest->hasExpired());
+        $this->assertInstanceOf(\Impensavel\Spoil\SPContextInfo::class, $contextInfo);
+        $this->assertTrue($contextInfo->formDigestHasExpired());
 
-        $site->setSPFormDigest($digest);
+        $site->setSPContextInfo($contextInfo);
     }
 
     /**
-     * Test SPSite setSPFormDigest() method to PASS
+     * Test SPSite setSPContextInfo() method to PASS
      *
      * @depends testSPSiteConstructorPass
      *
@@ -296,13 +301,17 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
-    public function testSPSiteSetSPFormDigestPass(SPSite $site)
+    public function testSPSiteSetSPContextInfoPass(SPSite $site)
     {
-        $digest = unserialize('C:29:"Impensavel\Spoil\SPFormDigest":59:{a:3:{i:0;s:0:"";i:1;i:2147483647;i:2;s:13:"Europe/London";}}');
-        $this->assertInstanceOf(\Impensavel\Spoil\SPFormDigest::class, $digest);
-        $this->assertFalse($digest->hasExpired());
+        $original = 'C:30:"Impensavel\Spoil\SPContextInfo":128:{a:5:{i:0;s:14:"16.0.1234.5678";i:1;a:2:{i:0;s:8:"14.0.0.0";i:1;s:8:"15.0.0.0";}i:2;N;i:3;i:2147483647;i:4;s:13:"Europe/Lisbon";}}';
+        $contextInfo = unserialize($original);
 
-        $site->setSPFormDigest($digest);
+        $this->assertInstanceOf(\Impensavel\Spoil\SPContextInfo::class, $contextInfo);
+        $this->assertFalse($contextInfo->formDigestHasExpired());
+
+        $site->setSPContextInfo($contextInfo);
+
+        $this->assertEquals($original, serialize($contextInfo));
     }
 
     /**
