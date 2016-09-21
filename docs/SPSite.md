@@ -1,6 +1,6 @@
 # SharePoint Site
 The `SPSite` class is the foundation for all the other classes of the **SPOIL** library.
-It handles HTTP requests and manages [Access Tokens](SPAccessToken.md) and [Form Digests](SPFormDigest.md).
+It handles HTTP requests and manages [Access Tokens](SPAccessToken.md) and [Context Info](SPContextInfo.md).
 
 ## Instantiation
 The library uses [**HTTPlug**](http://httplug.io), so it doesn't depend on a specific HTTP client implementation.
@@ -161,115 +161,161 @@ try {
 ## Configuration
 Retrieve the `SPSite` configuration array.
 
+**Example:**
 ```php
-    $config = $site->getConfig();
+$config = $site->getConfig();
 
-    var_dump($config);
+var_dump($config);
+```
 
-    // array(4) {
-    //     ["acs"]=>
-    //     string(57) "https://accounts.accesscontrol.windows.net/tokens/OAuth/2"
-    //     ["resource"]=>
-    //     string(101) "00000000-0000-ffff-0000-000000000000/example.sharepoint.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64"
-    //     ["client_id"]=>
-    //     string(90) "52848cad-bc13-4d69-a371-30deff17bb4d/example.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64"
-    //     ["secret"]=>
-    //     string(44) "YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scrum5mXVgE="
-    // }
+**Output:**
+```php
+array(4) {
+    ["acs"]=>
+    string(57) "https://accounts.accesscontrol.windows.net/tokens/OAuth/2"
+    ["resource"]=>
+    string(101) "00000000-0000-ffff-0000-000000000000/example.sharepoint.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64"
+    ["client_id"]=>
+    string(90) "52848cad-bc13-4d69-a371-30deff17bb4d/example.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64"
+    ["secret"]=>
+    string(44) "YzcZQ7N4lTeK5COin/nmNRG5kkL35gAW1scrum5mXVgE="
+}
 ```
 
 ## Hostname
 Retrieve the `SPSite` hostname.
 
+**Example:**
 ```php
-    echo $site->getHostname(); // https://example.sharepoint.com
+echo $site->getHostname();
 
-    echo $site->getHostname('/sites/mySite'); // https://example.sharepoint.com/sites/mySite
+echo $site->getHostname('/sites/mySite');
+```
+
+**Output:**
+```php
+https://example.sharepoint.com
+
+https://example.sharepoint.com/sites/mySite
 ```
 
 ## Path
 Retrieve the `SPSite` path.
 
-```php
-    echo $site->getPath(); // /sites/mySite/
 
-    echo $site->getPath('/stuff'); // /sites/mySite/stuff
+**Example:**
+```php
+echo $site->getPath();
+
+echo $site->getPath('/stuff');
+```
+
+**Output:**
+```php
+/sites/mySite/
+
+/sites/mySite/stuff
 ```
 
 ## URL
 Retrieve the `SPSite` URL.
 
+**Example:**
 ```php
-    echo $site->getUrl(); // https://example.sharepoint.com/sites/mySite
+echo $site->getUrl();
 
-    echo $site->getUrl('/stuff'); // https://example.sharepoint.com/sites/mySite/stuff
+echo $site->getUrl('/stuff');
+```
+
+**Output:**
+```php
+https://example.sharepoint.com/sites/mySite
+
+https://example.sharepoint.com/sites/mySite/stuff
 ```
 
 ## Logout URL
 Retrieve the `SPSite` logout URL.
 
+**Example:**
 ```php
-    echo $site->getLogoutUrl(); // https://example.sharepoint.com/sites/mySite/_layouts/SignOut.aspx
+echo $site->getLogoutUrl();
+```
+
+**Output:**
+```php
+https://example.sharepoint.com/sites/mySite/_layouts/SignOut.aspx
 ```
 
 ## HTTP request
 Make an HTTP request to the SharePoint API. Use this method when extending the library with new classes/methods or for debugging purposes.
 
+**HTTP GET example:**
 ```php
-    // [HTTP GET] get the most popular tags
-    $json = $site->request('_api/sp.userprofiles.peoplemanager.gettrendingtags', [
-        'headers' => [
-            'Authorization' => 'Bearer '.$site->getSPAccessToken(),
-            'Accept'        => 'application/json;odata=verbose',
-        ],
-    ]);
-
-    // [HTTP POST] follow a user
-    $json = $site->request('_api/sp.userprofiles.peoplemanager/follow(@v)', [
-        'headers' => [
-            'Authorization'   => 'Bearer '.$site->getSPAccessToken(),
-            'Accept'          => 'application/json;odata=verbose',
-            'X-RequestDigest' => (string) $site->getSPFormDigest(),
-        ],
-        'query' => [
-            '@v' => 'i:0#.f|membership|user@example.onmicrosoft.com',
-        ],
-    ], 'POST');
+// Get the most popular tags
+$json = $site->request('_api/sp.userprofiles.peoplemanager.gettrendingtags', [
+    'headers' => [
+        'Authorization' => 'Bearer '.$site->getSPAccessToken(),
+        'Accept'        => 'application/json',
+    ],
+]);
 ```
-The `$json` variable will be an `array` with the response of a successful request.
-If the response contains an error object, either a `SPRuntimeException` or a `SPObjectNotFoundException` will be thrown.
 
+**HTTP POST example:**
+```php
+// Follow a user
+$json = $site->request('_api/sp.userprofiles.peoplemanager/follow(@v)', [
+    'headers' => [
+        'Authorization'   => 'Bearer '.$site->getSPAccessToken(),
+        'Accept'          => 'application/json',
+        'X-RequestDigest' => $site->getSPContextInfo()->getFormDigest(),
+    ],
+    'query' => [
+        '@v' => 'i:0#.f|membership|user@example.onmicrosoft.com',
+    ],
+], 'POST');
+```
+
+The `$json` variable will be an `array` with the OData response payload.
+If the API returns an error, either a `SPRuntimeException` or a `SPObjectNotFoundException` will be thrown.
+
+### Debugging
 To **debug** a response, the 4th argument should be set to `false`.
-```php
-    // [HTTP GET] get the most popular tags
-    $response = $site->request('_api/sp.userprofiles.peoplemanager.gettrendingtags', [
-        'headers' => [
-            'Authorization' => 'Bearer '.$site->getSPAccessToken(),
-            'Accept'        => 'application/json;odata=verbose',
-        ],
-    ], 'GET', false);
 
-    // [HTTP POST] follow a user
-    $response = $site->request('_api/sp.userprofiles.peoplemanager/follow(@v)', [
-        'headers' => [
-            'Authorization'   => 'Bearer '.$site->getSPAccessToken(),
-            'Accept'          => 'application/json;odata=verbose',
-            'X-RequestDigest' => (string) $site->getSPFormDigest(),
-        ],
-        'query' => [
-            '@v' => 'i:0#.f|membership|user@example.onmicrosoft.com',
-        ],
-    ], 'POST', false);
+**HTTP GET debug example:**
+```php
+// Get the most popular tags
+$response = $site->request('_api/sp.userprofiles.peoplemanager.gettrendingtags', [
+    'headers' => [
+        'Authorization' => 'Bearer '.$site->getSPAccessToken(),
+        'Accept'        => 'application/json',
+    ],
+], 'GET', false);
 ```
 
->**TIP:** An `\Psr\Http\Message\ResponseInterface` object will always be returned, even if an error object exists in the response body.
+**HTTP POST debug example:**
+```php
+// Follow a user
+$response = $site->request('_api/sp.userprofiles.peoplemanager/follow(@v)', [
+    'headers' => [
+        'Authorization'   => 'Bearer '.$site->getSPAccessToken(),
+        'Accept'          => 'application/json',
+        'X-RequestDigest' => $site->getSPContextInfo()->getFormDigest(),
+    ],
+    'query' => [
+        '@v' => 'i:0#.f|membership|user@example.onmicrosoft.com',
+    ],
+], 'POST', false);
+```
 
-- When omitted, the 3rd argument will default to `GET`.
-- When omitted, the 4rd argument will default to `true`.
+>**TIP:** When debugging, an `\Psr\Http\Message\ResponseInterface` object will be returned, regardless of any API errors that may occur.
+
+- When omitted, the 3rd argument defaults to `GET`.
+- When omitted, the 4rd argument defaults to `true`.
 
 For more information on the API endpoints used in the examples above, see the [User profiles REST API reference](https://msdn.microsoft.com/EN-US/library/office/dn790354%28v=office.15%29.aspx).
 
-## Access Tokens
+## Access Token
 There are three methods to manage **Access Tokens** within the **SPSite** class.
 
 ### Create
@@ -284,29 +330,29 @@ $site->setSPAccessToken($token);
 ```
 
 ### Get
-The `getSPAccessToken()` method returns the `SPAccessToken` in use by the `SPSite`. If it hasn't been set yet or if it's expired, an `SPRuntimeException` will be thrown.
+The `getSPAccessToken()` method returns the `SPAccessToken` in use by the `SPSite`. If it hasn't been set yet or if it has expired, an `SPRuntimeException` will be thrown.
 
 ```php
 $token = $site->getSPAccessToken();
 ```
 
-## Form Digests
-Like with the **Access Tokens**, there's also three methods to manage `SPFormDigest` objects within the **SPSite** class.
+## Context Info
+Like with the **Access Tokens**, there's also three methods to manage `SPContextInfo` objects from a **SPSite** class.
 
 ### Create
-Like it's `createSPAccessToken()` couterpart, the `createSPFormDigest()` method is just a shorthand that creates a `SPFormDigest` and sets it internally to the `SPSite`.
-Refer to the [SharePoint Form Digest](SPFormDigest.md) documentation for usage examples.
+Like it's `createSPAccessToken()` couterpart, the `createSPContextInfo()` method is just a shorthand that creates a `SPContextInfo` and sets it internally to the `SPSite`.
+Refer to the [SharePoint Context Info](SPContextInfo.md) documentation for usage examples.
 
 ### Set
-The `setSPFormDigest()` method will assign a `SPFormDigest` to the `SPSite`. An `SPRuntimeException` will be thrown if the digest has expired.
+The `setSPContextInfo()` method will assign a `SPContextInfo` to the `SPSite`. An `SPRuntimeException` will be thrown if the `formDigest` attribute has expired.
 
 ```php
-$site->setSPFormDigest($token);
+$site->setSPContextInfo($contextInfo);
 ```
 
 ### Get
-The `getSPFormDigest()` method returns the `SPFormDigest` in use by the `SPSite`. An `SPRuntimeException` will be thrown if it's expired or non existent.
+The `getSPContextInfo()` method returns the `SPContextInfo` in use by the `SPSite`. An `SPRuntimeException` will be thrown if `SPContextInfo` hasn't been set or if the `formDigest` attribute has expired.
 
 ```php
-$digest = $site->getSPFormDigest();
+$contextInfo = $site->getSPContextInfo();
 ```

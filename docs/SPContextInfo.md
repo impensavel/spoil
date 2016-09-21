@@ -1,5 +1,5 @@
 # SharePoint Context Info
-To modify a SharePoint **List**, **Folder**, **Item** or **File**, an `X-RequestDigest` header must be set for every request.
+To modify a SharePoint **List**, **Folder**, **Item** or **File**, an `X-RequestDigest` header must be set for every API request.
 
 Among other things, the `SPContextInfo` class has a `formDigest` attribute, exactly for that purpose.
 
