@@ -340,7 +340,7 @@ $token = $site->getSPAccessToken();
 Like with the **Access Tokens**, there's also three methods to manage `SPContextInfo` objects from a **SPSite** class.
 
 ### Create
-Like it's `createSPAccessToken()` couterpart, the `createSPContextInfo()` method is just a shorthand that creates a `SPContextInfo` and sets it internally to the `SPSite`.
+Like its `createSPAccessToken()` couterpart, the `createSPContextInfo()` method is just a shorthand that creates a `SPContextInfo` and sets it internally to the `SPSite`.
 Refer to the [SharePoint Context Info](SPContextInfo.md) documentation for usage examples.
 
 ### Set
