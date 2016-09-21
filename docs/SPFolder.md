@@ -2,15 +2,15 @@
 The `SPFolder` class handles all the folder operations in SharePoint.
 
 ## Get by GUID
-Gets a SharePoint Folder by it's GUID
+Gets a SharePoint Folder by its GUID
 
 ```php
 <?php
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\Exception\SPRuntimeException;
+use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -33,15 +33,15 @@ try {
 ```
 
 ## Get by relative URL
-Gets a SharePoint Folder by it's relative URL
+Gets a SharePoint Folder by its relative URL
 
 ```php
 <?php
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\Exception\SPRuntimeException;
+use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -71,8 +71,8 @@ Gets all the Folders within a SharePoint Folder
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\Exception\SPRuntimeException;
+use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -107,9 +107,9 @@ Create a SharePoint Folder
 
 require 'vendor/autoload.php';
 
+use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\SPList;
-use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -122,12 +122,12 @@ try {
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
     // Generate Access Token and Form Digest
-    $site->createSPAccessToken()->createSPFormDigest();
+    $site->createSPAccessToken()->createSPContextInfo();
 
-    // Get a Folder
+    // Get a Folder (option #1)
     $folder = SPFolder::getByRelativeUrl($site, 'myFolder');
 
-    // Get a List
+    // Get a List (option #2)
     $folder = SPList::getByTitle($site, 'My List');
 
     $name = 'mySubfolder';
@@ -139,7 +139,7 @@ try {
 }
 ```
 
-A SharePoint Folder can be created inside a Folder or a List.
+>**TIP:** An `SPFolder` can be created inside an `SPFolder` or an `SPList`.
 
 ## Update
 Update a SharePoint Folder
@@ -149,8 +149,8 @@ Update a SharePoint Folder
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\Exception\SPRuntimeException;
+use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -163,7 +163,7 @@ try {
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
     // Generate Access Token and Form Digest
-    $site->createSPAccessToken()->createSPFormDigest();
+    $site->createSPAccessToken()->createSPContextInfo();
 
     // Get a Folder by relative URL
     $folder = SPFolder::getByRelativeUrl($site, 'myFolder/mySubfolder');
@@ -201,7 +201,7 @@ try {
     $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
 
     // Generate Access Token and Form Digest
-    $site->createSPAccessToken()->createSPFormDigest();
+    $site->createSPAccessToken()->createSPContextInfo();
 
     // Get a Folder by relative URL
     $folder = SPFolder::getByRelativeUrl($site, 'myFolder/mySubfolder');
@@ -216,47 +216,51 @@ try {
 ## To array
 Retrieve an `array` representation of the `SPFolder` object.
 
+**Example:**
 ```php
-    var_dump($folder->toArray());
-    
-    // array(11) {
-    //   ["sp_type"]=>
-    //   string(9) "SP.Folder"
-    //   ["guid"]=>
-    //   string(36) "00000000-0000-ffff-0000-000000000000"
-    //   ["title"]=>
-    //   string(8) "myFolder"
-    //   ["name"]=>
-    //   string(8) "myFolder"
-    //   ["created"]=>
-    //   object(Carbon\Carbon)#55 (3) {
-    //   ["date"]=>
-    //     string(26) "2000-01-01 00:00:00.000000"
-    //     ["timezone_type"]=>
-    //     int(3)
-    //     ["timezone"]=>
-    //     string(13) "Europe/London"
-    //   }
-    //   ["modified"]=>
-    //   object(Carbon\Carbon)#59 (3) {
-    //     ["date"]=>
-    //     string(26) "2000-01-01 00:00:00.000000"
-    //     ["timezone_type"]=>
-    //     int(3)
-    //     ["timezone"]=>
-    //     string(13) "Europe/London"
-    //   }
-    //   ["relative_url"]=>
-    //   string(31) "/sites/mySite/myFolder"
-    //   ["items"]=>
-    //   array(0) {
-    //   }
-    //   ["item_count"]=>
-    //   int(1)
-    //   ["extra"]=>
-    //   array(0) {
-    //   }
-    // }
+var_dump($folder->toArray());
+```
+
+**Output:**
+```php    
+array(11) {
+    ["sp_type"]=>
+    string(9) "SP.Folder"
+    ["guid"]=>
+    string(36) "00000000-0000-ffff-0000-000000000000"
+    ["title"]=>
+    string(8) "myFolder"
+    ["name"]=>
+    string(8) "myFolder"
+    ["created"]=>
+    object(Carbon\Carbon)#55 (3) {
+    ["date"]=>
+        string(26) "2000-01-01 00:00:00.000000"
+        ["timezone_type"]=>
+        int(3)
+        ["timezone"]=>
+        string(13) "Europe/London"
+    }
+    ["modified"]=>
+    object(Carbon\Carbon)#59 (3) {
+        ["date"]=>
+        string(26) "2000-01-01 00:00:00.000000"
+        ["timezone_type"]=>
+        int(3)
+        ["timezone"]=>
+        string(13) "Europe/London"
+    }
+    ["relative_url"]=>
+    string(31) "/sites/mySite/myFolder"
+    ["items"]=>
+    array(0) {
+    }
+    ["item_count"]=>
+    int(1)
+    ["extra"]=>
+    array(0) {
+    }
+}
 ```
 
 ## Properties
