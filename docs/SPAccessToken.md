@@ -1,5 +1,5 @@
 # SharePoint Access Token
-In order to work with SharePoint **Lists**, **Folders**, **Items**, **Files** or **Users**, an Access Token is needed.
+In order to work with SharePoint **Lists**, **Folders**, **Items**, **Files**, **Users**, **RecycleBinItems** and **RecycleBinItemCollections**, an Access Token is needed.
 
 Access Tokens can have two authorization policies: **App-only Policy** and **User-only Policy**
 
@@ -12,8 +12,8 @@ There are two ways to create a new **App-only Policy** `SPAccessToken` instance.
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPAccessToken;
 use Impensavel\Spoil\Exception\SPRuntimeException;
+use Impensavel\Spoil\SPAccessToken;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -39,8 +39,8 @@ try {
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPAccessToken;
 use Impensavel\Spoil\Exception\SPRuntimeException;
+use Impensavel\Spoil\SPAccessToken;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -69,8 +69,8 @@ Like with the **App-only Policy** `SPAccessToken`, there's also two ways to inst
 
 require 'vendor/autoload.php';
 
-use Impensavel\Spoil\SPAccessToken;
 use Impensavel\Spoil\Exception\SPRuntimeException;
+use Impensavel\Spoil\SPAccessToken;
 use Impensavel\Spoil\SPSite;
 
 try {
@@ -126,52 +126,68 @@ try {
 ## To array
 Retrieve an `array` representation of the `SPAccessToken` object.
 
+**Example:**
 ```php
-    var_dump($token->toArray());
-    
-    // array(3) {
-    //     ["token"]=>
-    //     string(1132) "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVG..."
-    //     ["expires"]=>
-    //     object(Carbon\Carbon)#28 (3) {
-    //         ["date"]=>
-    //         string(26) "2000-01-01 00:00:00.000000"
-    //         ["timezone_type"]=>
-    //         int(3)
-    //         ["timezone"]=>
-    //         string(13) "Europe/London"
-    //     }
-    //     ["extra"]=>
-    //     array(0) {
-    //     }
-    // }
+var_dump($token->toArray());
+```
+
+**Output:**
+```php
+array(3) {
+    ["token"]=>
+    string(1132) "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVG..."
+    ["expires"]=>
+    object(Carbon\Carbon)#28 (3) {
+        ["date"]=>
+        string(26) "2000-01-01 00:00:00.000000"
+        ["timezone_type"]=>
+        int(3)
+        ["timezone"]=>
+        string(13) "Europe/London"
+    }
+    ["extra"]=>
+    array(0) {
+    }
+}
 ```
 
 ## Has expired
 Check if the `SPAccessToken` has expired.
 
 ```php
-    if ($token->hasExpired()) {
-        // It's time to get a fresh token
-    } else {
-        // We're good
-    }
+if ($token->hasExpired()) {
+    // It's time to get a fresh one
+} else {
+    // We're good
+}
 ```
 
 ## Expire date
 Get the expiration date of a `SPAccessToken` in the form of a `Carbon` object.
 
+**Example:**
 ```php
-    $carbon = $token->expiration();
+$carbon = $token->expiration();
 
-    echo $carbon->diffForHumans(); // 12 hours from now
+echo $carbon->diffForHumans();
+```
+
+**Output:**
+```php
+12 hours from now
 ```
 
 ## To String
 The `SPAccessToken` class implements the `__toString` magic method, which enables us to get the token value when we treat the object as a `string`. 
 
+**Example:**
 ```php
-    echo $token; // eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVG...
+echo $token;
+```
+
+**Output:**
+```php
+eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVG...
 ```
 
 ## Serialization
@@ -179,20 +195,20 @@ The `SPAccessToken` class implements the `Serializable` interface.
 This allows saving the token to use at a later time, avoiding new token requests to the SharePoint API each time something needs doing.
 
 ```php
-    // Serialize the token
-    $serialized = serialize($token);
-    
-    // Store it in a database
-    
-    // When needed, get it back
+// Serialize the token
+$serialized = serialize($token);
 
-    // Unserialize the data
-    $oldToken = unserialize($serialized);
-    
-    // Check if it's still valid
-    if ($oldToken->hasExpired()) {
-        // Request a new token from the API
-    }
+// Store it in a database
 
-    // Do something
+// When needed, get it back
+
+// Unserialize the data
+$oldToken = unserialize($serialized);
+
+// Check if it's still valid
+if ($oldToken->hasExpired()) {
+    // Request a new token from the API
+}
+
+// Do something
 ```
