@@ -33,69 +33,60 @@ class SPSite implements SPRequesterInterface
     /**
      * HTTP client
      *
-     * @access  protected
-     * @var     \Http\Client\HttpClient
+     * @var  \Http\Client\HttpClient
      */
     protected $client;
 
     /**
      * Message factory
      *
-     * @access  protected
-     * @var     \Http\Message\MessageFactory
+     * @var  \Http\Message\MessageFactory
      */
     protected $message;
 
     /**
      * Access Token
      *
-     * @access  protected
-     * @var     SPAccessToken
+     * @var  SPAccessToken
      */
     protected $token;
 
     /**
      * Context Info
      *
-     * @access  protected
-     * @var     SPContextInfo
+     * @var  SPContextInfo
      */
     protected $contextInfo;
 
     /**
      * Site Hostname
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $hostname;
 
     /**
      * Site Path
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $path;
 
     /**
      * Site Configuration
      *
-     * @access  protected
-     * @var     array
+     * @var  array
      */
     protected $config = [];
 
     /**
      * SharePoint Site constructor
      *
-     * @access  public
      * @param   string                       $url     SharePoint Site URL
      * @param   array                        $config  SharePoint Site configuration
      * @param   \Http\Client\HttpClient      $client  HTTP client
      * @param   \Http\Message\MessageFactory $message Message factory
      * @throws  SPInvalidArgumentException
-     * @return  SPSite
      */
     public function __construct($url, array $config, HttpClient $client, MessageFactory $message)
     {
@@ -124,7 +115,6 @@ class SPSite implements SPRequesterInterface
     /**
      * Get the SharePoint Site configuration
      *
-     * @access  public
      * @return  array
      */
     public function getConfig()
@@ -135,7 +125,6 @@ class SPSite implements SPRequesterInterface
     /**
      * Get SharePoint Site Hostname
      *
-     * @access  public
      * @param   string $path Path to append
      * @return  string
      */
@@ -147,7 +136,6 @@ class SPSite implements SPRequesterInterface
     /**
      * Get SharePoint Site Path
      *
-     * @access  public
      * @param   string $path Path to append
      * @return  string
      */
@@ -159,7 +147,6 @@ class SPSite implements SPRequesterInterface
     /**
      * Get SharePoint Site URL
      *
-     * @access  public
      * @param   string $path Path to append
      * @return  string
      */
@@ -171,7 +158,6 @@ class SPSite implements SPRequesterInterface
     /**
      * Get the SharePoint Site logout URL
      *
-     * @access  public
      * @return  string
      */
     public function getLogoutUrl()
@@ -182,7 +168,6 @@ class SPSite implements SPRequesterInterface
     /**
      * Parse the SharePoint API response
      *
-     * @access  protected
      * @param   \Psr\Http\Message\ResponseInterface $response
      * @throws  SPObjectNotFoundException|SPRuntimeException
      * @return  array
@@ -258,7 +243,6 @@ class SPSite implements SPRequesterInterface
     /**
      * Create SharePoint Access Token
      *
-     * @access  public
      * @param   string $contextToken SharePoint Context Token
      * @param   array  $extra        Extra payload values to map
      * @throws  SPRuntimeException
@@ -294,7 +278,6 @@ class SPSite implements SPRequesterInterface
     /**
      * Set the SharePoint Access Token
      *
-     * @access  public
      * @param   SPAccessToken $token SharePoint Access Token
      * @throws  SPRuntimeException
      * @return  void
@@ -311,8 +294,7 @@ class SPSite implements SPRequesterInterface
     /**
      * Create a SharePoint Context Info
      *
-     * @access  public
-     * @param   array  $extra Extra payload values to map
+     * @param   array $extra Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPSite
      */
@@ -342,7 +324,6 @@ class SPSite implements SPRequesterInterface
     /**
      * Set the SharePoint Context Info
      *
-     * @access  public
      * @param   SPContextInfo $contextInfo SharePoint Context Info
      * @throws  SPRuntimeException
      * @return  void

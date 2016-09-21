@@ -27,16 +27,14 @@ class SPAccessToken extends SPObject implements Serializable
     /**
      * Access token
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $value;
 
     /**
      * Expiration date
      *
-     * @access  protected
-     * @var     \Carbon\Carbon
+     * @var  \Carbon\Carbon
      */
     protected $expiration;
 
@@ -55,11 +53,9 @@ class SPAccessToken extends SPObject implements Serializable
     /**
      * SharePoint Access Token constructor
      *
-     * @access  public
-     * @param   array  $payload OData response payload
-     * @param   array  $extra   Extra payload values to map
+     * @param   array $payload OData response payload
+     * @param   array $extra   Extra payload values to map
      * @throws  SPBadMethodCallException
-     * @return  SPAccessToken
      */
     public function __construct(array $payload, array $extra = [])
     {
@@ -86,7 +82,6 @@ class SPAccessToken extends SPObject implements Serializable
     /**
      * Serialize SharePoint Access Token
      *
-     * @access  public
      * @return  string
      */
     public function serialize()
@@ -101,7 +96,6 @@ class SPAccessToken extends SPObject implements Serializable
     /**
      * Recreate SharePoint Access Token
      *
-     * @access  public
      * @param   string $serialized
      * @return  void
      */
@@ -115,7 +109,6 @@ class SPAccessToken extends SPObject implements Serializable
     /**
      * SharePoint Access Token string value
      *
-     * @access  public
      * @return  string
      */
     public function __toString()
@@ -126,8 +119,6 @@ class SPAccessToken extends SPObject implements Serializable
     /**
      * Create a SharePoint Access Token (User-only Policy)
      *
-     * @static
-     * @access  public
      * @param   SPSite $site         SharePoint Site
      * @param   string $contextToken Context Token
      * @param   array  $extra        Extra payload values to map
@@ -180,8 +171,6 @@ class SPAccessToken extends SPObject implements Serializable
     /**
      * Create a SharePoint Access Token (App-only Policy)
      *
-     * @static
-     * @access  public
      * @param   SPSite $site  SharePoint Site
      * @param   array  $extra Extra payload values to map
      * @throws  SPBadMethodCallException|SPInvalidArgumentException
@@ -231,7 +220,6 @@ class SPAccessToken extends SPObject implements Serializable
     /**
      * Check if the SharePoint Access Token has expired
      *
-     * @access  public
      * @return  bool
      */
     public function hasExpired()
@@ -242,7 +230,6 @@ class SPAccessToken extends SPObject implements Serializable
     /**
      * Get the SharePoint Access Token expiration
      *
-     * @access  public
      * @return  Carbon
      */
     public function expiration()

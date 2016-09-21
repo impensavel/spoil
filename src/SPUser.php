@@ -20,84 +20,73 @@ class SPUser extends SPObject
     /**
      * SharePoint Site
      *
-     * @access  protected
-     * @var     SPSite
+     * @var  SPSite
      */
     protected $site;
 
     /**
      * User Account
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $account;
 
     /**
      * User Email
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $email;
 
     /**
      * User Full Name
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $fullName;
 
     /**
      * User First Name
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $firstName;
 
     /**
      * User Last Name
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $lastName;
 
     /**
      * User Title
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $title;
 
     /**
      * User Picture (URL)
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $picture;
 
     /**
      * User URL (profile)
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $url;
 
     /**
      * SharePoint User constructor
      *
-     * @access  public
      * @param   SPSite $site    SharePoint Site
      * @param   array  $payload OData response payload
      * @param   array  $extra   Extra payload values to map
      * @throws  SPBadMethodCallException
-     * @return  SPUser
      */
     public function __construct(SPSite $site, array $payload, array $extra = [])
     {
@@ -138,7 +127,6 @@ class SPUser extends SPObject
     /**
      * Get SharePoint User Account
      *
-     * @access  public
      * @return  string
      */
     public function getAccount()
@@ -149,7 +137,6 @@ class SPUser extends SPObject
     /**
      * Get SharePoint User Email
      *
-     * @access  public
      * @return  string
      */
     public function getEmail()
@@ -160,7 +147,6 @@ class SPUser extends SPObject
     /**
      * Get SharePoint User Full Name
      *
-     * @access  public
      * @return  string
      */
     public function getFullName()
@@ -171,7 +157,6 @@ class SPUser extends SPObject
     /**
      * Get SharePoint User First Name
      *
-     * @access  public
      * @return  string
      */
     public function getFirstName()
@@ -182,7 +167,6 @@ class SPUser extends SPObject
     /**
      * Get SharePoint User Last Name
      *
-     * @access  public
      * @return  string
      */
     public function getLastName()
@@ -193,7 +177,6 @@ class SPUser extends SPObject
     /**
      * Get SharePoint User Title
      *
-     * @access  public
      * @return  string
      */
     public function getTitle()
@@ -204,7 +187,6 @@ class SPUser extends SPObject
     /**
      * Get SharePoint User Picture (URL)
      *
-     * @access  public
      * @return  string
      */
     public function getPicture()
@@ -215,7 +197,6 @@ class SPUser extends SPObject
     /**
      * Get SharePoint User URL (profile)
      *
-     * @access  public
      * @return  string
      */
     public function getUrl()
@@ -226,7 +207,6 @@ class SPUser extends SPObject
     /**
      * Get the current (logged) SharePoint User
      *
-     * @access  public
      * @param   SPSite $site  SharePoint Site object
      * @param   array  $extra Extra payload values to map
      * @throws  SPRuntimeException
@@ -247,7 +227,6 @@ class SPUser extends SPObject
     /**
      * Get a SharePoint User by Account
      *
-     * @access  public
      * @param   SPSite $site    SharePoint Site object
      * @param   string $account SharePoint User account
      * @param   array  $extra   Extra payload values to map

@@ -17,7 +17,6 @@ interface SPItemInterface
     /**
      * Get SharePoint GUID
      *
-     * @access  public
      * @return  string
      */
     public function getGUID();
@@ -25,7 +24,6 @@ interface SPItemInterface
     /**
      * Get SharePoint Title
      *
-     * @access  public
      * @return  string
      */
     public function getTitle();

@@ -17,7 +17,6 @@ interface SPObjectInterface
     /**
      * Get an array with the SPObject properties
      *
-     * @access  public
      * @return  array
      */
     public function toArray();

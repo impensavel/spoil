@@ -17,31 +17,27 @@ trait SPPropertiesTrait
     /**
      * SharePoint Type
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $spType;
 
     /**
      * SharePoint GUID
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $guid;
 
     /**
      * SharePoint Title
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $title;
 
     /**
      * Get SharePoint Type
      *
-     * @access  public
      * @return  string
      */
     public function getSPType()
@@ -52,7 +48,6 @@ trait SPPropertiesTrait
     /**
      * Get SharePoint GUID
      *
-     * @access  public
      * @return  string
      */
     public function getGUID()
@@ -63,7 +58,6 @@ trait SPPropertiesTrait
     /**
      * Get SharePoint Title
      *
-     * @access  public
      * @return  string
      */
     public function getTitle()

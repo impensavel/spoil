@@ -17,23 +17,20 @@ trait SPTimestampsTrait
     /**
      * Creation Time
      *
-     * @access  protected
-     * @var     \Carbon\Carbon
+     * @var  \Carbon\Carbon
      */
     protected $created;
 
     /**
      * Modification Time
      *
-     * @access  protected
-     * @var     \Carbon\Carbon
+     * @var  \Carbon\Carbon
      */
     protected $modified;
 
     /**
      * Get Creation Time
      *
-     * @access  public
      * @return  \Carbon\Carbon
      */
     public function getTimeCreated()
@@ -44,7 +41,6 @@ trait SPTimestampsTrait
     /**
      * Get Modification Time
      *
-     * @access  public
      * @return  \Carbon\Carbon
      */
     public function getTimeModified()

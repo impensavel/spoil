@@ -24,32 +24,28 @@ class SPContextInfo extends SPObject implements Serializable
     /**
      * Library version
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $libraryVersion;
 
     /**
      * Supported REST/CSOM schema versions
      *
-     * @access  protected
-     * @var     array
+     * @var  array
      */
     protected $schemaVersions = [];
 
     /**
      * Form Digest
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $formDigest;
 
     /**
      * Form Digest expiration date
      *
-     * @access  protected
-     * @var     \Carbon\Carbon
+     * @var  \Carbon\Carbon
      */
     protected $formDigestExpiration;
 
@@ -68,11 +64,9 @@ class SPContextInfo extends SPObject implements Serializable
     /**
      * SharePoint Context Info constructor
      *
-     * @access  public
-     * @param   array  $payload OData response payload
-     * @param   array  $extra   Extra payload values to map
+     * @param   array $payload OData response payload
+     * @param   array $extra   Extra payload values to map
      * @throws  SPBadMethodCallException
-     * @return  SPContextInfo
      */
     public function __construct(array $payload, array $extra = [])
     {
@@ -103,7 +97,6 @@ class SPContextInfo extends SPObject implements Serializable
     /**
      * Serialize SharePoint Context Info
      *
-     * @access  public
      * @return  string
      */
     public function serialize()
@@ -120,7 +113,6 @@ class SPContextInfo extends SPObject implements Serializable
     /**
      * Recreate SharePoint Context Info
      *
-     * @access  public
      * @param   string $serialized
      * @return  void
      */
@@ -140,8 +132,6 @@ class SPContextInfo extends SPObject implements Serializable
     /**
      * Create a SharePoint Context Info
      *
-     * @static
-     * @access  public
      * @param   SPSite $site  SharePoint Site
      * @param   array  $extra Extra payload values to map
      * @throws  SPRuntimeException
@@ -162,7 +152,6 @@ class SPContextInfo extends SPObject implements Serializable
     /**
      * Get the Library version
      *
-     * @access  public
      * @return  string
      */
     public function getLibraryVersion()
@@ -173,7 +162,6 @@ class SPContextInfo extends SPObject implements Serializable
     /**
      * Get the REST/CSOM schema versions
      *
-     * @access  public
      * @return  array
      */
     public function getSchemaVersions()
@@ -184,7 +172,6 @@ class SPContextInfo extends SPObject implements Serializable
     /**
      * Get the Form Digest string value
      *
-     * @access  public
      * @return  string
      */
     public function getFormDigest()
@@ -195,7 +182,6 @@ class SPContextInfo extends SPObject implements Serializable
     /**
      * Check if the Form Digest has expired
      *
-     * @access  public
      * @return  bool
      */
     public function formDigestHasExpired()
@@ -206,7 +192,6 @@ class SPContextInfo extends SPObject implements Serializable
     /**
      * Get the Form Digest expiration date
      *
-     * @access  public
      * @return  Carbon
      */
     public function formDigestExpirationDate()

@@ -23,28 +23,24 @@ class SPItem extends SPObject implements SPItemInterface
     /**
      * SharePoint List
      *
-     * @access  protected
-     * @var     SPList
+     * @var  SPList
      */
     protected $list;
 
     /**
      * SharePoint ID
      *
-     * @access  protected
-     * @var     int
+     * @var  int
      */
     protected $id = 0;
 
     /**
      * SharePoint Item constructor
      *
-     * @access  public
      * @param   SPList $list    SharePoint List object
      * @param   array  $payload OData response payload
      * @param   array  $extra   Extra payload values to map
      * @throws  SPBadMethodCallException
-     * @return  SPItem
      */
     public function __construct(SPList $list, array $payload, array $extra = [])
     {
@@ -65,7 +61,6 @@ class SPItem extends SPObject implements SPItemInterface
     /**
      * Get SharePoint List
      *
-     * @access  public
      * @return  SPList
      */
     public function getSPList()
@@ -76,7 +71,6 @@ class SPItem extends SPObject implements SPItemInterface
     /**
      * Get SharePoint ID
      *
-     * @access  public
      * @return  int
      */
     public function getID()
@@ -103,8 +97,6 @@ class SPItem extends SPObject implements SPItemInterface
     /**
      * Get all SharePoint Items
      *
-     * @static
-     * @access  public
      * @param   SPList $list     SharePoint List
      * @param   array  $settings Instantiation settings
      * @throws  SPRuntimeException
@@ -141,8 +133,6 @@ class SPItem extends SPObject implements SPItemInterface
     /**
      * Get a SharePoint Item by ID
      *
-     * @static
-     * @access  public
      * @param   SPList $list  SharePoint List
      * @param   int    $id    Item ID
      * @param   array  $extra Extra payload values to map
@@ -164,8 +154,6 @@ class SPItem extends SPObject implements SPItemInterface
     /**
      * Create a SharePoint Item
      *
-     * @static
-     * @access  public
      * @param   SPList $list       SharePoint List
      * @param   array  $properties SharePoint Item properties (Title, ...)
      * @param   array  $extra      Extra payload values to map
@@ -199,8 +187,7 @@ class SPItem extends SPObject implements SPItemInterface
     /**
      * Update a SharePoint Item
      *
-     * @access  public
-     * @param   array  $properties SharePoint Item properties (Title, ...)
+     * @param   array $properties SharePoint Item properties (Title, ...)
      * @throws  SPRuntimeException
      * @return  SPItem
      */
@@ -236,7 +223,6 @@ class SPItem extends SPObject implements SPItemInterface
     /**
      * Recycle a SharePoint Item
      *
-     * @access  public
      * @throws  SPRuntimeException
      * @return  string
      */
@@ -257,7 +243,6 @@ class SPItem extends SPObject implements SPItemInterface
     /**
      * Delete a SharePoint Item
      *
-     * @access  public
      * @throws  SPRuntimeException
      * @return  bool
      */

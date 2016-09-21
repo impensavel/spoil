@@ -22,9 +22,7 @@ class SPFolder extends SPListObject implements SPItemInterface
     /**
      * System Folder names
      *
-     * @static
-     * @access  public
-     * @var     array
+     * @var  array
      */
     public static $systemFolders = [
         'forms',
@@ -33,36 +31,31 @@ class SPFolder extends SPListObject implements SPItemInterface
     /**
      * SharePoint List GUID
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $listGUID;
 
     /**
      * SharePoint List Title
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $listTitle;
 
     /**
      * Folder Name
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $name;
 
     /**
      * SharePoint Folder constructor
      *
-     * @access  public
      * @param   SPSite $site     SharePoint Site
      * @param   array  $payload  OData response payload
      * @param   array  $settings Instantiation settings
      * @throws  SPBadMethodCallException|SPRuntimeException
-     * @return  SPFolder
      */
     public function __construct(SPSite $site, array $payload, array $settings = [])
     {
@@ -120,7 +113,6 @@ class SPFolder extends SPListObject implements SPItemInterface
     /**
      * Get SharePoint Name
      *
-     * @access  public
      * @return  string
      */
     public function getName()
@@ -131,7 +123,6 @@ class SPFolder extends SPListObject implements SPItemInterface
     /**
      * Is this a SharePoint root Folder?
      *
-     * @access  public
      * @return  bool
      */
     public function isRootFolder()
@@ -170,8 +161,6 @@ class SPFolder extends SPListObject implements SPItemInterface
     /**
      * Check if a name matches a SharePoint System Folder
      *
-     * @static
-     * @access  public
      * @param   string $name SharePoint Folder name
      * @return  bool
      */
@@ -185,8 +174,6 @@ class SPFolder extends SPListObject implements SPItemInterface
     /**
      * Get a SharePoint Folder by GUID
      *
-     * @static
-     * @access  public
      * @param   SPSite $site     SharePoint Site
      * @param   string $guid     SharePoint Folder GUID
      * @param   array  $settings Instantiation settings
@@ -212,8 +199,6 @@ class SPFolder extends SPListObject implements SPItemInterface
     /**
      * Get a SharePoint Folder by Relative URL
      *
-     * @static
-     * @access  public
      * @param   SPSite $site        SharePoint Site
      * @param   string $relativeUrl SharePoint Folder relative URL
      * @param   array  $settings    Instantiation settings
@@ -243,8 +228,6 @@ class SPFolder extends SPListObject implements SPItemInterface
     /**
      * Get SubFolders of a SharePoint Folder
      *
-     * @static
-     * @access  public
      * @param   SPSite $site        SharePoint Site
      * @param   string $relativeUrl SharePoint Folder relative URL
      * @param   array  $settings    Instantiation settings
@@ -279,8 +262,6 @@ class SPFolder extends SPListObject implements SPItemInterface
     /**
      * Create a SharePoint Folder
      *
-     * @static
-     * @access  public
      * @param   SPFolderInterface $folder   Parent SharePoint Folder
      * @param   array             $name     SharePoint Folder name
      * @param   array             $settings Instantiation settings
@@ -318,8 +299,7 @@ class SPFolder extends SPListObject implements SPItemInterface
     /**
      * Update a SharePoint Folder
      *
-     * @access  public
-     * @param   array  $properties SharePoint Folder properties (Name, ...)
+     * @param   array $properties SharePoint Folder properties (Name, ...)
      * @throws  SPRuntimeException
      * @return  SPFolder
      */
@@ -358,7 +338,6 @@ class SPFolder extends SPListObject implements SPItemInterface
     /**
      * Delete a SharePoint Folder
      *
-     * @access  public
      * @throws  SPRuntimeException
      * @return  bool
      */
@@ -379,7 +358,6 @@ class SPFolder extends SPListObject implements SPItemInterface
     /**
      * Get the SharePoint Folder Item count (Folders and Files)
      *
-     * @access  public
      * @throws  SPRuntimeException
      * @return  int
      */
@@ -398,9 +376,7 @@ class SPFolder extends SPListObject implements SPItemInterface
     /**
      * Get all SharePoint Items (Folders/Files)
      *
-     * @static
-     * @access  public
-     * @param   array  $settings Instantiation settings
+     * @param   array $settings Instantiation settings
      * @throws  SPRuntimeException
      * @return  array
      */

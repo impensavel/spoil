@@ -50,76 +50,66 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * SharePoint Folder
      *
-     * @access  protected
-     * @var     SPFolderInterface
+     * @var  SPFolderInterface
      */
     protected $folder;
 
     /**
      * SharePoint ID
      *
-     * @access  protected
-     * @var     int
+     * @var  int
      */
     protected $id = 0;
 
     /**
      * File Name
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $name;
 
     /**
      * File Size
      *
-     * @access  protected
-     * @var     int
+     * @var  int
      */
     protected $size = 0;
 
     /**
      * File Relative URL
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $relativeUrl;
 
     /**
      * File Author
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $author;
 
     /**
      * Check In Comment
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $checkInComment;
 
     /**
      * Check Out Type
      *
-     * @access  protected
-     * @var     int
+     * @var  int
      */
     protected $checkOutType;
 
     /**
      * SharePoint File constructor
      *
-     * @access  public
      * @param   SPFolderInterface $folder  SharePoint Folder
      * @param   array             $payload OData response payload
      * @param   array             $extra   Extra payload values to map
      * @throws  SPBadMethodCallException
-     * @return  SPFile
      */
     public function __construct(SPFolderInterface $folder, array $payload, array $extra = [])
     {
@@ -146,7 +136,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Get SharePoint Folder
      *
-     * @access  public
      * @return  SPFolderInterface
      */
     public function getSPFolder()
@@ -157,7 +146,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Get SharePoint ID
      *
-     * @access  public
      * @return  int
      */
     public function getID()
@@ -190,7 +178,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Get File Name
      *
-     * @access  public
      * @return  string|null
      */
     public function getName()
@@ -201,7 +188,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Get File Size (in KiloBytes)
      *
-     * @access  public
      * @return  int
      */
     public function getSize()
@@ -212,7 +198,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Get File Relative URL
      *
-     * @access  public
      * @return  string
      */
     public function getRelativeUrl()
@@ -223,7 +208,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Get File URL
      *
-     * @access  public
      * @return  string
      */
     public function getUrl()
@@ -234,7 +218,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Get Author
      *
-     * @access  public
      * @return  string
      */
     public function getAuthor()
@@ -245,7 +228,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Get Check In Comment
      *
-     * @access  public
      * @return  string
      */
     public function getCheckInComment()
@@ -256,7 +238,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Get Check Out Type
      *
-     * @access  public
      * @return  int
      */
     public function getCheckOutType()
@@ -267,7 +248,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Get File Contents
      *
-     * @access  public
      * @return  string
      */
     public function getContents()
@@ -284,7 +264,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Get File Metadata
      *
-     * @access  public
      * @return  array
      */
     public function getMetadata()
@@ -303,7 +282,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Get the SharePoint Item equivalent
      *
-     * @access  public
      * @param   array  $extra Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPItem
@@ -316,8 +294,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Get all SharePoint Files
      *
-     * @static
-     * @access  public
      * @param   SPFolderInterface $folder SharePoint Folder
      * @param   array             $extra  Extra payload values to map
      * @throws  SPRuntimeException
@@ -348,8 +324,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Get a SharePoint File by Relative URL
      *
-     * @static
-     * @access  public
      * @param   SPSite $site        SharePoint Site
      * @param   string $relativeUrl SharePoint Folder relative URL
      * @param   array  $extra       Extra payload values to map
@@ -377,8 +351,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Get a SharePoint File by Name
      *
-     * @static
-     * @access  public
      * @param   SPFolderInterface $folder SharePoint Folder
      * @param   string            $name   File Name
      * @param   array             $extra  Extra payload values to map
@@ -406,9 +378,7 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Content type handler
      *
-     * @static
-     * @access  protected
-     * @param   mixed   $input
+     * @param   mixed $input
      * @throws  SPRuntimeException|SPInvalidArgumentException
      * @return  string
      */
@@ -450,8 +420,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Create a SharePoint File
      *
-     * @static
-     * @access  public
      * @param   SPFolderInterface $folder    SharePoint Folder
      * @param   mixed             $content   File content
      * @param   string            $name      Name for the file being uploaded
@@ -495,7 +463,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Update a SharePoint File
      *
-     * @access  public
      * @param   mixed $content File content
      * @throws  SPRuntimeException
      * @return  SPFile
@@ -527,7 +494,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Move a SharePoint File
      *
-     * @access  public
      * @param   SPFolderInterface $folder SharePoint Folder to move to
      * @param   string            $name   SharePoint File name
      * @param   array             $extra  Extra payload values to map
@@ -559,7 +525,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Copy a SharePoint File
      *
-     * @access  public
      * @param   SPFolderInterface $folder    SharePoint Folder to copy to
      * @param   string            $name      SharePoint File name
      * @param   bool              $overwrite Overwrite if file already exists?
@@ -590,7 +555,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Recycle a SharePoint File
      *
-     * @access  public
      * @throws  SPRuntimeException
      * @return  string
      */
@@ -611,7 +575,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Delete a SharePoint File
      *
-     * @access  public
      * @throws  SPRuntimeException
      * @return  bool
      */
@@ -632,7 +595,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Check in a SharePoint File
      *
-     * @access  public
      * @param   string $comment Check in comment
      * @param   int    $type    Check in Type
      * @throws  SPRuntimeException
@@ -654,7 +616,6 @@ class SPFile extends SPObject implements SPItemInterface
     /**
      * Check out a SharePoint File
      *
-     * @access  public
      * @throws  SPRuntimeException
      * @return  bool
      */

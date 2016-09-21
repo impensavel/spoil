@@ -25,8 +25,7 @@ class SPRecycleBinItemCollection implements ArrayAccess, Countable, IteratorAggr
     /**
      * SharePoint Recycle Bin Items
      *
-     * @access  protected
-     * @var     array
+     * @var  array
      */
     protected $items = [];
 
@@ -92,8 +91,6 @@ class SPRecycleBinItemCollection implements ArrayAccess, Countable, IteratorAggr
     /**
      * Create a SharePoint Recycle Bin Item Collection
      *
-     * @static
-     * @access  public
      * @param   SPSite $site  SharePoint Site
      * @param   array  $extra Extra properties to map
      * @throws  \Impensavel\Spoil\Exception\SPRuntimeException

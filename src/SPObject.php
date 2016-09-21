@@ -22,31 +22,27 @@ abstract class SPObject implements SPObjectInterface
     /**
      * Payload data
      *
-     * @access  protected
-     * @var     array
+     * @var  array
      */
     protected $payload = [];
 
     /**
      * Property mapper
      *
-     * @access  protected
-     * @var     array
+     * @var  array
      */
     protected $mapper = [];
 
     /**
      * Extra properties
      *
-     * @access  protected
-     * @var     array
+     * @var  array
      */
     protected $extra = [];
 
     /**
      * Get extra properties
      *
-     * @access  public
      * @param   string $property Extra property name
      * @throws  SPInvalidArgumentException
      * @return  mixed
@@ -67,7 +63,6 @@ abstract class SPObject implements SPObjectInterface
     /**
      * Assign a property value
      *
-     * @access  protected
      * @param   string $property Property name
      * @param   mixed  $value    Property value
      * @return  void
@@ -91,9 +86,8 @@ abstract class SPObject implements SPObjectInterface
     /**
      * Extract a value from an OData response payload
      *
-     * @access  protected
-     * @param   array     $payload OData response payload
-     * @param   string    $path    Path to the value
+     * @param   array  $payload OData response payload
+     * @param   string $path    Path to the value
      * @return  mixed
      */
     protected function extractFromPayload(array $payload, $path)
@@ -114,9 +108,8 @@ abstract class SPObject implements SPObjectInterface
     /**
      * Hydration handler
      *
-     * @access  protected
-     * @param   mixed     $data      SPObject / OData response payload
-     * @param   bool      $rehydrate Are we rehydrating?
+     * @param   mixed $data      SPObject / OData response payload
+     * @param   bool  $rehydrate Are we rehydrating?
      * @throws  SPBadMethodCallException
      * @return  SPObject
      */
@@ -152,7 +145,6 @@ abstract class SPObject implements SPObjectInterface
     /**
      * Get the Payload data
      *
-     * @access  public
      * @return  array
      */
     public function getPayload()

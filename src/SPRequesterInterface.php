@@ -19,7 +19,6 @@ interface SPRequesterInterface
     /**
      * Send an HTTP request
      *
-     * @access  public
      * @param   string $url     URL to make the request to
      * @param   array  $options HTTP client options
      * @param   string $method  HTTP method name (GET, POST, PUT, DELETE, ...)
@@ -32,7 +31,6 @@ interface SPRequesterInterface
     /**
      * Get the current SharePoint Access Token
      *
-     * @access  public
      * @throws  SPRuntimeException
      * @return  SPAccessToken
      */
@@ -41,7 +39,6 @@ interface SPRequesterInterface
     /**
      * Get the current SharePoint Context Info
      *
-     * @access  public
      * @throws  SPRuntimeException
      * @return  SPContextInfo
      */

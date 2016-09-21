@@ -19,9 +19,8 @@ class SPRecycleBinItem extends SPObject
     /**
      * SharePoint Recycle Bin Item States (SharePoint 2013)
      *
-     * @static
-     * @link   https://msdn.microsoft.com/en-us/library/microsoft.sharepoint.client.recyclebinitemstate.aspx
-     * @var    array
+     * @link  https://msdn.microsoft.com/en-us/library/microsoft.sharepoint.client.recyclebinitemstate.aspx
+     * @var   array
      */
     static $states = [
         0 => 'None',                  // Unspecified state
@@ -32,9 +31,8 @@ class SPRecycleBinItem extends SPObject
     /**
      * SharePoint Recycle Bin Item Types (SharePoint 2013)
      *
-     * @static
-     * @link   https://msdn.microsoft.com/en-us/library/microsoft.sharepoint.client.recyclebinitemtype.aspx
-     * @var    array
+     * @link  https://msdn.microsoft.com/en-us/library/microsoft.sharepoint.client.recyclebinitemtype.aspx
+     * @var   array
      */
     static $types = [
         0 => 'None',            // Unspecified type
@@ -52,84 +50,73 @@ class SPRecycleBinItem extends SPObject
     /**
      * SharePoint Site
      *
-     * @access  protected
-     * @var     SPSite
+     * @var  SPSite
      */
     protected $site;
 
     /**
      * Item State
      *
-     * @access  protected
-     * @var     int
+     * @var  int
      */
     protected $state;
 
     /**
      * Item Type
      *
-     * @access  protected
-     * @var     int
+     * @var  int
      */
     protected $type;
 
     /**
      * Item Deletion Time
      *
-     * @access  protected
-     * @var     \Carbon\Carbon
+     * @var  \Carbon\Carbon
      */
     protected $deleted;
 
     /**
      * Relative Directory
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $relativeDir;
 
     /**
      * Item Name
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $name;
 
     /**
      * Item Size
      *
-     * @access  protected
-     * @var     int
+     * @var  int
      */
     protected $size = 0;
 
     /**
      * Item Author
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $author;
 
     /**
      * Item Deleter
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $deleter;
 
     /**
      * SharePoint Recycle Bin Item constructor
      *
-     * @access  public
      * @param   SPSite $site    SharePoint Site
      * @param   array  $payload OData response payload
      * @param   array  $extra   Extra properties to map
      * @throws  \Impensavel\Spoil\Exception\SPBadMethodCallException
-     * @return  SPRecycleBinItem
      */
     public function __construct(SPSite $site, array $payload, array $extra = [])
     {
@@ -176,7 +163,6 @@ class SPRecycleBinItem extends SPObject
     /**
      * Get Item State
      *
-     * @access  public
      * @return  int
      */
     public function getState()
@@ -187,7 +173,6 @@ class SPRecycleBinItem extends SPObject
     /**
      * Get Item Type
      *
-     * @access  public
      * @return  int
      */
     public function getType()
@@ -198,7 +183,6 @@ class SPRecycleBinItem extends SPObject
     /**
      * Get Relative Directory
      *
-     * @access  public
      * @return  string
      */
     public function getRelativeDir()
@@ -209,7 +193,6 @@ class SPRecycleBinItem extends SPObject
     /**
      * Get Item Name
      *
-     * @access  public
      * @return  string|null
      */
     public function getName()
@@ -220,7 +203,6 @@ class SPRecycleBinItem extends SPObject
     /**
      * Get Item Size (in KiloBytes)
      *
-     * @access  public
      * @return  int
      */
     public function getSize()
@@ -231,7 +213,6 @@ class SPRecycleBinItem extends SPObject
     /**
      * Get Deletion Time
      *
-     * @access  public
      * @return  \Carbon\Carbon
      */
     public function getTimeDeleted()
@@ -242,7 +223,6 @@ class SPRecycleBinItem extends SPObject
     /**
      * Get Author
      *
-     * @access  public
      * @return  string
      */
     public function getAuthor()
@@ -253,7 +233,6 @@ class SPRecycleBinItem extends SPObject
     /**
      * Get Deleter
      *
-     * @access  public
      * @return  string
      */
     public function getDeleter()
@@ -264,8 +243,6 @@ class SPRecycleBinItem extends SPObject
     /**
      * Get a SharePoint RecycleBinItem by GUID
      *
-     * @static
-     * @access  public
      * @param   SPSite $site  SharePoint Site
      * @param   string $guid  SharePoint RecycleBinItem GUID
      * @param   array  $extra Extra properties to map
@@ -287,7 +264,6 @@ class SPRecycleBinItem extends SPObject
     /**
      * Restore a SharePoint RecycleBin Item
      *
-     * @access  public
      * @throws  \Impensavel\Spoil\Exception\SPRuntimeException
      * @return  bool
      */
@@ -306,7 +282,6 @@ class SPRecycleBinItem extends SPObject
     /**
      * Permanently delete a SharePoint RecycleBin Item
      *
-     * @access  public
      * @throws  \Impensavel\Spoil\Exception\SPRuntimeException
      * @return  bool
      */

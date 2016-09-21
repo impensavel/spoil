@@ -42,9 +42,7 @@ class SPList extends SPListObject
     /**
      * Allowed SharePoint List Types
      *
-     * @static
-     * @access  public
-     * @var     array
+     * @var  array
      */
     public static $allowedListTypes = [
         self::TPL_GENERICLIST,
@@ -65,9 +63,7 @@ class SPList extends SPListObject
      * SharePoint List Types that allow
      * Folder/File operations
      *
-     * @static
-     * @access  public
-     * @var     array
+     * @var  array
      */
     public static $writableListTypes = [
         self::TPL_DOCUMENTLIBRARY,
@@ -116,36 +112,31 @@ class SPList extends SPListObject
     /**
      * List Template Type
      *
-     * @access  protected
-     * @var     int
+     * @var  int
      */
     protected $template = 0;
 
     /**
      * List Item Entity Type Full Name
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $itemType;
 
     /**
      * List Description
      *
-     * @access  protected
-     * @var     string
+     * @var  string
      */
     protected $description;
 
     /**
      * SharePoint List constructor
      *
-     * @access  public
      * @param   SPSite $site     SharePoint Site
      * @param   array  $payload  OData response payload
      * @param   array  $settings Instantiation settings
      * @throws  SPBadMethodCallException|SPRuntimeException
-     * @return  SPList
      */
     public function __construct(SPSite $site, array $payload, array $settings = [])
     {
@@ -201,7 +192,6 @@ class SPList extends SPListObject
     /**
      * Get List Template Type
      *
-     * @access  public
      * @return  string
      */
     public function getTemplate()
@@ -242,7 +232,6 @@ class SPList extends SPListObject
     /**
      * Get List Description
      *
-     * @access  public
      * @return  string
      */
     public function getDescription()
@@ -253,7 +242,6 @@ class SPList extends SPListObject
     /**
      * Get the List Item Entity Type Full Name
      *
-     * @access  public
      * @return  string
      */
     public function getItemType()
@@ -264,9 +252,7 @@ class SPList extends SPListObject
     /**
      * Check if a List Type is allowed
      *
-     * @static
-     * @access  public
-     * @param   int    $listType SharePoint List Type
+     * @param   int $listType SharePoint List Type
      * @return  bool
      */
     public static function isListTypeAllowed($listType)
@@ -277,8 +263,6 @@ class SPList extends SPListObject
     /**
      * Get all SharePoint Lists
      *
-     * @static
-     * @access  public
      * @param   SPSite $site     SharePoint Site
      * @param   array  $settings Instantiation settings
      * @throws  SPRuntimeException
@@ -312,8 +296,6 @@ class SPList extends SPListObject
     /**
      * Get a SharePoint List by GUID
      *
-     * @static
-     * @access  public
      * @param   SPSite $site     SharePoint Site
      * @param   string $guid     SharePoint List GUID
      * @param   array  $settings Instantiation settings
@@ -339,8 +321,6 @@ class SPList extends SPListObject
     /**
      * Get a SharePoint List by Title
      *
-     * @static
-     * @access  public
      * @param   SPSite $site     SharePoint Site
      * @param   string $title    SharePoint List Title
      * @param   array  $settings Instantiation settings
@@ -366,8 +346,6 @@ class SPList extends SPListObject
     /**
      * Create a SharePoint List
      *
-     * @static
-     * @access  public
      * @param   SPSite $site       SharePoint Site
      * @param   array  $properties SharePoint List properties (Title, Description, ...)
      * @param   array  $settings   Instantiation settings
@@ -406,8 +384,7 @@ class SPList extends SPListObject
     /**
      * Update a SharePoint List
      *
-     * @access  public
-     * @param   array  $properties SharePoint List properties (Title, Description, ...)
+     * @param   array $properties SharePoint List properties (Title, Description, ...)
      * @throws  SPRuntimeException
      * @return  SPList
      */
@@ -442,7 +419,6 @@ class SPList extends SPListObject
     /**
      * Delete a List and all it's content
      *
-     * @access  public
      * @throws  SPRuntimeException
      * @return  bool
      */
@@ -464,8 +440,7 @@ class SPList extends SPListObject
     /**
      * Create a SharePoint Field
      *
-     * @access  public
-     * @param   array  $properties Field properties (Title, FieldTypeKind, ...)
+     * @param   array $properties Field properties (Title, FieldTypeKind, ...)
      * @throws  SPRuntimeException
      * @return  string
      */
@@ -497,7 +472,6 @@ class SPList extends SPListObject
     /**
      * Get the SharePoint List Item count
      *
-     * @access  public
      * @throws  SPRuntimeException
      * @return  int
      */
@@ -516,9 +490,7 @@ class SPList extends SPListObject
     /**
      * Get all SharePoint Items
      *
-     * @static
-     * @access  public
-     * @param   array  $settings Instantiation settings
+     * @param   array $settings Instantiation settings
      * @throws  SPRuntimeException
      * @return  array
      */
@@ -538,10 +510,8 @@ class SPList extends SPListObject
     /**
      * Get SharePoint Item by ID
      *
-     * @static
-     * @access  public
-     * @param   int    $id    Item ID
-     * @param   array  $extra Extra payload values to map
+     * @param   int   $id    Item ID
+     * @param   array $extra Extra payload values to map
      * @throws  SPRuntimeException
      * @return  SPItem
      */
@@ -557,8 +527,7 @@ class SPList extends SPListObject
     /**
      * Create a SharePoint Item
      *
-     * @access  public
-     * @param   array  $properties List properties (Title, ...)
+     * @param   array $properties List properties (Title, ...)
      * @throws  SPRuntimeException
      * @return  array
      */
@@ -574,7 +543,6 @@ class SPList extends SPListObject
     /**
      * Update a SharePoint Item
      *
-     * @access  public
      * @param   string $guid       SharePoint Item GUID
      * @param   array  $properties SharePoint Item properties (Title, ...)
      * @throws  SPRuntimeException
@@ -588,7 +556,6 @@ class SPList extends SPListObject
     /**
      * Delete a SharePoint Item
      *
-     * @access  public
      * @param   string $guid SharePoint Item index
      * @throws  SPRuntimeException
      * @return  bool

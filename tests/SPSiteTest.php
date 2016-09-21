@@ -26,7 +26,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
      * @expectedExceptionMessage  The SharePoint Site URL is invalid
      *
-     * @access  public
      * @return  void
      */
     public function testSPSiteConstructorFailInvalidUrl()
@@ -40,7 +39,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
     /**
      * Test SPSite constructor to PASS
      *
-     * @access  public
      * @return  SPSite
      */
     public function testSPSiteConstructorPass()
@@ -75,7 +73,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
      * @expectedExceptionMessage  Invalid SharePoint Access Token
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
@@ -91,7 +88,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
      * @expectedExceptionMessage  Expired SharePoint Access Token
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
@@ -118,7 +114,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      *
      * @depends testSPSiteConstructorPass
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
@@ -136,7 +131,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      *
      * @depends testSPSiteConstructorPass
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
@@ -172,7 +166,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
      * @expectedExceptionMessage  Expired SharePoint Access Token
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
@@ -191,7 +184,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      *
      * @depends testSPSiteConstructorPass
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
@@ -212,7 +204,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
      * @expectedExceptionMessage  Invalid SharePoint Context Info
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
@@ -228,7 +219,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
      * @expectedExceptionMessage  SharePoint Context Info with expired Form Digest
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
@@ -256,7 +246,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      *
      * @depends testSPSiteConstructorPass
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
@@ -276,7 +265,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      * @expectedException         \Impensavel\Spoil\Exception\SPRuntimeException
      * @expectedExceptionMessage  SharePoint Context Info with expired Form Digest
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
@@ -297,7 +285,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      *
      * @depends testSPSiteConstructorPass
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
@@ -319,7 +306,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      *
      * @depends testSPSiteConstructorPass
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
@@ -340,7 +326,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      *
      * @depends testSPSiteConstructorPass
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
@@ -358,7 +343,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      *
      * @depends testSPSiteConstructorPass
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
@@ -376,7 +360,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      *
      * @depends testSPSiteConstructorPass
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */
@@ -394,7 +377,6 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
      *
      * @depends testSPSiteConstructorPass
      *
-     * @access  public
      * @param   SPSite $site SharePoint Site
      * @return  void
      */

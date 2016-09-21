@@ -19,7 +19,6 @@ interface SPFolderInterface extends SPRequesterInterface
     /**
      * Get SharePoint Site
      *
-     * @access  public
      * @return  SPSite
      */
     public function getSPSite();
@@ -27,7 +26,6 @@ interface SPFolderInterface extends SPRequesterInterface
     /**
      * Get Relative URL
      *
-     * @access  public
      * @param   string $path Path to append to the Relative URL
      * @return  string
      */
@@ -36,7 +34,6 @@ interface SPFolderInterface extends SPRequesterInterface
     /**
      * Get URL
      *
-     * @access  public
      * @param   string $path Path to append to the URL
      * @return  string
      */
@@ -45,8 +42,7 @@ interface SPFolderInterface extends SPRequesterInterface
     /**
      * Is the folder writable?
      *
-     * @access  public
-     * @param   bool   $exception Throw exception if not writable?
+     * @param   bool $exception Throw exception if not writable?
      * @throws  SPRuntimeException
      * @return  bool
      */
@@ -55,8 +51,7 @@ interface SPFolderInterface extends SPRequesterInterface
     /**
      * Get the SharePoint List equivalent
      *
-     * @access  public
-     * @param   array  $settings Instantiation settings
+     * @param   array $settings Instantiation settings
      * @throws  SPRuntimeException
      * @return  SPList
      */
