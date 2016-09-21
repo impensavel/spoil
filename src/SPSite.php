@@ -224,7 +224,10 @@ class SPSite implements SPRequesterInterface
                 'query'   => [],
             ], $options);
 
-            $url = filter_var($url, FILTER_VALIDATE_URL) === false ? $this->getUrl($url) : $url;
+            // Prepend the SharePoint Site URL when only the path is passed
+            if (filter_var($url, FILTER_VALIDATE_URL) === false) {
+                $url = $this->getUrl($url);
+            }
 
             if (! empty($options['query'])) {
                 $url = sprintf('%s?%s', $url, http_build_query($options['query']));
