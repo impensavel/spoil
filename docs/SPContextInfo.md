@@ -80,9 +80,9 @@ array(5) {
   ["schema_versions"]=>   
   array(2) {
     [0]=>
-    string(8) "14.0.0.0"  
+    string(8) "14.0.0.0"
     [1]=>
-    string(8) "15.0.0.0"  
+    string(8) "15.0.0.0"
   }
   ["form_digest"]=>
   string(157) "0x79EAB4CE687BD3DE6B9A87177CC6430759744CDED8C2605..."
@@ -150,7 +150,7 @@ Check if the `formDigest` attribute has expired.
 
 ```php
 if ($contextInfo->formDigestHasExpired()) {
-    // It's time to get a new Context Info
+    // It's time to get a new one
 } else {
     // Looking good
 }
