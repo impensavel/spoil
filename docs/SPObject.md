@@ -3,16 +3,23 @@ The `SPObject` class contains methods related to common attributes of SharePoint
 
 ## Subclasses
 - [SPAccessToken](docs/SPAccessToken.md)
-- [SPFormDigest](docs/SPFormDigest.md)
+- [SPContextInfo](docs/SPContextInfo.md)
 - [SPList](docs/SPList.md)
 - [SPItem](docs/SPItem.md)
 - [SPFolder](docs/SPFolder.md)
 - [SPFile](docs/SPFile.md)
 - [SPUser](docs/SPUser.md)
+- [SPRecycleBinItem](docs/SPRecycleBinItem.md)
 
 ## Extra
-Get an extra property of a `SPAccessToken`, `SPFormDigest`, `SPList`, `SPItem`, `SPFolder`, `SPFile` or `SPUser` object.
-           
+Get an extra property of a `SPAccessToken`, `SPContextInfo`, `SPList`, `SPItem`, `SPFolder`, `SPFile`, `SPUser` or `SPRecycleBinItem` object.
+
+**Example:**
 ```php
-    echo $object->getExtra('Foo'); // Bar
+echo $object->getExtra('Foo');
+```
+
+**Output:**
+```php
+Bar
 ```
