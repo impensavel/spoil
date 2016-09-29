@@ -42,11 +42,9 @@ interface SPFolderInterface extends SPRequesterInterface
     /**
      * Is the folder writable?
      *
-     * @param   bool $exception Throw exception if not writable?
-     * @throws  SPRuntimeException
      * @return  bool
      */
-    public function isWritable($exception = false);
+    public function isWritable();
 
     /**
      * Get the SharePoint List equivalent
