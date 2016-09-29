@@ -210,15 +210,9 @@ class SPList extends SPListObject
     /**
      * {@inheritdoc}
      */
-    public function isWritable($exception = false)
+    public function isWritable()
     {
-        $writable = in_array($this->template, static::$writableListTypes);
-
-        if (! $writable && $exception) {
-            throw new SPRuntimeException('SPList Template Type ['.$this->template.'] does not allow SharePoint Folder/File operations');
-        }
-
-        return $writable;
+        return ! in_array($this->template, static::$writableListTypes);
     }
 
     /**
