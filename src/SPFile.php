@@ -359,7 +359,12 @@ class SPFile extends SPObject implements SPItemInterface
      */
     public static function getByName(SPFolderInterface $folder, $name, array $extra = [])
     {
-        $folder->isWritable(true);
+        if (! $folder->isWritable()) {
+            throw new SPRuntimeException(sprintf(
+                'Folder/File operations are not allowed on a SPList Template Type [%s]',
+                $folder->getTemplate()
+            ));
+        }
 
         $json = $folder->request("_api/web/GetFolderByServerRelativeUrl('".$folder->getRelativeUrl()."')/Files('".$name."')", [
             'headers' => [
@@ -430,7 +435,12 @@ class SPFile extends SPObject implements SPItemInterface
      */
     public static function create(SPFolderInterface $folder, $content, $name = null, $overwrite = false, array $extra = [])
     {
-        $folder->isWritable(true);
+        if (! $folder->isWritable()) {
+            throw new SPRuntimeException(sprintf(
+                'Folder/File operations are not allowed on a SPList Template Type [%s]',
+                $folder->getTemplate()
+            ));
+        }
 
         if (empty($name)) {
             if (! $content instanceof SplFileInfo) {
@@ -502,7 +512,12 @@ class SPFile extends SPObject implements SPItemInterface
      */
     public function move(SPFolderInterface $folder, $name = null, array $extra = [])
     {
-        $folder->isWritable(true);
+        if (! $folder->isWritable()) {
+            throw new SPRuntimeException(sprintf(
+                'Folder/File operations are not allowed on a SPList Template Type [%s]',
+                $folder->getTemplate()
+            ));
+        }
 
         $newUrl = $folder->getRelativeUrl($name ?: $this->name);
 
@@ -534,7 +549,12 @@ class SPFile extends SPObject implements SPItemInterface
      */
     public function copy(SPFolderInterface $folder, $name = null, $overwrite = false, array $extra = [])
     {
-        $folder->isWritable(true);
+        if (! $folder->isWritable()) {
+            throw new SPRuntimeException(sprintf(
+                'Folder/File operations are not allowed on a SPList Template Type [%s]',
+                $folder->getTemplate()
+            ));
+        }
 
         $newUrl = $folder->getRelativeUrl($name ?: $this->name);
 

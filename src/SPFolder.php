@@ -270,7 +270,12 @@ class SPFolder extends SPListObject implements SPItemInterface
      */
     public static function create(SPFolderInterface $folder, $name, array $settings = [])
     {
-        $folder->isWritable(true);
+        if (! $folder->isWritable()) {
+            throw new SPRuntimeException(sprintf(
+                'Folder/File operations are not allowed on a SPList Template Type [%s]',
+                $folder->getTemplate()
+            ));
+        }
 
         $body = json_encode([
             'odata.type'        => 'SP.Folder',
