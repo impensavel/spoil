@@ -32,7 +32,7 @@ Unknown SSL protocol error in connection to accounts.accesscontrol.windows.net:4
 If `CURL_SSLVERSION_SSLv2` or `CURL_SSLVERSION_SSLv3` are being used, try using `CURL_SSLVERSION_TLSv1_0` instead.
 
 
-Note that `CURL_SSLVERSION_TLSv1_0` is only **available since** PHP 5.5.19/5.6.3 and cURL 7.34+.
+Note that `CURL_SSLVERSION_TLSv1_0` is **only** available since PHP `5.5.19`/`5.6.3` and cURL `7.34`.
 
 
 ##### Error code 56
@@ -43,10 +43,10 @@ GnuTLS recv error (-9): A TLS packet with unexpected length was received.
 
 This happens when **libcURL** is built against [GnuTLS](http://www.gnutls.org/) and the fact that this library is more strict when dealing with the TLS protocol.
 
-The [GnuTLS mailing list](http://lists.gnu.org/archive/html/gnutls-devel/2011-02/msg00002.html) has an explanation about it:
+There's an explanation about it in the [GnuTLS mailing list](http://lists.gnu.org/archive/html/gnutls-devel/2011-02/msg00002.html):
 > Several sites terminate the TLS connection without following the TLS protocol (i.e. sending closure alerts), but rather terminate the TCP connection directly. This is a relic of SSLv2 and it seems other implementations ignore this error. GnuTLS doesn't and thus prints this error.
 
-Given that this is a mix of SharePoint not following the TLS protocol correctly and GnuTLS being too strict about it, there's not much that can be done except for using a different PHP/libcURL version.
+Given that this is a mix of SharePoint not following the TLS protocol correctly and GnuTLS being strict about it, there's not much that can be done except for using a different PHP/libcURL version.
 
 ##### Other codes
 If other cURL errors emerge, check the libcURL [error list](http://curl.haxx.se/libcurl/c/libcurl-errors.html) to help find the root cause.
