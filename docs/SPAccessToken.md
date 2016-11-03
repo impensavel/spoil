@@ -12,17 +12,20 @@ There are two ways to create a new **App-only Policy** `SPAccessToken` instance.
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
-use Impensavel\Spoil\SPAccessToken;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    // Instantiate SharePoint Site
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     $site->createSPAccessToken();
 
@@ -39,17 +42,21 @@ try {
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPAccessToken;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    // Instantiate SharePoint Site
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     $token = SPAccessToken::createAppOnlyPolicy($site);
 
@@ -69,17 +76,20 @@ Like with the **App-only Policy** `SPAccessToken`, there's also two ways to inst
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
-use Impensavel\Spoil\SPAccessToken;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    // Instantiate SharePoint Site
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     $context_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNTQyNGR...';
 
@@ -98,17 +108,21 @@ try {
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPAccessToken;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    // Instantiate SharePoint Site
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     $context_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNTQyNGR...';
 

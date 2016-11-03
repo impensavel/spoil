@@ -9,19 +9,23 @@ Gets all the SharePoint Files from a SharePoint Folder
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPList;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
     // Instantiate SharePoint Site
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     // Generate Access Token
     $site->createSPAccessToken();
@@ -53,18 +57,21 @@ Gets a SharePoint File by its relative URL
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
     // Instantiate SharePoint Site
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     // Generate Access Token
     $site->createSPAccessToken();
@@ -84,19 +91,23 @@ Gets a SharePoint File by its name
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPList;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
     // Instantiate SharePoint Site
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     // Generate Access Token
     $site->createSPAccessToken();
@@ -122,19 +133,23 @@ Create a SharePoint File
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPList;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
     // Instantiate SharePoint Site
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPContextInfo();
@@ -164,7 +179,7 @@ try {
     $name = 'document.pdf';
 
     // Allow overwriting the file if it already exists
-    // An SPBadMethodCallException will be thrown if the file exists and we didn't allow overwriting
+    // An SPBadMethodCallException will be thrown if the file exists and overwriting wasn't allowed
     $overwrite = false;
 
     $file = SPFile::create($folder, $content, $name, $overwrite);
@@ -182,19 +197,23 @@ Update a SharePoint File
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPList;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
     // Instantiate SharePoint Site
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPContextInfo();
@@ -231,19 +250,23 @@ Move and/or rename a SharePoint File.
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPList;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
     // Instantiate SharePoint Site
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPContextInfo();
@@ -281,19 +304,23 @@ Copy a SharePoint File
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPList;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
     // Instantiate SharePoint Site
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPContextInfo();
@@ -335,19 +362,23 @@ Delete a SharePoint File
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFile;
 use Impensavel\Spoil\SPFolder;
+use Impensavel\Spoil\SPList;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
     // Instantiate SharePoint Site
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPContextInfo();

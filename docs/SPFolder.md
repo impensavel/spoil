@@ -14,13 +14,13 @@ use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
     // Instantiate SharePoint Site
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     // Generate Access Token
     $site->createSPAccessToken();
@@ -45,13 +45,13 @@ use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
     // Instantiate SharePoint Site
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     // Generate Access Token
     $site->createSPAccessToken();
@@ -76,13 +76,13 @@ use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
     // Instantiate SharePoint Site
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     // Generate Access Token
     $site->createSPAccessToken();
@@ -113,13 +113,13 @@ use Impensavel\Spoil\SPList;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
     // Instantiate SharePoint Site
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPContextInfo();
@@ -154,13 +154,13 @@ use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
     // Instantiate SharePoint Site
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPContextInfo();
@@ -192,13 +192,13 @@ use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\SPSite;
 
 try {
-    // SharePoint Site settings
-    $settings = [
+    // SharePoint Site configuration
+    $config = [
         // ...
     ];
 
     // Instantiate SharePoint Site
-    $site = SPSite::create('https://example.sharepoint.com/sites/mySite/', $settings);
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     // Generate Access Token and Form Digest
     $site->createSPAccessToken()->createSPContextInfo();
