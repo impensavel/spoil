@@ -47,13 +47,13 @@ class SPSiteTest extends SPTestCase
         $client = new HttpClient($message);
 
         // testSPSiteGetSPAccessTokenWithoutContextPass
-        $client->addResponse($this->createMockResponse('token.json'));
+        $client->addResponse($this->createMockResponse('access_token.json'));
 
         // testSPSiteGetSPAccessTokenWithContextPass
-        $client->addResponse($this->createMockResponse('token.json'));
+        $client->addResponse($this->createMockResponse('access_token.json'));
 
         // testSPSiteGetSPContextInfoPass
-        $client->addResponse($this->createMockResponse('digest.json'));
+        $client->addResponse($this->createMockResponse('context_info.json'));
 
         $site = new SPSite('https://example.sharepoint.com/sites/mySite/', [
             'resource'  => '00000000-0000-ffff-0000-000000000000/example.sharepoint.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
