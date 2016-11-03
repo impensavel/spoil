@@ -178,28 +178,29 @@ class SPSite implements SPRequesterInterface
         $json = json_decode($response->getBody(), true);
 
         if ($code >= 400) {
-            $message = null;
+            $message = 'The SharePoint API failed to provide an error message!';
 
             // If the response body can't be parsed as JSON,
             // it will be used as the error message itself
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                $message = $response->getBody();
-            } else {
-                if (isset($json['odata.error']['message']['value']) && $message === null) {
-                    $message = $json['odata.error']['message']['value'];
-                }
+            if ($json === null) {
+                $message = $response->getBody()->getContents();
+            }
 
-                if (isset($json['error_description']) && $message === null) {
-                    $message = $json['error_description'];
-                }
+            // Error message assignment
+            if (isset($json['error'])) {
+                $message = $json['error'];
+            }
 
-                if (isset($json['odata.error']) && $message === null) {
-                    $message = $json['odata.error'];
-                }
+            if (isset($json['error_description'])) {
+                $message = $json['error_description'];
+            }
 
-                if (isset($json['error']) && $message === null) {
-                    $message = $json['error'];
-                }
+            if (isset($json['odata.error'])) {
+                $message = $json['odata.error'];
+            }
+
+            if (isset($json['odata.error']['message']['value'])) {
+                $message = $json['odata.error']['message']['value'];
             }
 
             if ($code == 404) {
