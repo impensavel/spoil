@@ -41,7 +41,7 @@ class SPFile extends SPObject implements SPItemInterface
      * @link https://msdn.microsoft.com/en-us/library/microsoft.sharepoint.spfile.spcheckouttype.aspx
      * @var  int
      */
-    static $checkOutTypes = [
+    public static $checkOutTypes = [
         0 => 'Online',  // The file is checked out for editing on the server
         1 => 'Offline', // The file is checked out for editing on the local computer
         2 => 'None',    // The file is not checked out (Published)

@@ -22,7 +22,7 @@ class SPRecycleBinItem extends SPObject
      * @link  https://msdn.microsoft.com/en-us/library/microsoft.sharepoint.client.recyclebinitemstate.aspx
      * @var   array
      */
-    static $states = [
+    public static $states = [
         0 => 'None',                  // Unspecified state
         1 => 'FirstStageRecycleBin',  // Item is in the User Recycle Bin (first stage)
         2 => 'SecondStageRecycleBin', // Item is in the Site Collection Recycle Bin (second stage)
@@ -34,7 +34,7 @@ class SPRecycleBinItem extends SPObject
      * @link  https://msdn.microsoft.com/en-us/library/microsoft.sharepoint.client.recyclebinitemtype.aspx
      * @var   array
      */
-    static $types = [
+    public static $types = [
         0 => 'None',            // Unspecified type
         1 => 'File',            // File
         2 => 'FileVersion',     // Historical version of a File
