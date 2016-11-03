@@ -50,7 +50,10 @@
         "php-http/curl-client": "cURL client HTTP adapter"
     },
     "scripts": {
-        "cs": "php-cs-fixer fix src --level=psr2 --verbose",
+        "cs": [
+            "php-cs-fixer fix src --level=psr2 --verbose",
+            "php-cs-fixer fix tests --level=psr2 --verbose"
+        ],
         "test": "phpunit --verbose"
     }
 }
