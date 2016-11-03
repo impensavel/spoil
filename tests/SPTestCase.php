@@ -19,10 +19,10 @@ class SPTestCase extends \PHPUnit_Framework_TestCase
     /**
      * Create an API mock response
      *
-     * @param string $file    API response file name
-     * @param int    $status  HTTP status
-     * @param array  $headers HTTP headers
-     * @return string
+     * @param  string $file    API response file name
+     * @param  int    $status  HTTP status
+     * @param  array  $headers HTTP headers
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function createMockResponse($file, $status = 200, $headers = [])
     {
