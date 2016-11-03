@@ -238,7 +238,6 @@ class SPSite implements SPRequesterInterface
             $response = $this->client->sendRequest($request);
 
             return $json ? $this->parseResponse($response) : $response;
-
         } catch (HttpClientException $e) {
             throw new SPRuntimeException('Unable to make HTTP request', 0, $e);
         }
