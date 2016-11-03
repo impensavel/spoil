@@ -9,12 +9,21 @@ Get a `SPUser` instance of the current logged user.
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 use Impensavel\Spoil\SPUser;
 
 try {
-    // Instantiate a SPSite class
+    // SharePoint Site configuration
+    $config = [
+        // ...
+    ];
+
+    // Instantiate SharePoint Site
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     $user = SPUser::getCurrent($site);
 
@@ -31,12 +40,21 @@ Get a `SPUser` instance from a specific user account.
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPSite;
 use Impensavel\Spoil\SPUser;
 
 try {
-    // Instantiate a SPSite class
+    // SharePoint Site configuration
+    $config = [
+        // ...
+    ];
+
+    // Instantiate SharePoint Site
+    $site = new SPSite('https://example.sharepoint.com/sites/mySite/', $config, new HttpClient, new MessageFactory);
 
     $user = SPUser::getByAccount($site, 'i:0#.f|membership|username@example.onmicrosoft.com');
 

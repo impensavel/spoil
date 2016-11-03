@@ -9,6 +9,9 @@ Gets a SharePoint Folder by its GUID
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\SPSite;
@@ -40,6 +43,9 @@ Gets a SharePoint Folder by its relative URL
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\SPSite;
@@ -70,6 +76,9 @@ Gets all the Folders within a SharePoint Folder
 <?php
 
 require 'vendor/autoload.php';
+
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
 
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFolder;
@@ -106,6 +115,9 @@ Create a SharePoint Folder
 <?php
 
 require 'vendor/autoload.php';
+
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
 
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFolder;
@@ -149,6 +161,9 @@ Update a SharePoint Folder
 
 require 'vendor/autoload.php';
 
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFolder;
 use Impensavel\Spoil\SPSite;
@@ -186,6 +201,9 @@ Delete a SharePoint Folder
 <?php
 
 require 'vendor/autoload.php';
+
+use Http\Adapter\Guzzle6\Client as HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
 
 use Impensavel\Spoil\Exception\SPRuntimeException;
 use Impensavel\Spoil\SPFolder;
