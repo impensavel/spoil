@@ -13,12 +13,12 @@
 namespace Impensavel\Spoil\Tests;
 
 use Firebase\JWT\JWT;
-use Http\Mock\Client as HttpClient;
 use Http\Message\MessageFactory\GuzzleMessageFactory as MessageFactory;
+use Http\Mock\Client as HttpClient;
 
 use Impensavel\Spoil\SPSite;
 
-class SPSiteTest extends \PHPUnit_Framework_TestCase
+class SPSiteTest extends SPTestCase
 {
     /**
      * Test SPSite constructor to FAIL (invalid URL)
@@ -47,13 +47,13 @@ class SPSiteTest extends \PHPUnit_Framework_TestCase
         $client = new HttpClient($message);
 
         // testSPSiteGetSPAccessTokenWithoutContextPass
-        $client->addResponse(\GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__.'/responses/token')));
+        $client->addResponse($this->createMockResponse('token.json'));
 
         // testSPSiteGetSPAccessTokenWithContextPass
-        $client->addResponse(\GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__.'/responses/token')));
+        $client->addResponse($this->createMockResponse('token.json'));
 
         // testSPSiteGetSPContextInfoPass
-        $client->addResponse(\GuzzleHttp\Psr7\parse_response(file_get_contents(__DIR__.'/responses/digest')));
+        $client->addResponse($this->createMockResponse('digest.json'));
 
         $site = new SPSite('https://example.sharepoint.com/sites/mySite/', [
             'resource'  => '00000000-0000-ffff-0000-000000000000/example.sharepoint.com@09g7c3b0-f0d4-416d-39a7-09671ab91f64',
