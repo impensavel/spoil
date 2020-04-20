@@ -10,8 +10,8 @@ Here are some examples of how to create an `SPSite` instance using different HTT
 
 **Dependencies:**
 ``` bash
-composer require "impensavel/spoil"
 composer require "php-http/guzzle6-adapter"
+composer require "impensavel/spoil"
 ```
 
 **Example:**
